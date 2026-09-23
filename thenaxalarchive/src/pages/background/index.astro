@@ -1,0 +1,495 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+
+const sections = [
+  {
+    number: '01',
+    title: 'History',
+    description:
+      'Trace the movement from the 1967 Naxalbari uprising through organisational expansion, the formation of CPI (Maoist), and its subsequent contraction.',
+    href: `${BASE}/background/history/`,
+    label: 'Explore history',
+  },
+  {
+    number: '02',
+    title: 'Ideology',
+    description:
+      'Examine the ideological foundations, political objectives, strategic doctrines and organisational principles associated with the movement.',
+    href: `${BASE}/background/ideology/`,
+    label: 'Explore ideology',
+  },
+  {
+    number: '03',
+    title: 'Major Incidents',
+    description:
+      'Review major attacks, security operations and other events that shaped the trajectory and geographical spread of Left Wing Extremism.',
+    href: `${BASE}/background/major-incidents/`,
+    label: 'Explore incidents',
+  },
+];
+---
+
+<BaseLayout
+  title="Background — The Naxal Archive"
+  description="Historical, ideological and incident-based background on the Naxalite movement and Left Wing Extremism in India."
+>
+  <Header />
+
+  <main class="background-page" id="top">
+
+    <section class="background-hero">
+      <div class="shell">
+
+        <span class="eyebrow">
+          The Naxal Archive
+        </span>
+
+        <h1>
+          Background
+        </h1>
+
+        <p>
+          Understand the movement through its historical evolution,
+          ideological foundations and major incidents.
+        </p>
+
+      </div>
+    </section>
+
+
+    <section class="background-sections">
+      <div class="shell">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="eyebrow">
+              Explore the record
+            </span>
+
+            <h2>
+              Three ways to understand the movement
+            </h2>
+          </div>
+
+          <p>
+            These sections provide the essential context for reading the
+            archive's articles, datasets and visual records.
+          </p>
+
+        </div>
+
+
+        <div class="background-grid">
+
+          {sections.map((section) => (
+
+            <a
+              class="background-card"
+              href={section.href}
+            >
+              <div class="card-top">
+                <span>{section.number}</span>
+                <span>Background</span>
+              </div>
+
+              <h3>
+                {section.title}
+              </h3>
+
+              <p>
+                {section.description}
+              </p>
+
+              <strong>
+                {section.label} →
+              </strong>
+            </a>
+
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="background-note">
+      <div class="shell note-grid">
+
+        <span class="eyebrow">
+          Reading note
+        </span>
+
+        <p>
+          Historical phases are analytical markers rather than rigid
+          boundaries. Organisations, leaders, ideologies and regional
+          networks frequently overlap across periods.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+
+<style>
+
+  .background-page {
+    background: #f3efe5;
+    color: #111b20;
+  }
+
+
+  .background-hero {
+    padding: 76px 0 70px;
+
+    border-bottom:
+      1px solid #cec6b8;
+  }
+
+
+  .eyebrow {
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: .12em;
+
+    color: #a34f32;
+  }
+
+
+  .background-hero h1 {
+    margin: 14px 0 22px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(64px, 10vw, 132px);
+
+    font-weight: 700;
+    line-height: .86;
+
+    letter-spacing: -.055em;
+  }
+
+
+  .background-hero p {
+    max-width: 720px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 21px;
+    line-height: 1.55;
+
+    color: #625f59;
+  }
+
+
+  .background-sections {
+    padding: 70px 0 84px;
+  }
+
+
+  .section-heading {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.1fr)
+      minmax(280px, .9fr);
+
+    gap: 70px;
+
+    align-items: end;
+
+    margin-bottom: 46px;
+  }
+
+
+  .section-heading h2 {
+    max-width: 650px;
+
+    margin: 10px 0 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(40px, 5vw, 62px);
+
+    line-height: .98;
+    letter-spacing: -.035em;
+  }
+
+
+  .section-heading > p {
+    max-width: 500px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: #68645e;
+  }
+
+
+  .background-grid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    border-top:
+      1px solid #c9c0b3;
+
+    border-left:
+      1px solid #c9c0b3;
+  }
+
+
+  .background-card {
+    min-width: 0;
+    min-height: 410px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px;
+
+    border-right:
+      1px solid #c9c0b3;
+
+    border-bottom:
+      1px solid #c9c0b3;
+
+    background: #fffdf8;
+
+    color: #111b20;
+    text-decoration: none;
+
+    transition:
+      background .2s ease,
+      color .2s ease;
+  }
+
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 70px;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: .1em;
+
+    color: #9c5a40;
+  }
+
+
+  .background-card h3 {
+    margin: 0 0 18px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 38px;
+    line-height: 1;
+
+    letter-spacing: -.03em;
+  }
+
+
+  .background-card p {
+    margin: 0 0 32px;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: #68645e;
+  }
+
+
+  .background-card strong {
+    margin-top: auto;
+
+    font-family:
+      system-ui,
+      sans-serif;
+
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+
+  @media
+  (hover: hover)
+  and
+  (pointer: fine) {
+
+    .background-card:hover {
+      background: #172327;
+      color: #fffdf8;
+    }
+
+
+    .background-card:hover p {
+      color: #d2d7d5;
+    }
+
+
+    .background-card:hover .card-top {
+      color: #d79a77;
+    }
+
+  }
+
+
+  .background-note {
+    padding: 42px 0;
+
+    background: #e8e1d4;
+
+    border-top:
+      1px solid #c9c0b3;
+  }
+
+
+  .note-grid {
+    display: grid;
+
+    grid-template-columns:
+      190px
+      minmax(0, 680px);
+
+    gap: 40px;
+  }
+
+
+  .note-grid p {
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size: 17px;
+    line-height: 1.6;
+
+    color: #55534e;
+  }
+
+
+  @media (max-width: 900px) {
+
+    .section-heading {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+
+    .background-grid {
+      grid-template-columns: 1fr;
+    }
+
+
+    .background-card {
+      min-height: 320px;
+    }
+
+
+    .card-top {
+      margin-bottom: 42px;
+    }
+
+  }
+
+
+  @media (max-width: 600px) {
+
+    .background-hero {
+      padding: 46px 0 44px;
+    }
+
+
+    .background-hero h1 {
+      font-size: 64px;
+    }
+
+
+    .background-hero p {
+      font-size: 18px;
+    }
+
+
+    .background-sections {
+      padding: 48px 0 58px;
+    }
+
+
+    .section-heading h2 {
+      font-size: 40px;
+    }
+
+
+    .background-card {
+      min-height: 300px;
+      padding: 25px;
+    }
+
+
+    .background-card h3 {
+      font-size: 34px;
+    }
+
+
+    .note-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+  }
+
+</style>
