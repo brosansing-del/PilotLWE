@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 export default defineConfig({
-  site: 'https://thenaxalarchieve.com',
+  site: 'https://brosansing-del.github.io/thenaxalarchive/',
   output: 'static',
 });
