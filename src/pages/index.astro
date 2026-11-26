@@ -4,7 +4,6 @@ import ArticleShowcase from '../components/ArticleShowcase.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import StatCard from '../components/StatCard.astro';
 import { getCollection } from 'astro:content';
 
 const articles = (await getCollection('articles')).sort(
@@ -69,7 +68,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-           href={pageUrl('background/history/#naxalbari')}
+           href={pageUrl('history/#naxalbari')}
           >
             <span class="phase-number">
               01
@@ -99,7 +98,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-            href={pageUrl('background/#cpi-ml')}          >
+            href={pageUrl('history/#formation-of-cpi-ml')}          >
             <span class="phase-number">
               02
             </span>
@@ -129,7 +128,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-            href={pageUrl('background/history/#pwg-mcc')}
+            href={pageUrl('history/#pwg-mcc')}
           >
             <span class="phase-number">
               03
@@ -159,7 +158,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-            href={pageUrl('background/history/#convergence')}
+            href={pageUrl('history/#convergence')}
           >
             <span class="phase-number">
               04
@@ -189,7 +188,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-            href={pageUrl('background/history/#cpi-maoist')}
+            href={pageUrl('history/#cpi-maoist')}
           >
             <span class="phase-number">
               05
@@ -219,7 +218,7 @@ const assetUrl = (path: string) =>
 
           <a
             class="phase-card"
-            href={pageUrl('background/history/#contraction')}
+            href={pageUrl('history/#naxalbari')}
           >
             <span class="phase-number">
               06
@@ -253,8 +252,8 @@ const assetUrl = (path: string) =>
             History · Ideology · Organisation · Geography
           </span>
 
-          <a href={pageUrl('background/')}>
-            Explore full background →
+          <a href={pageUrl('history/')}>
+            Explore full history →
           </a>
 
         </div>
@@ -268,53 +267,7 @@ const assetUrl = (path: string) =>
          KEY INDICATORS
          ====================================================== -->
 
-    <section class="section shell">
-
-      <div class="section-head">
-
-        <div>
-          <span class="eyebrow">
-            Current picture
-          </span>
-
-          <h2>
-            Key indicators
-          </h2>
-        </div>
-
-        <p>
-          These figures will be populated from validated datasets rather
-          than maintained manually in the homepage code.
-        </p>
-
-      </div>
-
-
-      <div class="stats-grid">
-
-        <StatCard
-          value="—"
-          label="LWE-affected districts"
-        />
-
-        <StatCard
-          value="—"
-          label="Violent incidents, latest year"
-        />
-
-        <StatCard
-          value="—"
-          label="Civilian + security-force deaths"
-        />
-
-        <StatCard
-          value="—"
-          label="Most LWE-affected districts"
-        />
-
-      </div>
-
-    </section>
+    
 
 
 
@@ -390,96 +343,6 @@ const assetUrl = (path: string) =>
     <!-- ======================================================
          TRACKING DEVELOPMENT
          ====================================================== -->
-
-    <section
-      class="section section-dark"
-      id="development"
-    >
-
-      <div class="shell">
-
-        <div class="section-head light">
-
-          <div>
-
-            <span class="eyebrow">
-              Tracking Development
-            </span>
-
-            <h2>
-              What changes after violence declines?
-            </h2>
-
-          </div>
-
-          <p>
-            Roads, telecom, banking, education, health,
-            rehabilitation and district-level progress.
-          </p>
-
-        </div>
-
-
-        <div class="development-grid">
-
-          <div>
-
-            <strong>
-              Roads & connectivity
-            </strong>
-
-            <p>
-              Year-wise and district-level infrastructure progress.
-            </p>
-
-          </div>
-
-
-          <div>
-
-            <strong>
-              Telecom
-            </strong>
-
-            <p>
-              Network expansion, tower rollout and connectivity.
-            </p>
-
-          </div>
-
-
-          <div>
-
-            <strong>
-              Public services
-            </strong>
-
-            <p>
-              Banking, post offices, education and health access.
-            </p>
-
-          </div>
-
-
-          <div>
-
-            <strong>
-              Rehabilitation
-            </strong>
-
-            <p>
-              Surrenders, rehabilitation packages and reintegration indicators.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
 
     <!-- ======================================================
          METHODOLOGY

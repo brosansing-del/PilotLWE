@@ -1,0 +1,30 @@
+[
+  {
+    "rel": "src/components/Header.astro",
+    "existed": true
+  },
+  {
+    "rel": "src/pages/history/index.astro",
+    "existed": true
+  },
+  {
+    "rel": "src/data/archiveVideos.ts",
+    "existed": true
+  },
+  {
+    "rel": "src/components/ArchiveVideoCollection.astro",
+    "existed": true
+  },
+  {
+    "rel": "src/pages/seeds-of-change/index.astro",
+    "existed": false
+  },
+  {
+    "rel": "src/components/PoliticalOrganisation.astro",
+    "existed": false
+  },
+  {
+    "rel": "public/images/history/cpi-maoist-hierarchy.png",
+    "existed": false
+  }
+]

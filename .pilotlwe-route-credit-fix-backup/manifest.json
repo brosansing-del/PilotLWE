@@ -1,0 +1,18 @@
+[
+  [
+    "src/pages/index.astro",
+    true
+  ],
+  [
+    "src/data/archiveVideos.ts",
+    true
+  ],
+  [
+    "src/components/ArchiveVideoCollection.astro",
+    true
+  ],
+  [
+    "src/pages/background/history/index.astro",
+    true
+  ]
+]

@@ -1,0 +1,6 @@
+[
+  "src/components/Header.astro",
+  "src/pages/index.astro",
+  "src/pages/history/index.astro",
+  "src/data/archiveVideos.ts"
+]

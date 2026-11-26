@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import VictimsMediaGallery from '../../components/VictimsMediaGallery.astro';
+
+const home = import.meta.env.BASE_URL;
+---
+<BaseLayout
+  title="Victims’ Corner | The Naxal Archive"
+  description="Selected media reports, survivor testimonies and firsthand accounts documenting the human cost of Maoist violence."
+>
+  <Header />
+  <main class="vc-page" id="main-content">
+    <section class="vc-hero" aria-labelledby="victims-title">
+      <div class="vc-shell">
+        <nav class="vc-breadcrumb" aria-label="Breadcrumb">
+          <a href={home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">Victims’ Corner</span>
+        </nav>
+        <div class="vc-hero-copy">
+          <span class="vc-eyebrow">VICTIMS’ CORNER / MEDIA COVERAGE</span>
+          <h1 id="victims-title">The Human Cost <em>of Maoist Violence</em></h1>
+          <p>Selected media reports, survivor testimonies and firsthand accounts documenting the impact of Maoist violence on security personnel, civilians and their families.</p>
+          <a href="#media-coverage" class="vc-jump">Explore media coverage <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+    <VictimsMediaGallery />
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .vc-page{background:#f6f1e9;color:#20372e;font-family:Georgia,'Times New Roman',serif}
+  .vc-shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+  .vc-hero{background:#f6f1e9;padding:34px 0 48px;border-bottom:1px solid #ded5c8}
+  .vc-breadcrumb{display:flex;align-items:center;gap:12px;font:650 12px/1.5 system-ui,sans-serif;color:#706a60}
+  .vc-breadcrumb a{color:inherit;text-decoration:none}.vc-breadcrumb a:hover{color:#a45538}
+  .vc-hero-copy{padding:66px 0 25px;max-width:970px}
+  .vc-eyebrow{display:block;color:#a45538;font:800 11px/1.5 system-ui,sans-serif;letter-spacing:.14em}
+  .vc-hero h1{max-width:1050px;margin:22px 0 25px;font:700 clamp(44px,5.2vw,71px)/1.05 Georgia,serif;letter-spacing:-.045em;color:#20372e}
+  .vc-hero h1 em{font-weight:400;color:#a45538}
+  .vc-hero-copy p{max-width:800px;margin:0;font:18px/1.7 Georgia,serif;color:#575d54}
+  .vc-jump{display:inline-flex;gap:18px;margin-top:29px;padding-bottom:8px;border-bottom:1px solid #a45538;color:#20372e;text-decoration:none;font:750 12px/1.4 system-ui,sans-serif}
+  .vc-jump:hover{color:#a45538}.vc-jump:focus-visible,.vc-breadcrumb a:focus-visible{outline:3px solid #a45538;outline-offset:4px}
+  @media(max-width:600px){.vc-shell{width:calc(100% - 32px)}.vc-hero{padding-top:24px}.vc-hero-copy{padding:47px 0 15px}.vc-hero h1{font-size:clamp(37px,9vw,50px)}.vc-hero-copy p{font-size:16px}}
+</style>

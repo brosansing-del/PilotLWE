@@ -54,7 +54,6 @@ const route = (path: string) => `${base}/${path.replace(/^\/+/, '')}`;
             <span class="av-fallback" aria-hidden="true"><span>THE NAXAL ARCHIVE</span><strong>{video.kind === 'interview' ? 'Interview' : 'Testimony'}</strong></span>
             <img src={youtubeThumbnail(video)} alt={`YouTube thumbnail for ${video.title}`} loading="lazy" decoding="async" data-av-image />
             <span class="av-play" aria-hidden="true">&#9654;</span>
-            <span class="av-image-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           </a>
           <div class="av-content">
             <div class="av-meta">
@@ -65,7 +64,7 @@ const route = (path: string) => `${base}/${path.replace(/^\/+/, '')}`;
             <p class="av-context">{video.context}</p>
             <p class="av-description">{video.description}</p>
             <div class="av-footer">
-              <span class="av-status">{video.reviewed ? 'Editorial summary reviewed' : 'Summary awaiting review'}</span>
+              <span class="av-status">{video.publisher ? `Courtesy: ${video.publisher}` : 'Original video on YouTube'}</span>
               <a href={youtubeWatchUrl(video)} target="_blank" rel="noopener noreferrer">Watch original <span aria-hidden="true">&#8599;</span></a>
             </div>
           </div>
@@ -73,9 +72,7 @@ const route = (path: string) => `${base}/${path.replace(/^\/+/, '')}`;
       ))}
     </div>
 
-    {mode !== 'home' && (
-      <p class="av-disclaimer">Video thumbnails and recordings are hosted by their original publishers on YouTube. Editorial descriptions marked for review are preliminary and do not establish the accuracy of claims made in a video.</p>
-    )}
+   
   </div>
 </section>
 
@@ -127,7 +124,7 @@ const route = (path: string) => `${base}/${path.replace(/^\/+/, '')}`;
   .av-status{font:700 10px/1.4 system-ui,sans-serif;color:#8a8175;}
   .av-footer a{font:800 11px/1.3 system-ui,sans-serif;color:#1e473a;text-decoration:none;white-space:nowrap;}
   .av-footer a:hover{color:var(--av-rust);}
-  .av-disclaimer{font:12px/1.65 system-ui,sans-serif;color:#72776e;border-top:1px solid #dad1c5;margin:28px 0 0;padding-top:18px;}
+  
   @media(max-width:1000px){.av-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.av-section-head{align-items:start;}}
   @media(max-width:700px){.av-section-head{flex-direction:column;align-items:stretch;gap:18px;}.av-section-links{align-items:flex-start;}.av-grid,.av-home .av-grid,.av-interviews .av-grid{grid-template-columns:1fr;}.av-content{padding:20px;}.av-section-head h2{font-size:38px;}.av-play{width:54px;height:54px;}.av-media{aspect-ratio:16/9;}}
   @media(prefers-reduced-motion:reduce){.av-card,.av-media img{transition:none;}}

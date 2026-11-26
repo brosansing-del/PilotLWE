@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "rel": "src/pages/victims-corner/index.astro",
+      "original": true,
+      "installedHash": "69d0dfac15f04a8ca58952794b8f2d2f4760d217ae072468272d89c04e807f02"
+    },
+    {
+      "rel": "src/components/VictimsMediaGallery.astro",
+      "original": false,
+      "installedHash": "1c70116d3b37ca6a0fb68b5003eeb9a525a73b53d6150674ae9f5d8269a1b3a1"
+    },
+    {
+      "rel": "src/data/victimsArticles.ts",
+      "original": false,
+      "installedHash": "913a5f2a928b3084dbb676b28c76518e42ba89d8738092b688bb489c5ebb5e8f"
+    }
+  ]
+}
