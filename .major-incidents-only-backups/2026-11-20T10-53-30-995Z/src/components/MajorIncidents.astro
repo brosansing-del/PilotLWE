@@ -1,0 +1,370 @@
+---
+import {
+  majorIncidents,
+  majorIncidentFields,
+  majorIncidentLabels,
+} from '../data/majorIncidents';
+
+const fmt = (n: number) => n.toLocaleString('en-IN');
+const sums = Object.fromEntries(
+  majorIncidentFields.slice(1).map((key) => [
+    key,
+    majorIncidents.reduce((total, row) => total + row[key], 0),
+  ])
+) as Record<string, number>;
+const start = majorIncidents[0].year;
+const end = majorIncidents[majorIncidents.length - 1].year;
+---
+
+<section class="mi-section" aria-labelledby="mi-heading" data-major-incidents data-rows={JSON.stringify(majorIncidents)}>
+  <div class="mi-shell">
+    <div class="mi-breadcrumb"><span class="mi-breadcrumb-mark"></span> DATA & VISUALS <span class="mi-slash">/</span> CONFLICT TRENDS <span class="mi-slash">/</span> MAJOR INCIDENTS</div>
+
+    <header class="mi-hero">
+      <div class="mi-hero-content">
+        <p class="mi-hero-eyebrow">AN INTERACTIVE DATA STORY <span class="mi-hero-line"></span> 2000–2026</p>
+        <h2 id="mi-heading">Major incidents.<br /><em>Beyond the numbers.</em></h2>
+        <p class="mi-hero-description">Explore reported major Left-Wing Extremism incidents across India. Trace changes in fatalities, injuries and the reported actors who initiated incidents.</p>
+        <div class="mi-hero-tags" aria-label="Dataset features">
+          <span><span class="mi-tag-dot"></span> 27 reporting years</span>
+          <span><span class="mi-tag-dot"></span> 16 data fields</span>
+          <span><span class="mi-tag-dot"></span> Interactive records</span>
+        </div>
+      </div>
+      <div class="mi-hero-art" aria-hidden="true">
+        <svg class="mi-landscape" viewBox="0 0 700 400" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <linearGradient id="mi-sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#355f50"/><stop offset="1" stop-color="#15382f"/></linearGradient>
+            <linearGradient id="mi-hill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#719382"/><stop offset="1" stop-color="#294e3e"/></linearGradient>
+          </defs>
+          <rect width="700" height="400" fill="url(#mi-sky)" />
+          <circle cx="536" cy="100" r="71" fill="#e7b66b" opacity=".5"/>
+          <circle cx="536" cy="100" r="105" fill="none" stroke="#f7d99e" opacity=".13"/>
+          <path d="M0 249 Q102 173 183 225 T345 211 T521 201 T700 210 L700 400 L0 400Z" fill="#789988" opacity=".42"/>
+          <path d="M0 291 Q105 243 218 275 T433 255 T700 248 L700 400 L0 400Z" fill="url(#mi-hill)"/>
+          <path d="M0 340 Q105 290 213 321 T450 305 T700 293 L700 400 L0 400Z" fill="#163e31"/>
+          <g fill="#0d2c25" opacity=".8">
+            <path d="M30 348 l27-103 28 103h-16l13 22H30l14-22z M99 352l24-85 25 85h-15l10 21H103l9-21z M568 350l34-120 33 120h-17l13 25H575l13-25z M646 360l24-92 25 92h-12l11 22H645l11-22z"/>
+            <rect x="55" y="332" width="5" height="68"/><rect x="601" y="336" width="6" height="64"/>
+          </g>
+          <g fill="none" stroke="#b3d0b4" stroke-width="1.2" opacity=".26">
+            <path d="M-40 55Q153 18 323 70T742 41"/><path d="M-40 82Q153 45 323 97T742 68"/><path d="M-40 109Q153 72 323 124T742 95"/>
+            <path d="M-40 136Q153 99 323 151T742 122"/>
+          </g>
+          <g stroke="#e3b876" stroke-width="1.5" fill="#f2d6a0" opacity=".9"><circle cx="178" cy="110" r="4"/><circle cx="292" cy="139" r="4"/><circle cx="405" cy="91" r="4"/><path d="M178 110L292 139L405 91" fill="none" stroke-dasharray="5 7"/></g>
+        </svg>
+        <div class="mi-hero-stamp"><span>REPORTING WINDOW</span><strong>2000 <span>—</span> 2026</strong><small>6 March 2000 – 17 November 2026</small></div>
+      </div>
+    </header>
+
+    <div class="mi-context-strip">
+      <div class="mi-context-primary"><span class="mi-context-icon">i</span><p><strong>About this dataset</strong> These figures cover reported <em>major incidents</em>. They are distinct from the all-incident fatalities series shown elsewhere on this page.</p></div>
+      <div class="mi-context-coverage"><span>PERIOD COVERED</span><strong>6 Mar 2000 — 17 Nov 2026</strong></div>
+    </div>
+
+    <div class="mi-section-heading">
+      <div><p class="mi-eyebrow">THE BIG PICTURE</p><h3>At a glance</h3></div>
+      <p>Totals change with your selected year range.</p>
+    </div>
+    <div class="mi-stats" aria-label="Major incidents summary">
+      <div class="mi-stat mi-stat-incidents">
+        <div class="mi-stat-top"><span class="mi-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16M5 15l5-5 4 3 5-8M16 5h3v3"/></svg></span><span class="mi-stat-index">01 / INCIDENTS</span></div>
+        <strong data-stat="incidents">{fmt(sums.incidents)}</strong><span class="mi-stat-label">Major incidents</span><small>Recorded in the selected period</small>
+      </div>
+      <div class="mi-stat mi-stat-killed">
+        <div class="mi-stat-top"><span class="mi-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 19v-7m5 7V5m5 14v-9M4 19h16"/></svg></span><span class="mi-stat-index">02 / CASUALTIES</span></div>
+        <strong data-stat="killedTotal">{fmt(sums.killedTotal)}</strong><span class="mi-stat-label">People killed</span><small>Across all reported categories</small>
+      </div>
+      <div class="mi-stat mi-stat-injured">
+        <div class="mi-stat-top"><span class="mi-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg></span><span class="mi-stat-index">03 / CASUALTIES</span></div>
+        <strong data-stat="injuredTotal">{fmt(sums.injuredTotal)}</strong><span class="mi-stat-label">People injured</span><small>Across all reported categories</small>
+      </div>
+      <div class="mi-stat mi-stat-militant">
+        <div class="mi-stat-top"><span class="mi-stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg></span><span class="mi-stat-index">04 / INITIATION</span></div>
+        <strong data-stat="initiatedMilitant">{fmt(sums.initiatedMilitant)}</strong><span class="mi-stat-label">Militant-initiated</span><small>Source-defined initiation category</small>
+      </div>
+    </div>
+
+    <div class="mi-workspace">
+      <div class="mi-workspace-head">
+        <div><p class="mi-eyebrow">EXPLORE THE RECORDS</p><h3>Find the story in the data.</h3></div>
+        <div class="mi-controls" aria-label="Filter major incidents by year">
+          <div class="mi-select-wrap"><label for="mi-start">From</label><select id="mi-start" data-start>{majorIncidents.map((r) => <option value={r.year} selected={r.year === start}>{r.year}</option>)}</select></div>
+          <span class="mi-select-sep">—</span>
+          <div class="mi-select-wrap"><label for="mi-end">To</label><select id="mi-end" data-end>{majorIncidents.map((r) => <option value={r.year} selected={r.year === end}>{r.year}</option>)}</select></div>
+          <button type="button" class="mi-reset" data-reset aria-label="Reset year range"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 1-2.4-5.7M20 4v6h-6"/></svg> Reset</button>
+        </div>
+      </div>
+      <div class="mi-tabs" role="tablist" aria-label="Major incident visualizations">
+        <button type="button" role="tab" id="mi-tab-trend" aria-controls="mi-panel-trend" aria-selected="true" tabindex="0" data-tab="trend"><span class="mi-tab-icon">↗</span> Trend analysis</button>
+        <button type="button" role="tab" id="mi-tab-breakdown" aria-controls="mi-panel-breakdown" aria-selected="false" tabindex="-1" data-tab="breakdown"><span class="mi-tab-icon">◉</span> Category breakdown</button>
+        <button type="button" role="tab" id="mi-tab-table" aria-controls="mi-panel-table" aria-selected="false" tabindex="-1" data-tab="table"><span class="mi-tab-icon">▦</span> Data table</button>
+      </div>
+      <div class="mi-range-bar"><span class="mi-live-dot"></span><span data-range aria-live="polite">Showing {start}–{end} · {majorIncidents.length} reporting years</span><span class="mi-range-note">Interactive dataset</span></div>
+
+      <div class="mi-panel" id="mi-panel-trend" role="tabpanel" aria-labelledby="mi-tab-trend" data-panel="trend">
+        <div class="mi-panel-heading">
+          <div><p class="mi-eyebrow">YEAR-WISE TREND</p><h4>Incidents &amp; casualties over time</h4></div>
+          <div class="mi-select-wrap mi-metric-wrap"><label for="mi-metric">Choose measure</label><select id="mi-metric" data-metric>
+            <option value="incidents">Major incidents</option><option value="killedTotal" selected>Total killed</option><option value="injuredTotal">Total injured</option><option value="killedCivilian">Civilians killed</option><option value="killedSecurity">Security forces killed</option><option value="killedMilitant">Militants killed</option>
+          </select></div>
+        </div>
+        <div class="mi-chart-card">
+          <div class="mi-chart" data-chart role="group" aria-label="Interactive line graph of major incidents by year"><p class="mi-chart-loading">Enable JavaScript for the interactive chart. The full data remains available in the Data table tab.</p></div>
+          <div class="mi-chart-insights" aria-live="polite"><div><span>HIGHEST REPORTED YEAR</span><strong data-peak-year>—</strong><small data-peak-value>—</small></div><div><span>REPORTING YEARS</span><strong data-years-count>27</strong><small>Years in the selection</small></div><div><span>SELECTED MEASURE</span><strong data-measure-name>Total killed</strong><small>Change using the dropdown</small></div></div>
+        </div>
+        <p class="mi-chart-note">Hover or focus on the chart points for exact figures. <strong>2000 and 2026 are partial reporting years.</strong></p>
+      </div>
+
+      <div class="mi-panel" id="mi-panel-breakdown" role="tabpanel" aria-labelledby="mi-tab-breakdown" data-panel="breakdown" hidden>
+        <div class="mi-panel-heading"><div><p class="mi-eyebrow">A CLOSER LOOK</p><h4>Understand the composition</h4></div><p class="mi-panel-lead">Compare reported groups across fatalities, injuries and incident initiation.</p></div>
+        <div class="mi-breakdowns" data-breakdowns></div>
+        <p class="mi-chart-note">C = civilians; SF = security forces; M = militants; NS = not specified. “Not assigned” is calculated as total incidents minus the recorded initiation categories; it is not a source-defined category.</p>
+      </div>
+
+      <div class="mi-panel mi-table-panel" id="mi-panel-table" role="tabpanel" aria-labelledby="mi-tab-table" data-panel="table" hidden>
+        <div class="mi-panel-heading"><div><p class="mi-eyebrow">COMPLETE DATASET</p><h4>Year-by-year records</h4></div><button type="button" class="mi-export" data-export aria-label="Download filtered major incidents as CSV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v3h14v-3"/></svg> Download CSV</button></div>
+        <p class="mi-table-hint">Scroll horizontally to see all categories. Year and totals remain visible where supported.</p>
+        <div class="mi-table-scroll" tabindex="0" aria-label="Scrollable table of major incidents"><table class="mi-data-table"><caption>Major LWE incidents, killed, injured and initiated-by categories, {start}–{end}</caption><thead><tr><th rowspan="2" scope="col" class="mi-sticky">Year</th><th rowspan="2" scope="col">Major<br />incidents</th><th colspan="5" scope="colgroup">Killed</th><th colspan="5" scope="colgroup">Injured</th><th colspan="4" scope="colgroup">Initiated by</th></tr><tr><th scope="col" title="Civilians">C</th><th scope="col" title="Security forces">SF</th><th scope="col" title="Militants">M</th><th scope="col" title="Not specified">NS</th><th scope="col">Total</th><th scope="col" title="Civilians">C</th><th scope="col" title="Security forces">SF</th><th scope="col" title="Militants">M</th><th scope="col" title="Not specified">NS</th><th scope="col">Total</th><th scope="col" title="Civilians">C</th><th scope="col" title="Security forces">SF</th><th scope="col" title="Militants">M</th><th scope="col" title="Not specified">NS</th></tr></thead><tbody>
+          {majorIncidents.map((r) => <tr data-year={r.year}><th scope="row" class="mi-sticky">{r.year}{r.year === 2000 ? '*' : r.year === 2026 ? '†' : ''}</th>{majorIncidentFields.slice(1).map((key) => <td>{fmt(r[key])}</td>)}</tr>)}
+        </tbody><tfoot><tr><th scope="row" class="mi-sticky">Total</th>{majorIncidentFields.slice(1).map((key) => <td data-total={key}>{fmt(sums[key])}</td>)}</tr></tfoot></table></div>
+      </div>
+    </div>
+
+    <div class="mi-source"><div><span class="mi-source-icon">↗</span><div><strong>Source &amp; coverage</strong><p>Figures transcribed from the supplied “Major Incidents” table. *2000 starts 6 March; †2026 ends 17 November. The underlying figures have not been independently verified.</p></div></div><div><span class="mi-source-icon">≠</span><div><strong>Do not combine different series</strong><p>This dataset is separate from the site's fatalities series starting in 1980. Initiation categories do not cover every reported incident.</p></div></div></div>
+  </div>
+</section>
+
+
+<style is:global>
+.mi-section,.mi-section *{box-sizing:border-box}
+.mi-section{--forest:#173e34;--rust:#b84e2c;--cream:#f5f0e7;--ink:#142a25;--line:#ded4c4;background:var(--cream);color:var(--ink);padding:clamp(42px,6vw,88px) 0 70px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;border-top:1px solid #e1d7c8}
+.mi-shell{width:min(1220px,calc(100% - 40px));margin:auto}
+.mi-breadcrumb{display:flex;align-items:center;gap:12px;color:#7b6757;font-size:10px;letter-spacing:.16em;font-weight:800;margin:0 0 20px;flex-wrap:wrap}
+.mi-breadcrumb-mark{width:8px;height:8px;border-radius:2px;background:var(--rust)}.mi-slash{color:#c8bba7}
+.mi-hero{position:relative;min-height:365px;border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1.18fr 1fr;background:#153c31;box-shadow:0 14px 38px rgba(35,43,29,.12);isolation:isolate}
+.mi-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 10%,rgba(100,138,108,.25),transparent 58%);z-index:0;pointer-events:none}
+.mi-hero-content{position:relative;z-index:2;padding:clamp(32px,4.5vw,62px) clamp(28px,4.5vw,62px);align-self:center}
+.mi-hero-eyebrow{display:flex;align-items:center;gap:10px;color:#e4bd85;font-size:10px;letter-spacing:.18em;font-weight:800;margin:0 0 20px;flex-wrap:wrap}
+.mi-hero-line{width:28px;height:1px;background:#e2b176}
+.mi-hero h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(42px,4.5vw,66px);line-height:1.01;letter-spacing:-.055em;font-weight:500;color:#fff9ef;margin:0 0 19px}
+.mi-hero h2 em{font-style:italic;color:#f0bf7e;font-weight:400}
+.mi-hero-description{font:clamp(14px,1.4vw,17px)/1.68 Georgia,serif;color:#e2e9df;max-width:550px;margin:0 0 24px}
+.mi-hero-tags{display:flex;flex-wrap:wrap;gap:10px}.mi-hero-tags>span{font-size:10px;font-weight:700;color:#e9eee5;border:1px solid rgba(238,241,227,.22);border-radius:100px;padding:9px 12px;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.045)}.mi-tag-dot{width:5px;height:5px;background:#d9a75f;border-radius:50%}
+.mi-hero-art{position:relative;min-height:300px;overflow:hidden}.mi-landscape{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.mi-hero-art::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#153c31 0%,transparent 25%,transparent 75%,rgba(8,33,27,.22))}
+.mi-hero-stamp{position:absolute;z-index:2;right:24px;bottom:25px;display:flex;flex-direction:column;gap:5px;padding:17px 19px;background:rgba(9,37,30,.82);border:1px solid rgba(240,226,189,.26);border-radius:8px;backdrop-filter:blur(5px);color:#fff}.mi-hero-stamp>span{font-size:9px;letter-spacing:.14em;font-weight:800;color:#d5c7a9}.mi-hero-stamp strong{font:500 27px Georgia,serif}.mi-hero-stamp strong span{color:#dfab68}.mi-hero-stamp small{font-size:10px;color:#e1e4d9}
+.mi-context-strip{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 3px 16px;border-bottom:1px solid var(--line);margin-bottom:30px}.mi-context-primary{display:flex;gap:12px;align-items:flex-start;max-width:810px}.mi-context-icon{width:21px;height:21px;flex:none;display:grid;place-items:center;border-radius:50%;background:#e6e2d4;color:#456454;font:bold italic 15px Georgia,serif}.mi-context-primary p{margin:0;font:13px/1.65 system-ui,sans-serif;color:#566259}.mi-context-primary strong{color:#1b3e33}.mi-context-coverage{flex:none;border-left:1px solid var(--line);padding-left:20px}.mi-context-coverage span{display:block;font-size:9px;letter-spacing:.13em;color:#8b6550;font-weight:800;margin-bottom:5px}.mi-context-coverage strong{font-size:12px;color:#244c3d}
+.mi-section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 17px}.mi-eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;color:var(--rust);margin:0 0 8px}.mi-section h3,.mi-section h4{font-family:Georgia,'Times New Roman',serif;font-weight:500;letter-spacing:-.045em}.mi-section h3{font-size:clamp(28px,3vw,39px);line-height:1.1;margin:0}.mi-section-heading>p{color:#777b71;font-size:12px;margin:0 0 5px}
+.mi-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 34px}
+.mi-stat{min-width:0;min-height:180px;border-radius:12px;padding:20px 20px 18px;display:flex;flex-direction:column;color:#fff;box-shadow:0 8px 19px rgba(36,44,32,.09);position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.mi-stat::after{content:'';position:absolute;width:220px;height:220px;border-radius:50%;right:-115px;bottom:-140px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 23px rgba(255,255,255,.025),0 0 0 50px rgba(255,255,255,.025);pointer-events:none}
+.mi-stat:hover{transform:translateY(-3px);box-shadow:0 14px 25px rgba(36,44,32,.15)}.mi-stat-incidents{background:linear-gradient(140deg,#b64a27,#8c351d)}.mi-stat-killed{background:linear-gradient(140deg,#4d6d36,#284b30)}.mi-stat-injured{background:linear-gradient(140deg,#c68b25,#a96818)}.mi-stat-militant{background:linear-gradient(140deg,#27644f,#153c34)}
+.mi-stat-top{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:auto}.mi-stat-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2)}.mi-stat-icon svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.mi-stat-index{font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.75);font-weight:800;text-align:right}
+.mi-stat strong{font:500 clamp(34px,3.7vw,50px)/1.1 Georgia,serif;letter-spacing:-.045em;margin:13px 0 4px;font-variant-numeric:tabular-nums}.mi-stat-label{font-weight:750;font-size:13px}.mi-stat small{color:rgba(255,255,255,.8);font-size:10px;line-height:1.4;margin-top:5px}
+.mi-workspace{border:1px solid #e1d7c8;border-radius:15px;background:#fffdf9;overflow:hidden;box-shadow:0 13px 35px rgba(55,49,35,.065)}
+.mi-workspace-head{display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:27px 30px 24px}.mi-workspace-head h3{font-size:clamp(25px,2.7vw,34px)}
+.mi-controls{display:flex;align-items:end;gap:8px;flex-wrap:wrap}.mi-select-wrap{display:flex;flex-direction:column;gap:7px}.mi-select-wrap label{font-size:9px;letter-spacing:.11em;color:#7a7165;font-weight:800;text-transform:uppercase}.mi-select-wrap select{height:42px;min-width:95px;padding:0 30px 0 12px;border:1px solid #d9d0c2;border-radius:7px;background:#fff;color:#284438;font:700 12px system-ui,sans-serif;cursor:pointer}.mi-select-sep{color:#ac9e8c;padding-bottom:12px}.mi-reset,.mi-export{border:1px solid #d9d0c2;background:#f7f3eb;color:#25483b;border-radius:7px;height:42px;padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;font:750 12px system-ui,sans-serif;transition:background .15s ease,border-color .15s ease}.mi-reset svg,.mi-export svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.mi-reset:hover,.mi-export:hover{background:#eae4d8;border-color:#a6b5a9}.mi-export{background:#174838;color:white;border-color:#174838}.mi-export:hover{background:#2a6651;color:#fff}
+.mi-tabs{display:flex;gap:0;border-top:1px solid #ece5da;border-bottom:1px solid #e3dbce;background:#f4f0e8;padding:0 19px;overflow-x:auto;scrollbar-width:thin}.mi-tabs button{position:relative;flex:none;border:0;background:transparent;padding:18px 19px;color:#5c695e;cursor:pointer;font:750 12px system-ui,sans-serif;display:flex;align-items:center;gap:9px;white-space:nowrap}.mi-tabs button[aria-selected="true"]{color:#ad4222}.mi-tabs button[aria-selected="true"]::after{content:'';position:absolute;bottom:0;left:17px;right:17px;height:3px;border-radius:3px 3px 0 0;background:#b74927}.mi-tab-icon{font-size:19px;line-height:1;font-weight:400}
+.mi-range-bar{display:flex;align-items:center;gap:8px;padding:13px 30px;border-bottom:1px solid #eee8de;color:#526b5b;font-size:11px;font-weight:650}.mi-live-dot{width:7px;height:7px;background:#689578;border-radius:50%;box-shadow:0 0 0 3px #e3ede3}.mi-range-note{margin-left:auto;color:#929184;font-weight:500}
+.mi-panel{padding:30px}.mi-panel[hidden]{display:none}.mi-panel-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:22px}.mi-section h4{font-size:clamp(25px,2.5vw,34px);line-height:1.13;margin:0}.mi-metric-wrap select{min-width:188px}.mi-panel-lead{font:13px/1.6 Georgia,serif;color:#6a726a;max-width:300px;margin:0}
+.mi-chart-card{border:1px solid #eee5d9;border-radius:11px;background:linear-gradient(180deg,#fff,#fdfbf6);padding:18px 16px 0}.mi-chart{min-height:280px;width:100%;position:relative}.mi-chart svg{display:block;width:100%;height:auto;overflow:visible}.mi-chart-loading{font:14px/1.6 Georgia,serif;color:#6d746d;padding:40px 0}.mi-chart-insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #eee6da;margin-top:8px}.mi-chart-insights>div{padding:17px 20px}.mi-chart-insights>div+div{border-left:1px solid #eee6da}.mi-chart-insights span{display:block;font-size:9px;letter-spacing:.11em;font-weight:800;color:#8b715b;margin-bottom:7px}.mi-chart-insights strong{display:block;font:500 24px/1.2 Georgia,serif;color:#214a3b}.mi-chart-insights small{display:block;color:#788279;font-size:10px;margin-top:4px}.mi-chart-note{color:#777e74;font-size:11px;line-height:1.7;margin:15px 0 0}.mi-chart-note strong{color:#57695d}
+.mi-breakdowns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.mi-breakdown{min-width:0;border:1px solid #e9dfd0;border-radius:12px;padding:22px;background:linear-gradient(180deg,#fffefb,#f7f3eb)}.mi-breakdown h4{font:500 23px/1.2 Georgia,serif;margin:0 0 18px}.mi-donut{width:154px;height:154px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#b84e2c 0% 100%);box-shadow:0 7px 15px rgba(34,44,30,.07)}.mi-donut-center{background:#fffdfa;width:106px;height:106px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px #e8e2d8}.mi-donut-center strong{font:500 27px Georgia,serif;color:#1a4033}.mi-donut-center span{font-size:10px;color:#68776b}.mi-breakdown-row{margin:0 0 13px}.mi-breakdown-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#5b6a5d;margin-bottom:6px}.mi-breakdown-meta .mi-legend-name{display:inline-flex;align-items:center;gap:7px}.mi-legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex:none}.mi-breakdown-meta strong{color:#1d382f;font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}.mi-breakdown-track{height:5px;background:#e8e0d4;border-radius:20px;overflow:hidden}.mi-breakdown-fill{height:100%;border-radius:20px}
+.mi-table-hint{font-size:11px;color:#747e73;margin:0 0 12px}.mi-table-scroll{max-width:100%;overflow-x:auto;border:1px solid #e4ded3;border-radius:9px;background:#fff;scrollbar-color:#b6b5a8 #f0ece5}.mi-data-table{border-collapse:separate;border-spacing:0;min-width:1120px;width:100%;font:11px/1.45 system-ui,sans-serif;font-variant-numeric:tabular-nums}.mi-data-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.mi-data-table th,.mi-data-table td{padding:11px 10px;border-right:1px solid #e8e5dc;border-bottom:1px solid #e8e5dc;text-align:right;white-space:nowrap}.mi-data-table thead th{position:sticky;top:0;background:#245243;color:#fff;text-align:center;font-weight:750;z-index:2}.mi-data-table thead tr:nth-child(2) th{background:#e5eee5;color:#28483a}.mi-data-table tbody tr[hidden]{display:none}.mi-data-table tbody tr:nth-child(even){background:#faf8f3}.mi-data-table tbody tr:hover{background:#f1eddd}.mi-data-table .mi-sticky{position:sticky;left:0;z-index:1;background:#f4f1e8;text-align:left;box-shadow:1px 0 #e0dbd1}.mi-data-table thead .mi-sticky{z-index:3;background:#245243;color:#fff}.mi-data-table tfoot th,.mi-data-table tfoot td{background:#e2eade;font-weight:800;color:#214537;border-top:2px solid #7b9c87}.mi-data-table tfoot .mi-sticky{background:#e2eade}
+.mi-source{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}.mi-source>div{display:flex;align-items:flex-start;gap:13px;padding:21px;border:1px solid #e3d9ca;border-radius:10px;background:#f8f5ee}.mi-source-icon{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#e8e4d6;color:#47654e;font-size:17px}.mi-source strong{display:block;color:#2b503f;font-size:11px;font-weight:800;letter-spacing:.05em;margin:0 0 6px}.mi-source p{margin:0;color:#69736b;font-size:11px;line-height:1.7}
+.mi-section button:focus-visible,.mi-section select:focus-visible,.mi-table-scroll:focus-visible{outline:3px solid #dc9b55;outline-offset:3px}
+@media(max-width:1000px){.mi-hero{grid-template-columns:1.1fr .9fr}.mi-hero-content{padding:35px}.mi-hero h2{font-size:clamp(40px,5vw,58px)}.mi-stats{gap:10px}.mi-stat{padding:17px}.mi-stat-index{font-size:8px}.mi-breakdowns{gap:10px}.mi-breakdown{padding:16px}}
+@media(max-width:760px){.mi-hero{grid-template-columns:1fr}.mi-hero-content{padding:34px;min-height:350px}.mi-hero-art{position:absolute;inset:0;opacity:.38;z-index:-1}.mi-hero-art::after{background:linear-gradient(90deg,#153c31 0%,rgba(21,60,49,.7) 60%,rgba(21,60,49,.25))}.mi-hero-stamp{display:none}.mi-hero h2{max-width:620px}.mi-context-strip{align-items:flex-start}.mi-context-coverage{display:none}.mi-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.mi-workspace-head{padding:24px}.mi-breakdowns{grid-template-columns:1fr}.mi-breakdown{display:grid;grid-template-columns:180px 1fr;column-gap:20px;align-items:center}.mi-breakdown h4{grid-column:1/-1}.mi-donut{margin:0}.mi-source{grid-template-columns:1fr}}
+@media(max-width:520px){.mi-shell{width:calc(100% - 26px)}.mi-section{padding-top:30px}.mi-breadcrumb{font-size:9px;gap:7px}.mi-hero{border-radius:12px}.mi-hero-content{padding:29px 23px;min-height:355px}.mi-hero h2{font-size:clamp(37px,9.8vw,49px)}.mi-hero-description{font-size:14px}.mi-hero-tags{gap:6px}.mi-hero-tags>span{padding:7px 9px;font-size:9px}.mi-context-strip{padding:18px 0;margin-bottom:24px}.mi-context-primary p{font-size:11px}.mi-section-heading{align-items:start}.mi-section-heading>p{font-size:10px;max-width:120px;text-align:right}.mi-stats{gap:9px;margin-bottom:24px}.mi-stat{min-height:156px;padding:15px 13px;border-radius:10px}.mi-stat-icon{width:31px;height:31px}.mi-stat-icon svg{width:17px;height:17px}.mi-stat-index{font-size:7px}.mi-stat strong{font-size:35px;margin-top:10px}.mi-stat-label{font-size:11px}.mi-stat small{font-size:9px}.mi-workspace-head{padding:22px 18px 20px}.mi-workspace-head h3{font-size:28px}.mi-controls{width:100%;gap:7px}.mi-select-wrap select{min-width:87px}.mi-tabs{padding:0 8px}.mi-tabs button{padding:15px 11px;font-size:11px}.mi-tab-icon{font-size:16px}.mi-range-bar{padding:12px 18px}.mi-range-note{display:none}.mi-panel{padding:20px 15px}.mi-panel-heading{align-items:start}.mi-section h4{font-size:26px}.mi-chart-card{padding:9px 4px 0}.mi-chart{min-height:175px}.mi-chart-insights>div{padding:12px 7px}.mi-chart-insights span{font-size:7px}.mi-chart-insights strong{font-size:18px}.mi-chart-insights small{font-size:9px}.mi-breakdown{display:block;padding:18px}.mi-donut{margin:0 auto 18px}.mi-source{gap:10px}.mi-source>div{padding:16px}.mi-chart-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.mi-stat,.mi-reset,.mi-export{transition:none}}
+</style>
+
+<script>
+  type DataRow = {
+    year: number; incidents: number;
+    killedCivilian: number; killedSecurity: number; killedMilitant: number; killedNS: number; killedTotal: number;
+    injuredCivilian: number; injuredSecurity: number; injuredMilitant: number; injuredNS: number; injuredTotal: number;
+    initiatedCivilian: number; initiatedSecurity: number; initiatedMilitant: number; initiatedNS: number;
+  };
+  type Metric = keyof Omit<DataRow,'year'>;
+  const fields: Metric[] = [
+    'incidents','killedCivilian','killedSecurity','killedMilitant','killedNS','killedTotal',
+    'injuredCivilian','injuredSecurity','injuredMilitant','injuredNS','injuredTotal',
+    'initiatedCivilian','initiatedSecurity','initiatedMilitant','initiatedNS'
+  ];
+  const labels = [
+    'Year','Incidents','Killed: civilians','Killed: security forces','Killed: militants',
+    'Killed: not specified','Killed: total','Injured: civilians','Injured: security forces',
+    'Injured: militants','Injured: not specified','Injured: total','Initiated by: civilians',
+    'Initiated by: security forces','Initiated by: militants','Initiated by: not specified'
+  ];
+  const nf = (n: number) => n.toLocaleString('en-IN');
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svgNode = (tag: string, attrs: Record<string,string | number>, text?: string): SVGElement => {
+    const el = document.createElementNS(svgNS, tag);
+    for (const [k,v] of Object.entries(attrs)) el.setAttribute(k,String(v));
+    if (text !== undefined) el.textContent = text;
+    return el;
+  };
+  const niceMax = (n: number) => {
+    if (n <= 0) return 4;
+    const magnitude = Math.pow(10,Math.floor(Math.log10(n)));
+    const unit = n / magnitude;
+    const nice = unit <= 1 ? 1 : unit <= 2 ? 2 : unit <= 2.5 ? 2.5 : unit <= 5 ? 5 : 10;
+    return nice * magnitude;
+  };
+  document.querySelectorAll<HTMLElement>('[data-major-incidents]').forEach((root) => {
+    if (root.dataset.ready === 'yes') return;
+    root.dataset.ready = 'yes';
+    const all = JSON.parse(root.dataset.rows || '[]') as DataRow[];
+    const startEl = root.querySelector<HTMLSelectElement>('[data-start]')!;
+    const endEl = root.querySelector<HTMLSelectElement>('[data-end]')!;
+    const metricEl = root.querySelector<HTMLSelectElement>('[data-metric]')!;
+    const rangeEl = root.querySelector<HTMLElement>('[data-range]')!;
+    const chartEl = root.querySelector<HTMLElement>('[data-chart]')!;
+    const breakdownEl = root.querySelector<HTMLElement>('[data-breakdowns]')!;
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-tab]'));
+    const filtered = () => all.filter(r => r.year >= +startEl.value && r.year <= +endEl.value);
+    const sum = (rows: DataRow[], field: Metric) => rows.reduce((a,r) => a + r[field],0);
+    const currentTotals = (rows: DataRow[]) => Object.fromEntries(fields.map(f => [f,sum(rows,f)])) as Record<Metric,number>;
+
+    function drawChart(rows: DataRow[]) {
+      chartEl.replaceChildren();
+      const metric = metricEl.value as Metric;
+      const metricLabel = metricEl.selectedOptions[0].textContent || metric;
+      const width=900,height=345,left=67,right=25,top=26,bottom=52;
+      const innerW=width-left-right,innerH=height-top-bottom;
+      const values=rows.map(r=>r[metric]);
+      const peak=rows.reduce<DataRow | null>((best,r)=>!best||r[metric]>best[metric]?r:best,null);
+      const peakYear=root.querySelector<HTMLElement>('[data-peak-year]');
+      const peakValue=root.querySelector<HTMLElement>('[data-peak-value]');
+      const yearsCount=root.querySelector<HTMLElement>('[data-years-count]');
+      const measureName=root.querySelector<HTMLElement>('[data-measure-name]');
+      if(peakYear) peakYear.textContent=peak?String(peak.year):'—';
+      if(peakValue) peakValue.textContent=peak?`${nf(peak[metric])} ${metricLabel.toLowerCase()}`:'No data';
+      if(yearsCount) yearsCount.textContent=String(rows.length);
+      if(measureName) measureName.textContent=metricLabel;
+      const yMax=niceMax(Math.max(...values,0));
+      const x = (i:number) => left + (rows.length===1 ? innerW/2 : i*innerW/(rows.length-1));
+      const y = (n:number) => top+innerH-(n/yMax)*innerH;
+      const svg=svgNode('svg',{viewBox:`0 0 ${width} ${height}`,role:'img','aria-label':`${metricLabel} by year from ${rows[0]?.year} to ${rows[rows.length-1]?.year}`});
+      svg.append(svgNode('title',{},`${metricLabel}, ${rows[0]?.year} to ${rows[rows.length-1]?.year}`));
+      for(let i=0;i<=4;i++) {
+        const val=yMax*i/4;
+        const yy=y(val);
+        svg.append(svgNode('line',{x1:left,y1:yy,x2:width-right,y2:yy,stroke:'#e9e4d9','stroke-width':1}));
+        svg.append(svgNode('text',{x:left-13,y:yy+4,'text-anchor':'end','font-size':12,fill:'#697d6d','font-family':'system-ui'},nf(val)));
+      }
+      const tickEvery = rows.length>19 ? 4 : rows.length>10 ? 2 : 1;
+      rows.forEach((r,i)=> {
+        if(i%tickEvery===0 || i===rows.length-1) {
+          svg.append(svgNode('text',{x:x(i),y:height-19,'text-anchor':'middle','font-size':12,fill:'#697d6d','font-family':'system-ui'},String(r.year)));
+        }
+      });
+      const points=rows.map((r,i)=>[x(i),y(r[metric])] as [number,number]);
+      if(points.length>1) {
+        const area=`M ${points[0][0]} ${top+innerH} L ${points.map(p=>p.join(' ')).join(' L ')} L ${points[points.length-1][0]} ${top+innerH} Z`;
+        svg.append(svgNode('path',{d:area,fill:'#b84e2c','fill-opacity':'.09'}));
+        svg.append(svgNode('polyline',{points:points.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#b84e2c','stroke-width':3.4,'stroke-linejoin':'round','stroke-linecap':'round'}));
+      }
+      rows.forEach((r,i)=> {
+        const circle=svgNode('circle',{cx:x(i),cy:y(r[metric]),r:rows.length>20?4.1:5.2,fill:'#b84e2c',stroke:'#fffdf8','stroke-width':1.6,tabindex:0,role:'img','aria-label':`${r.year}: ${nf(r[metric])} ${metricLabel.toLowerCase()}`});
+        circle.append(svgNode('title',{},`${r.year}: ${nf(r[metric])} ${metricLabel.toLowerCase()}`));
+        svg.append(circle);
+      });
+      svg.append(svgNode('text',{x:width/2,y:height-1,'text-anchor':'middle','font-size':12,fill:'#697d6d','font-family':'system-ui'},'Year'));
+      chartEl.append(svg);
+    }
+
+    const palettes=['#b84e2c','#285648','#c58a2c','#78998b','#9a9c94'];
+    function drawBreakdown(rows:DataRow[]) {
+      breakdownEl.replaceChildren();
+      const totals=currentTotals(rows);
+      const groups:[string,[string,number][],number][] = [
+        ['Killed',[['Civilians',totals.killedCivilian],['Security forces',totals.killedSecurity],['Militants',totals.killedMilitant],['Not specified',totals.killedNS]],totals.killedTotal],
+        ['Injured',[['Civilians',totals.injuredCivilian],['Security forces',totals.injuredSecurity],['Militants',totals.injuredMilitant],['Not specified',totals.injuredNS]],totals.injuredTotal],
+        ['Initiated by',[['Civilians',totals.initiatedCivilian],['Security forces',totals.initiatedSecurity],['Militants',totals.initiatedMilitant],['Not specified',totals.initiatedNS],['Not assigned (calculated)',Math.max(0,totals.incidents-totals.initiatedCivilian-totals.initiatedSecurity-totals.initiatedMilitant-totals.initiatedNS)]],totals.incidents],
+      ];
+      groups.forEach(([title,items,grand]) => {
+        const panel=document.createElement('div'); panel.className='mi-breakdown';
+        const heading=document.createElement('h4');heading.textContent=title;panel.append(heading);
+        const donut=document.createElement('div');donut.className='mi-donut';
+        let cursor=0;
+        const stops=items.map(([,value],i)=>{const from=cursor;cursor+=grand?value/grand*100:0;return `${palettes[i]} ${from.toFixed(4)}% ${cursor.toFixed(4)}%`;});
+        donut.style.background=grand?`conic-gradient(${stops.join(',')})`:'#e7e2d9';
+        const inner=document.createElement('div');inner.className='mi-donut-center';
+        const grandNumber=document.createElement('strong');grandNumber.textContent=nf(grand);
+        const grandLabel=document.createElement('span');grandLabel.textContent=title==='Initiated by'?'Incidents':'People';
+        inner.append(grandNumber,grandLabel);donut.append(inner);panel.append(donut);
+        items.forEach(([label,value],i) => {
+          const row=document.createElement('div');row.className='mi-breakdown-row';
+          const meta=document.createElement('div');meta.className='mi-breakdown-meta';
+          const name=document.createElement('span');name.className='mi-legend-name';
+          const dot=document.createElement('span');dot.className='mi-legend-dot';dot.style.background=palettes[i];
+          const nameText=document.createElement('span');nameText.textContent=label;name.append(dot,nameText);
+          const count=document.createElement('strong');count.textContent=`${nf(value)} · ${grand?((value/grand)*100).toFixed(1):'0.0'}%`;
+          meta.append(name,count);
+          const track=document.createElement('div');track.className='mi-breakdown-track';
+          const fill=document.createElement('div');fill.className='mi-breakdown-fill';fill.style.width=`${grand?value/grand*100:0}%`;fill.style.background=palettes[i];
+          track.append(fill);row.append(meta,track);panel.append(row);
+        });
+        breakdownEl.append(panel);
+      });
+    }
+
+    function update() {
+      const rows=filtered();
+      const totals=currentTotals(rows);
+      rangeEl.textContent=`Showing ${startEl.value}–${endEl.value} · ${rows.length} reporting year${rows.length===1?'':'s'}`;
+      root.querySelectorAll<HTMLElement>('[data-stat]').forEach(el=>{
+        const field=el.dataset.stat as Metric;
+        el.textContent=nf(totals[field]||0);
+      });
+      root.querySelectorAll<HTMLTableRowElement>('tbody tr[data-year]').forEach(tr=>{
+        tr.hidden=+tr.dataset.year! < +startEl.value || +tr.dataset.year! > +endEl.value;
+      });
+      root.querySelectorAll<HTMLElement>('[data-total]').forEach(el=>{
+        el.textContent=nf(totals[el.dataset.total as Metric]||0);
+      });
+      drawChart(rows);drawBreakdown(rows);
+    }
+    startEl.addEventListener('change',()=>{
+      if(+startEl.value > +endEl.value) endEl.value=startEl.value;
+      update();
+    });
+    endEl.addEventListener('change',()=>{
+      if(+endEl.value < +startEl.value) startEl.value=endEl.value;
+      update();
+    });
+    root.querySelector<HTMLButtonElement>('[data-reset]')?.addEventListener('click',()=>{
+      startEl.value=String(all[0].year);endEl.value=String(all[all.length-1].year);update();
+    });
+    metricEl.addEventListener('change',()=>drawChart(filtered()));
+    const activate=(tab:HTMLButtonElement)=>{
+      tabs.forEach(t=>{
+        const selected=t===tab;
+        t.setAttribute('aria-selected',String(selected));
+        t.tabIndex=selected?0:-1;
+        const panel=root.querySelector<HTMLElement>(`[data-panel="${t.dataset.tab}"]`);
+        if(panel) panel.hidden=!selected;
+      });
+    };
+    tabs.forEach((tab,i)=>{
+      tab.addEventListener('click',()=>activate(tab));
+      tab.addEventListener('keydown',(e)=>{
+        if(e.key!=='ArrowRight' && e.key!=='ArrowLeft' && e.key!=='Home' && e.key!=='End')return;
+        e.preventDefault();
+        const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+        activate(tabs[next]);tabs[next].focus();
+      });
+    });
+    root.querySelector<HTMLButtonElement>('[data-export]')?.addEventListener('click',()=>{
+      const selected=filtered();
+      const lines=[labels.join(','),...selected.map(r=>[r.year,...fields.map(f=>r[f])].join(','))];
+      const blob=new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');a.href=url;a.download=`major-incidents-${startEl.value}-${endEl.value}.csv`;
+      document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
+    });
+    update();
+  });
+</script>

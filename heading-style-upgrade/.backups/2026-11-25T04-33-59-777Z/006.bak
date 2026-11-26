@@ -1,0 +1,220 @@
+---
+// Keep internal links compatible with GitHub Pages and any future custom domain.
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const pageUrl = (path: string) => `${BASE}/${path.replace(/^\/+/, '')}`;
+const contactEmail = 'thenaxalarchieve@gmail.com';
+---
+
+<section class="na-about" id="about" aria-labelledby="na-about-title">
+  <!-- INTRODUCTION -->
+  <div class="na-intro">
+    <div class="na-shell">
+      <p class="na-eyebrow"><span class="na-rule" aria-hidden="true"></span> About the archive</p>
+      <h1 id="na-about-title" class="na-hero-title">
+        <span>History in context.</span>
+        <em>People in focus.</em>
+      </h1>
+      <p class="na-lead">A clearer understanding of the Naxalite–Maoist movement in India—and the lives shaped by it.</p>
+      <p class="na-description">
+        The Naxal Archive brings together history, public records, data and analysis.
+        We aim to make a fragmented record easier to explore, with attention to the
+        communities, institutions and everyday lives affected by the conflict.
+      </p>
+      <a class="na-explore" href={pageUrl('background/')}>Explore the historical record <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <!-- VISION & MISSION -->
+  <div class="na-vision-section">
+    <div class="na-shell na-vision-layout">
+      <div class="na-vision-column">
+        <p class="na-overline">Our vision</p>
+        <h3>A lasting record.<br /><em>A deeper understanding.</em></h3>
+        <p>
+          To build an accessible record that helps people understand the conflict,
+          examine its consequences and follow the changes taking place in affected regions.
+        </p>
+      </div>
+      <div class="na-mission-column">
+        <p class="na-overline">Our mission</p>
+        <h3>Preserve. Connect.<br />Explain.</h3>
+        <p>
+          Bring available material together, explain its context, and make its sources
+          and limitations clear.
+        </p>
+        <div class="na-audience">
+          <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 6c-3.8-2.1-7.2-2.3-11-1.5v17c4.2-.8 7.7-.4 11 1.7 3.3-2.1 6.8-2.5 11-1.7v-17C21.2 3.7 17.8 3.9 14 6Z" />
+            <path d="M14 6v17" />
+          </svg>
+          <span>For students, journalists, researchers and curious readers.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL COMMITMENTS -->
+  <div class="na-editorial">
+    <div class="na-shell na-editorial-layout">
+      <div class="na-editorial-intro">
+        <p class="na-overline">Our editorial commitments</p>
+        <h3>Trust comes<br />from the work.</h3>
+        <p>Our aim is a record readers can examine, question and help improve.</p>
+        <blockquote>“Understanding begins with evidence—and the context around it.”</blockquote>
+      </div>
+      <div class="na-commitments" aria-label="Editorial commitments">
+        <details class="na-commitment">
+          <summary><span class="na-commitment-number">01</span><span class="na-commitment-title">Evidence with attribution</span><span class="na-toggle" aria-hidden="true"></span></summary>
+          <p>We aim to identify sources for factual claims, figures and quotations, and distinguish documented information from allegations and interpretation.</p>
+        </details>
+        <details class="na-commitment">
+          <summary><span class="na-commitment-number">02</span><span class="na-commitment-title">Context before conclusions</span><span class="na-toggle" aria-hidden="true"></span></summary>
+          <p>Events and data are considered in their historical, geographical and social context, including uncertainties and differences between sources.</p>
+        </details>
+        <details class="na-commitment">
+          <summary><span class="na-commitment-number">03</span><span class="na-commitment-title">People at the centre</span><span class="na-toggle" aria-hidden="true"></span></summary>
+          <p>We pay attention to the experiences of families, local institutions and communities living with the consequences of the conflict.</p>
+        </details>
+        <details class="na-commitment">
+          <summary><span class="na-commitment-number">04</span><span class="na-commitment-title">A record open to correction</span><span class="na-toggle" aria-hidden="true"></span></summary>
+          <p>Readers can flag errors, submit additional material and suggest missing context. Corrections should be reflected clearly in the record.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="na-contact-section">
+    <div class="na-shell na-contact-layout">
+      <div class="na-contact-copy">
+        <p class="na-overline">Contribute to the archive</p>
+        <h3>Help make the<br />record stronger<span class="na-rust-dot">.</span></h3>
+        <p>
+          A document. A correction. A different perspective.<br />
+          We welcome contributions that add evidence, context and understanding.
+        </p>
+      </div>
+      <div class="na-contact-actions">
+        <a class="na-contact-button" href={`mailto:${contactEmail}?subject=The%20Naxal%20Archive%20-%20Enquiry`}>Contact The Naxal Archive <span aria-hidden="true">↗</span></a>
+        <a class="na-email" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        <p>Research · Corrections · Contributions</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMALL CLOSING STRIP, DISTINCT FROM THE SITE FOOTER -->
+  <div class="na-closing-strip">
+    <div class="na-shell">
+      <span>The Naxal Archive</span>
+      <span>History in context. People in focus.</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .na-about {
+    --na-paper: #f3efe7;
+    --na-paper-deep: #e9e1d4;
+    --na-ink: #172826;
+    --na-green: #1e3a34;
+    --na-rust: #a44925;
+    --na-peach: #e8b7a0;
+    --na-muted: #626765;
+    --na-rule-color: #d8d0c3;
+    color: var(--na-ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    scroll-margin-top: 26px;
+  }
+  .na-about, .na-about * { box-sizing: border-box; }
+  .na-shell { max-width: 1120px; margin: 0 auto; padding: 0 30px; }
+  .na-eyebrow, .na-overline {
+    margin: 0; color: var(--na-rust); font: 600 12px/1.5 system-ui, sans-serif;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .na-intro { background: var(--na-paper); padding: clamp(72px, 9vw, 128px) 0 clamp(88px, 10vw, 132px); }
+  .na-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 38px; }
+  .na-rule { width: 39px; height: 2px; flex: 0 0 auto; background: var(--na-rust); }
+  .na-hero-title { font-weight: 700; font-size: clamp(47px, 6.2vw, 88px); line-height: 1.01; letter-spacing: -.048em; margin: 0 0 44px; }
+  .na-hero-title span, .na-hero-title em { display: block; }
+  .na-hero-title em { color: var(--na-rust); font-style: italic; font-weight: 400; }
+  .na-lead { max-width: 770px; margin: 0 0 25px; font: 400 clamp(21px, 2.3vw, 30px)/1.42 system-ui, sans-serif; letter-spacing: -.025em; color: #152321; }
+  .na-description { max-width: 755px; margin: 0; font: 400 clamp(17px, 1.65vw, 21px)/1.85 system-ui, sans-serif; color: var(--na-muted); }
+  .na-explore { display: inline-flex; align-items: center; gap: 24px; margin-top: 36px; padding-bottom: 8px; border-bottom: 1px solid #b9ab9b; font: 650 13px/1.5 system-ui, sans-serif; color: var(--na-rust); text-decoration: none; }
+  .na-explore:hover, .na-explore:focus-visible { color: var(--na-green); border-bottom-color: currentColor; }
+  .na-vision-section { background: var(--na-green); color: #fff8ef; padding: clamp(68px, 8vw, 110px) 0; }
+  .na-vision-layout { display: grid; grid-template-columns: 1.15fr .85fr; column-gap: clamp(45px, 5vw, 86px); }
+  .na-vision-column { padding-right: 15px; }
+  .na-mission-column { border-left: 1px solid rgba(240,232,221,.34); padding-left: clamp(34px, 4vw, 68px); }
+  .na-vision-section .na-overline { color: var(--na-peach); }
+  .na-vision-section h3 { font-size: clamp(34px, 3.95vw, 53px); line-height: 1.14; letter-spacing: -.032em; font-weight: 500; margin: 27px 0 25px; }
+  .na-vision-section h3 em { font-weight: 400; color: var(--na-peach); }
+  .na-vision-section p:not(.na-overline) { max-width: 580px; margin: 0; font: 400 clamp(17px, 1.75vw, 22px)/1.86 system-ui, sans-serif; color: #e3e7e2; }
+  .na-mission-column h3 { font-size: clamp(32px, 3.3vw, 44px); }
+  .na-audience { display: flex; align-items: center; gap: 17px; margin-top: 37px; color: #bdccc5; }
+  .na-audience svg { flex: 0 0 24px; }
+  .na-audience span { font: 400 15px/1.65 system-ui, sans-serif; max-width: 320px; }
+  .na-editorial { background: var(--na-paper); padding: clamp(75px, 9vw, 120px) 0; }
+  .na-editorial-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(54px, 8vw, 128px); }
+  .na-editorial-intro h3 { font-size: clamp(43px, 5vw, 65px); line-height: 1.08; letter-spacing: -.04em; font-weight: 500; margin: 26px 0 34px; }
+  .na-editorial-intro > p:not(.na-overline) { max-width: 425px; margin: 0; font: 400 clamp(17px, 1.8vw, 21px)/1.75 system-ui, sans-serif; color: var(--na-muted); }
+  .na-editorial-intro blockquote { max-width: 500px; border-left: 3px solid var(--na-rust); margin: 38px 0 0; padding: 0 0 0 26px; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.38; font-style: italic; color: var(--na-rust); }
+  .na-commitments { border-top: 1px solid var(--na-rule-color); }
+  .na-commitment { border-bottom: 1px solid var(--na-rule-color); }
+  .na-commitment summary { cursor: pointer; display: grid; grid-template-columns: 31px 1fr 20px; align-items: center; gap: 19px; padding: 32px 2px; list-style: none; }
+  .na-commitment summary::-webkit-details-marker { display: none; }
+  .na-commitment-number { font: 500 14px/1.4 system-ui, sans-serif; color: var(--na-rust); }
+  .na-commitment-title { font: 400 clamp(21px, 2vw, 29px)/1.25 Georgia, 'Times New Roman', serif; letter-spacing: -.02em; }
+  .na-toggle { position: relative; width: 18px; height: 18px; color: var(--na-rust); }
+  .na-toggle::before, .na-toggle::after { content: ''; display: block; position: absolute; background: currentColor; left: 1px; top: 8px; height: 2px; width: 16px; transition: transform .2s ease; }
+  .na-toggle::after { transform: rotate(90deg); }
+  .na-commitment[open] .na-toggle::after { transform: rotate(0); }
+  .na-commitment summary:hover .na-commitment-title { color: var(--na-rust); }
+  .na-commitment summary:focus-visible, .na-contact-button:focus-visible, .na-email:focus-visible { outline: 3px solid var(--na-rust); outline-offset: 4px; }
+  .na-commitment > p { margin: -8px 35px 29px 50px; max-width: 560px; color: var(--na-muted); font: 400 16px/1.8 system-ui, sans-serif; }
+  .na-contact-section { background: var(--na-paper-deep); padding: clamp(65px, 8vw, 112px) 0; }
+  .na-contact-layout { display: grid; grid-template-columns: 1.4fr .75fr; gap: clamp(50px, 7vw, 118px); align-items: center; }
+  .na-contact-copy h3 { font-size: clamp(45px, 5vw, 67px); font-weight: 500; letter-spacing: -.04em; line-height: 1.05; margin: 32px 0 34px; }
+  .na-rust-dot { color: var(--na-rust); }
+  .na-contact-copy > p:not(.na-overline) { margin: 0; color: var(--na-muted); font: 400 clamp(17px, 1.8vw, 21px)/1.85 system-ui, sans-serif; }
+  .na-contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .na-contact-button { background: var(--na-ink); color: white; display: inline-flex; justify-content: space-between; align-items: center; gap: 35px; min-width: 272px; padding: 23px 29px; text-decoration: none; font: 600 16px/1.4 system-ui, sans-serif; transition: background .2s ease, transform .2s ease; }
+  .na-contact-button:hover { background: var(--na-rust); transform: translateY(-2px); }
+  .na-contact-button span { font-size: 24px; line-height: 1; }
+  .na-email { font: 400 17px/1.5 system-ui, sans-serif; color: var(--na-ink); text-decoration: none; border-bottom: 1px solid #b6a99b; padding-bottom: 8px; overflow-wrap: anywhere; }
+  .na-email:hover { color: var(--na-rust); }
+  .na-contact-actions p { margin: 0; font: 400 14px/1.5 system-ui, sans-serif; color: var(--na-muted); }
+  .na-closing-strip { background: #172e2a; color: white; padding: 27px 0; }
+  .na-closing-strip .na-shell { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .na-closing-strip span:first-child { font: 700 21px Georgia, 'Times New Roman', serif; }
+  .na-closing-strip span:last-child { font: 400 14px/1.5 system-ui, sans-serif; color: #e5e4df; }
+  @media (max-width: 860px) {
+    .na-vision-layout, .na-editorial-layout, .na-contact-layout { grid-template-columns: 1fr; }
+    .na-vision-layout { row-gap: 48px; }
+    .na-mission-column { padding-left: 0; padding-top: 43px; border-left: 0; border-top: 1px solid rgba(240,232,221,.34); }
+    .na-editorial-layout { gap: 52px; }
+    .na-contact-layout { gap: 42px; }
+  }
+  @media (max-width: 580px) {
+    .na-shell { padding-left: 22px; padding-right: 22px; }
+    .na-intro { padding: 66px 0 76px; }
+    .na-eyebrow { margin-bottom: 28px; }
+    .na-hero-title { font-size: clamp(41px, 10.8vw, 60px); margin-bottom: 32px; }
+    .na-lead { font-size: 21px; }
+    .na-description { font-size: 16px; line-height: 1.72; }
+    .na-vision-section { padding: 62px 0; }
+    .na-vision-section h3 { font-size: 37px; }
+    .na-editorial { padding: 68px 0 76px; }
+    .na-editorial-intro h3 { font-size: 45px; }
+    .na-commitment summary { grid-template-columns: 25px 1fr 18px; gap: 12px; padding: 25px 0; }
+    .na-commitment-title { font-size: 22px; }
+    .na-commitment > p { margin: -2px 5px 24px 38px; font-size: 15px; }
+    .na-contact-section { padding: 70px 0; }
+    .na-contact-copy h3 { font-size: 48px; }
+    .na-contact-copy > p:not(.na-overline) { font-size: 17px; }
+    .na-contact-copy > p:not(.na-overline) br { display: none; }
+    .na-contact-button { min-width: 0; width: 100%; }
+    .na-contact-actions { width: 100%; }
+    .na-closing-strip .na-shell { align-items: flex-start; flex-direction: column; gap: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .na-contact-button, .na-toggle::after { transition: none; } }
+</style>

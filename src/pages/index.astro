@@ -1,4 +1,6 @@
 ---
+import ArchiveVideoCollection from '../components/ArchiveVideoCollection.astro';
+import ArticleShowcase from '../components/ArticleShowcase.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -320,136 +322,7 @@ const assetUrl = (path: string) =>
          ARTICLES
          ====================================================== -->
 
-    <section
-      class="section section-tint"
-      id="articles"
-    >
-
-      <div class="shell">
-
-        <div class="section-head">
-
-          <div>
-            <span class="eyebrow">
-              Articles
-            </span>
-
-            <h2>
-              Latest reporting and analysis
-            </h2>
-          </div>
-
-          <p>
-            News Desk reporting and Opinions are published in one stream,
-            with each piece clearly labelled.
-          </p>
-
-        </div>
-
-
-        {articles.length > 0 ? (
-
-          <div class="article-carousel" data-article-carousel>
-            <div class="article-carousel-viewport" data-carousel-viewport>
-              <div class="article-carousel-track" data-carousel-track>
-                {articles.slice(0, 5).map((article, index) => (
-                  <article class="article-carousel-slide" aria-hidden={index === 0 ? 'false' : 'true'}>
-                    <a class="article-carousel-link" href={articleUrl(article.id)}>
-                      <div class:list={["article-carousel-image", { "article-carousel-image-fallback": !article.data.cover }]}>
-                        {article.data.cover ? (
-                          <img
-                            src={assetUrl(article.data.cover)}
-                            alt={article.data.title}
-                            loading={index === 0 ? 'eager' : 'lazy'}
-                          />
-                        ) : (
-                          <div class="article-carousel-fallback-copy" aria-hidden="true">
-                            <span>{article.data.type}</span>
-                            <strong>{String(index + 1).padStart(2, '0')}</strong>
-                            <small>The Naxal Archive</small>
-                          </div>
-                        )}
-                      </div>
-
-                      <div class="article-carousel-content">
-                        <div class="article-carousel-topline">
-                          <span class="article-label">
-                            {article.data.section} · {article.data.type}
-                          </span>
-                          <span class="article-carousel-date">
-                            {article.data.published.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
-                          </span>
-                        </div>
-
-                        <h3>{article.data.title}</h3>
-                        {article.data.dek && <p class="article-carousel-dek">{article.data.dek}</p>}
-
-                        <div class="article-carousel-info">
-                          <span>By {article.data.author}</span>
-                          <span>{article.data.readTime ?? 'Read article'}</span>
-                        </div>
-
-                        {article.data.tags?.length > 0 && (
-                          <div class="article-carousel-tags" aria-label="Article topics">
-                            {article.data.tags.slice(0, 4).map((tag) => (
-                              <span>{tag}</span>
-                            ))}
-                          </div>
-                        )}
-
-                        <div class="article-card-meta">
-                          Read full story <span>→</span>
-                        </div>
-                      </div>
-                    </a>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div class="article-carousel-controls">
-              <div class="article-carousel-dots" data-carousel-dots aria-label="Choose article">
-                {articles.slice(0, 5).map((_, index) => (
-                  <button
-                    type="button"
-                    class:list={['article-carousel-dot', { active: index === 0 }]}
-                    aria-label={`Show article ${index + 1}`}
-                    aria-current={index === 0 ? 'true' : 'false'}
-                    data-carousel-dot={index}
-                  ></button>
-                ))}
-              </div>
-
-              <div class="article-carousel-nav">
-                <span class="article-carousel-count" data-carousel-count>
-                  01 / {String(Math.min(articles.length, 5)).padStart(2, '0')}
-                </span>
-                <button type="button" class="article-carousel-arrow" data-carousel-prev aria-label="Previous article">←</button>
-                <button type="button" class="article-carousel-arrow" data-carousel-next aria-label="Next article">→</button>
-              </div>
-            </div>
-          </div>
-
-        ) : (
-          <div class="empty-state"><p>No articles have been published yet.</p></div>
-        )}
-
-
-
-        <div
-          class="visual-actions"
-          style="margin-top: 28px;"
-        >
-
-          <a href={pageUrl('articles/')}>
-            View all articles →
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
+    <ArticleShowcase articles={articles} />
 
 
 
@@ -745,6 +618,9 @@ const assetUrl = (path: string) =>
       });
     </script>
 
+  
+    <!-- ARCHIVE VOICES: homepage preview -->
+    <ArchiveVideoCollection mode="home" />
   </main>
 
   <Footer />

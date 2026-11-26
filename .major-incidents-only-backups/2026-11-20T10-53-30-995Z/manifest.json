@@ -1,0 +1,18 @@
+[
+  {
+    "name": "src/components/MajorIncidents.astro",
+    "existed": true
+  },
+  {
+    "name": "src/pages/data-visuals/lwe-fatalities-since-1980.astro",
+    "existed": false
+  },
+  {
+    "name": "src/pages/data-visuals/index.astro",
+    "existed": true
+  },
+  {
+    "name": "src/components/Header.astro",
+    "existed": true
+  }
+]

@@ -1,0 +1,18 @@
+---
+// Compatibility redirect only. The old 1980–2026 data and charts have been removed.
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const destination = `${base}/data-visuals/major-incidents/`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${destination}`} />
+    <meta name="robots" content="noindex, follow" />
+    <title>Major Incidents — The Naxal Archive</title>
+    <link rel="canonical" href={destination} />
+  </head>
+  <body>
+    <p>This page has moved to <a href={destination}>Major Incidents (2000–2026)</a>.</p>
+  </body>
+</html>

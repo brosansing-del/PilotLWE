@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-11-20T10:26:59.934Z",
+  "changes": [
+    {
+      "file": "src/pages/data-visuals/lwe-fatalities-since-1980.astro",
+      "existed": true
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-11-25T04-33-59-777Z",
+  "root": "D:\\thenaxalarchive",
+  "files": [
+    {
+      "file": "src/styles/naxal-section-headings.css",
+      "exists": false,
+      "backup": null,
+      "installedSha256": "7eea64580cbeb53f10a31c3c4b5758a66199e0331ee0b5d99fd0b12869b1a37b"
+    },
+    {
+      "file": "src/pages/history/index.astro",
+      "exists": true,
+      "backup": "001.bak",
+      "installedSha256": "380ae0486adf036434a83c8c941f778507fc01f1514ab88d6fd9c41b954d9495"
+    },
+    {
+      "file": "src/pages/background/index.astro",
+      "exists": true,
+      "backup": "002.bak",
+      "installedSha256": "c42ab669f1784054efe2e41614d202dda769450df2968e0037540baa186cfb41"
+    },
+    {
+      "file": "src/pages/data-visuals/index.astro",
+      "exists": true,
+      "backup": "003.bak",
+      "installedSha256": "a0f3bd858a98678c24bf4283fb46aee4215606bc076b59b5f0f58b9b7d3191b1"
+    },
+    {
+      "file": "src/pages/articles/index.astro",
+      "exists": true,
+      "backup": "004.bak",
+      "installedSha256": "1718ed679bdd0553d4a0f9003d919c8da48ddeacbfdb6e7a483adf3102e4b67d"
+    },
+    {
+      "file": "src/pages/victims-corner/index.astro",
+      "exists": true,
+      "backup": "005.bak",
+      "installedSha256": "e91a1ee8f74a10476ef7c8bf712439c64332800852cb76714517919a3586b51c"
+    },
+    {
+      "file": "src/components/AboutSection.astro",
+      "exists": true,
+      "backup": "006.bak",
+      "installedSha256": "916dd821f9553fac79f417b8f49d06e176a6fcc1fd74e39bd57d480fcef27f28"
+    },
+    {
+      "file": "src/components/MajorIncidents.astro",
+      "exists": true,
+      "backup": "007.bak",
+      "installedSha256": "3af04824f31a17ea3de528bddb560bcdb765cfdcd06a6a2a9d5546ed5127e003"
+    }
+  ]
+}

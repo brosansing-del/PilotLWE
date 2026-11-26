@@ -1,0 +1,228 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { articles: CollectionEntry<'articles'>[]; }
+const { articles } = Astro.props;
+const items = articles.slice(0, 6);
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const url = (s: string) => `${base}/${s.replace(/^\/+/, '')}`;
+const asset = (s: string) => {
+  if (/^(https?:)?\/\//.test(s) || s.startsWith('data:')) return s;
+  const clean = s.replace(/^\/+/, '');
+  const prefix = base.replace(/^\/+/, '');
+  return '/' + (prefix && !clean.startsWith(prefix + '/') ? prefix + '/' : '') + clean;
+};
+const naArticleCover = (id: string) => {
+  if (id === 'whose-liberation-after-all') return '/images/articles/whose-liberation.webp';
+  if (id === 'who-stole-their-childhoods') return '/images/articles/children-of-maoists.webp';
+  return '';
+};
+const data = (item: CollectionEntry<'articles'>) => item.data as Record<string, any>;
+const cover = (item: CollectionEntry<'articles'>) => {
+  const d = data(item);
+  const image = naArticleCover(item.id) || d.image || d.cover || d.heroImage || '';
+  return typeof image === 'string' ? asset(image) : image?.src || '';
+};
+const summary = (item: CollectionEntry<'articles'>) => data(item).dek || data(item).description || data(item).excerpt || '';
+const date = (item: CollectionEntry<'articles'>) => {
+  const v = data(item).published;
+  const dt = v instanceof Date ? v : new Date(v || Date.now());
+  return Number.isNaN(dt.valueOf()) ? '' : dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+---
+<section class="na-features" id="articles" aria-label="Featured opinions" data-na-features>
+  <div class="na-features-shell">
+    <div class="na-features-heading">
+      <div>
+        <span class="na-eyebrow"><span class="na-asterisk">✳</span> THE ARCHIVE / EDITORIAL</span>
+        <h2>Stories worth <em>understanding.</em></h2>
+        <p>Reporting, perspectives and the human stories behind the history.</p>
+      </div>
+      <a class="na-browse" href={url('articles/')}>Explore opinions <span aria-hidden="true">↗</span></a>
+    </div>
+
+    {items.length > 0 ? (
+      <div class="na-gallery" aria-roledescription="carousel" aria-label="Latest opinions">
+        <div class="na-gallery-stage">
+          {items.map((item, index) => (
+            <article class="na-stage-card" data-na-stage hidden={index !== 0} aria-hidden={index === 0 ? 'false' : 'true'}>
+              <a href={url(`articles/${item.id}/`)} class="na-stage-media" tabindex={index === 0 ? 0 : -1} data-na-stage-link>
+                {cover(item) ? (
+                  <img src={cover(item)} alt={`Cover illustration for ${data(item).title}`} loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+                ) : (
+                  <div class="na-photo-fallback"><span>THE NAXAL<br/>ARCHIVE</span><b>{String(index + 1).padStart(2,'0')}</b></div>
+                )}
+                <span class="na-image-tag">FROM THE ARCHIVE <span aria-hidden="true">↗</span></span>
+              </a>
+              <div class="na-stage-copy">
+                <div class="na-stage-meta"><span>{data(item).section || 'Articles'}</span><span class="na-middot">·</span><span>{data(item).type || 'Article'}</span><span class="na-stretch"></span><time>{date(item)}</time></div>
+                <h3><a href={url(`articles/${item.id}/`)} tabindex={index === 0 ? 0 : -1} data-na-stage-link>{data(item).title}</a></h3>
+                <p class="na-excerpt">{summary(item)}</p>
+                <div class="na-byline"><span>THE NAXAL ARCHIVE</span><span class="na-meta-rule"></span><span>{data(item).readTime || 'Feature story'}</span></div>
+                <a class="na-read-action" href={url(`articles/${item.id}/`)} tabindex={index === 0 ? 0 : -1} data-na-stage-link><span>Read the full article</span><span class="na-round-arrow" aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="na-gallery-footer">
+          <div class="na-selector" aria-label="Select an article">
+            {items.map((item, index) => (
+              <button type="button" class:list={['na-selector-item', {'is-current': index === 0}]} data-na-select={index} aria-label={`Show article ${index + 1}: ${data(item).title}`} aria-pressed={index === 0 ? 'true' : 'false'}>
+                <span class="na-selector-n">{String(index + 1).padStart(2,'0')}</span>
+                <span class="na-selector-title">{data(item).title}</span>
+              </button>
+            ))}
+          </div>
+          <div class="na-feature-controls">
+            <span class="na-count" data-na-count aria-live="polite">01 <small>/ {String(items.length).padStart(2,'0')}</small></span>
+            <button class="na-control" type="button" aria-label="Previous article" data-na-prev>←</button>
+            <button class="na-control" type="button" aria-label="Next article" data-na-next>→</button>
+          </div>
+        </div>
+      </div>
+    ) : <p class="na-empty">New articles will appear here.</p>}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-na-features]').forEach(section => {
+    if (section.dataset.naReady === '1') return;
+    section.dataset.naReady = '1';
+    const slides = Array.from(section.querySelectorAll<HTMLElement>('[data-na-stage]'));
+    const selectors = Array.from(section.querySelectorAll<HTMLButtonElement>('[data-na-select]'));
+    const count = section.querySelector<HTMLElement>('[data-na-count]');
+    let active = 0;
+    let startX: number | null = null;
+    let startY: number | null = null;
+    function show(index: number) {
+      if (!slides.length) return;
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const visible = i === active;
+        slide.hidden = !visible;
+        slide.setAttribute('aria-hidden', String(!visible));
+        slide.querySelectorAll<HTMLAnchorElement>('a').forEach(link => link.tabIndex = visible ? 0 : -1);
+      });
+      selectors.forEach((btn,i) => {
+        btn.classList.toggle('is-current',i === active);
+        btn.setAttribute('aria-pressed',String(i === active));
+      });
+      if (count) count.innerHTML = `${String(active + 1).padStart(2,'0')} <small>/ ${String(slides.length).padStart(2,'0')}</small>`;
+    }
+    section.querySelector('[data-na-prev]')?.addEventListener('click', () => show(active - 1));
+    section.querySelector('[data-na-next]')?.addEventListener('click', () => show(active + 1));
+    selectors.forEach((btn,i) => btn.addEventListener('click', () => show(i)));
+    const stage = section.querySelector<HTMLElement>('.na-gallery-stage');
+    stage?.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      startX = e.clientX; startY = e.clientY;
+    });
+    stage?.addEventListener('pointerup', e => {
+      if (startX === null || startY === null) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      startX = null; startY = null;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) show(active + (dx < 0 ? 1 : -1));
+    });
+    stage?.addEventListener('pointercancel', () => { startX = null; startY = null; });
+    section.addEventListener('keydown', e => {
+      if (e.target instanceof HTMLInputElement) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(active + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(active - 1); }
+    });
+  });
+</script>
+
+<style>
+  .na-features{background:#eee9df;padding:82px 0 78px;color:#182722;}
+  .na-features *{box-sizing:border-box;}
+  .na-features-shell{width:min(1180px,calc(100% - 56px));margin:0 auto;}
+  .na-features-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:31px;}
+  .na-eyebrow{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.18em;color:#a45437;}
+  .na-asterisk{font-size:20px;vertical-align:-2px;margin-right:8px;color:#ad5839;}
+  .na-features-heading h2{font:500 clamp(36px,4.8vw,60px)/1.1 Georgia,serif;letter-spacing:-.045em;margin:9px 0 8px;}
+  .na-features-heading h2 em{color:#a75d42;font-style:italic;font-weight:400;}
+  .na-features-heading p{color:#68706b;font:15px/1.6 system-ui,sans-serif;margin:0;}
+  .na-browse{white-space:nowrap;color:#174035;font:700 13px/1.3 system-ui,sans-serif;text-decoration:none;border-bottom:1px solid #adb8ab;padding-bottom:9px;margin-bottom:3px;}
+  .na-browse span{margin-left:14px;color:#b15b3a;}
+  .na-stage-card{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);background:#fffdf7;border:1px solid #d5d1c6;min-height:446px;overflow:hidden;box-shadow:0 18px 35px #18332908;}
+  .na-stage-card[hidden]{display:none!important;}
+  .na-stage-media{display:block;position:relative;min-height:440px;background:#274239;overflow:hidden;}
+  .na-stage-media img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .55s ease;}
+  .na-stage-media:hover img{transform:scale(1.04);}
+  .na-stage-media::after{content:"";pointer-events:none;position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#0a242666);}
+  .na-image-tag{position:absolute;bottom:24px;left:24px;z-index:1;font:700 11px/1.3 system-ui,sans-serif;letter-spacing:.12em;color:white;}
+  .na-image-tag span{margin-left:8px;}
+  .na-photo-fallback{width:100%;min-height:440px;height:100%;padding:38px;background:radial-gradient(circle at 60% 40%,#54776d,#19352e 75%);display:flex;flex-direction:column;justify-content:space-between;color:#fcf4e3;font:700 16px/1.3 Georgia,serif;letter-spacing:.15em;}
+  .na-photo-fallback b{font:400 160px/.8 Georgia,serif;opacity:.15;}
+  .na-stage-copy{padding:clamp(28px,3.8vw,54px);display:flex;flex-direction:column;min-width:0;}
+  .na-stage-meta{display:flex;align-items:center;gap:9px;font:700 10px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.13em;color:#a85335;}
+  .na-stage-meta time{font-size:10px;color:#8e938b;white-space:nowrap;letter-spacing:.03em;text-transform:none;font-weight:500;}
+  .na-middot{color:#b9ac9d;}
+  .na-stretch{flex:1;}
+  .na-stage-copy h3{font:500 clamp(36px,3.65vw,52px)/1.09 Georgia,serif;letter-spacing:-.042em;margin:25px 0 16px;}
+  .na-stage-copy h3 a{text-decoration:none;color:#192823;}
+  .na-stage-copy h3 a:hover{color:#ac5839;}
+  .na-excerpt{font:17px/1.65 Georgia,serif;color:#606861;margin:0 0 26px;max-width:36ch;}
+  .na-byline{display:flex;align-items:center;gap:10px;margin-top:auto;color:#66776e;font:700 10px/1.4 system-ui,sans-serif;letter-spacing:.05em;}
+  .na-meta-rule{height:4px;width:4px;border-radius:50%;background:#b1b8ad;}
+  .na-read-action{margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #d8dcd3;padding-top:18px;color:#174035;font:700 13px/1.5 system-ui,sans-serif;text-decoration:none;}
+  .na-round-arrow{border:1px solid #d2d9ce;width:35px;height:35px;border-radius:50%;display:grid;place-items:center;font-size:20px;transition:background .2s ease,color .2s ease;}
+  .na-read-action:hover .na-round-arrow{background:#174035;color:#fff;}
+  .na-gallery-footer{display:flex;justify-content:space-between;gap:22px;align-items:stretch;margin-top:23px;}
+  .na-selector{display:flex;gap:10px;min-width:0;flex:1;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px;}
+  .na-selector-item{border:1px solid #d3cfc4;border-top:3px solid transparent;padding:14px 12px 12px;text-align:left;min-width:145px;flex:1;background:#f7f4ec;color:#56605b;cursor:pointer;display:flex;gap:10px;align-items:flex-start;}
+  .na-selector-item:hover,.na-selector-item.is-current{border-top-color:#b45b3d;background:#fffdf7;color:#192823;}
+  .na-selector-n{font:700 10px/1.6 system-ui,sans-serif;color:#ab634b;}
+  .na-selector-title{font:600 12px/1.35 system-ui,sans-serif;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
+  .na-feature-controls{display:flex;align-items:center;gap:10px;flex:none;}
+  .na-count{font:700 13px/1 system-ui,sans-serif;color:#1f372f;min-width:68px;white-space:nowrap;}
+  .na-count :global(small){font-weight:400;color:#8e938a;}
+  .na-control{border:1px solid #c5cfc4;border-radius:50%;height:44px;width:44px;background:transparent;color:#24493d;cursor:pointer;font:23px Georgia,serif;}
+  .na-control:hover{background:#1a4739;color:white;}
+  .na-empty{padding:40px;border:1px dashed #c8c8be;}
+  @media(max-width:850px){.na-stage-card{grid-template-columns:1fr;}.na-stage-media{min-height:0;aspect-ratio:16/9;}.na-stage-copy{padding:32px;}.na-gallery-footer{flex-wrap:wrap;}.na-feature-controls{margin-left:auto;}.na-features-heading h2{font-size:44px;}}
+  @media(max-width:600px){.na-features{padding:49px 0;}.na-features-shell{width:min(100% - 32px,1180px);}.na-features-heading{display:block;}.na-features-heading h2{font-size:38px;}.na-browse{display:inline-block;margin-top:20px;}.na-stage-media{aspect-ratio:15/10;}.na-stage-copy{padding:26px 22px;}.na-stage-copy h3{font-size:37px;margin-top:18px;}.na-excerpt{font-size:16px;}.na-selector{width:100%;flex-basis:100%;}.na-selector-item{min-width:140px;}.na-gallery-footer{gap:12px;}.na-feature-controls{gap:8px;}.na-control{height:42px;width:42px;}}
+  @media(prefers-reduced-motion:reduce){.na-stage-media img,.na-round-arrow{transition:none;}}
+</style>
+
+
+<style is:global>
+/* NA_BROKEN_COVER_FALLBACK_V1 */
+.na-cover-art-fallback{position:absolute;inset:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:18px;padding:clamp(25px,5vw,60px);background:radial-gradient(circle at 75% 20%,#496e5c,#18382f 65%,#102b25);color:#f6f0e4;box-sizing:border-box;overflow:hidden;text-align:left;}
+.na-cover-art-fallback::before{content:'✳';position:absolute;right:-26px;top:-45px;font:normal 280px/1 Georgia,serif;color:#ffffff0d;pointer-events:none;}
+.na-cover-art-fallback .na-fallback-eyebrow{position:relative;font:700 11px/1.5 system-ui,sans-serif;letter-spacing:.19em;color:#e8ba8f;}
+.na-cover-art-fallback .na-fallback-title{position:relative;max-width:95%;font:normal clamp(25px,3.6vw,49px)/1.13 Georgia,serif;letter-spacing:-.025em;overflow-wrap:anywhere;}
+.na-stage-media .na-cover-art-fallback,.na-spotlight-image .na-cover-art-fallback,.na-tile-image .na-cover-art-fallback,.na-related-img .na-cover-art-fallback{position:absolute;inset:0;}
+.na-tile-image .na-cover-art-fallback,.na-related-img .na-cover-art-fallback{gap:11px;padding:24px;}
+.na-tile-image .na-fallback-title,.na-related-img .na-fallback-title{font-size:clamp(21px,2.1vw,28px);}
+.na-cover .na-cover-art-fallback{position:relative;inset:auto;min-height:330px;aspect-ratio:16/8;justify-content:center;}
+@media(max-width:600px){.na-cover-art-fallback{padding:26px;gap:12px;}.na-cover-art-fallback .na-fallback-title{font-size:clamp(24px,6vw,37px);}.na-cover .na-cover-art-fallback{min-height:220px;}}
+/* END_NA_BROKEN_COVER_FALLBACK_V1 */
+</style>
+
+
+<script>
+  // NA_BROKEN_COVER_FALLBACK_V1: If a source image is missing, show an editorial card.
+  const coverSelectors = '.na-stage-media > img, .na-spotlight-image > img, .na-tile-image > img, .na-cover > img, .na-related-img > img';
+  document.querySelectorAll<HTMLImageElement>(coverSelectors).forEach(img => {
+    const onBroken = () => {
+      if (!img.isConnected) return;
+      const holder = img.parentElement;
+      if (!holder || holder.querySelector('.na-cover-art-fallback')) return;
+      const art = document.createElement('span');
+      art.className = 'na-cover-art-fallback';
+      art.setAttribute('aria-label', 'Article cover placeholder');
+      const eyebrow = document.createElement('span');
+      eyebrow.className = 'na-fallback-eyebrow';
+      eyebrow.textContent = 'THE NAXAL ARCHIVE / EDITORIAL';
+      const title = document.createElement('strong');
+      title.className = 'na-fallback-title';
+      title.textContent = img.alt.replace(/^Cover (?:illustration|image|for) (?:for )?/i, '').trim() || 'Stories worth understanding.';
+      art.append(eyebrow,title);
+      img.replaceWith(art);
+    };
+    img.addEventListener('error', onBroken, { once: true });
+    if (img.complete && img.naturalWidth === 0) onBroken();
+  });
+</script>

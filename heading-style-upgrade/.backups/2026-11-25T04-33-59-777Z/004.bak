@@ -1,0 +1,212 @@
+---
+import ArchiveVideoCollection from '../../components/ArchiveVideoCollection.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles')).sort((a,b) => new Date(b.data.published).valueOf() - new Date(a.data.published).valueOf());
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const url = (s: string) => `${base}/${s.replace(/^\/+/, '')}`;
+const asset = (s: string) => {
+  if (/^(https?:)?\/\//.test(s) || s.startsWith('data:')) return s;
+  const clean = s.replace(/^\/+/, '');
+  const prefix = base.replace(/^\/+/, '');
+  return '/' + (prefix && !clean.startsWith(prefix + '/') ? prefix + '/' : '') + clean;
+};
+const naArticleCover = (id: string) => {
+  if (id === 'whose-liberation-after-all') return '/images/articles/whose-liberation.webp';
+  if (id === 'who-stole-their-childhoods') return '/images/articles/children-of-maoists.webp';
+  return '';
+};
+const meta = (item: (typeof articles)[number]) => item.data as Record<string, any>;
+const cover = (item: (typeof articles)[number]) => {
+  const image = naArticleCover(item.id) || meta(item).image || meta(item).cover || '';
+  return typeof image === 'string' ? asset(image) : image?.src || '';
+};
+const description = (item: (typeof articles)[number]) => meta(item).dek || meta(item).description || meta(item).excerpt || '';
+const when = (item: (typeof articles)[number]) => new Date(meta(item).published).toLocaleDateString('en-IN', { day: 'numeric',month:'short',year:'numeric' });
+const categories = [...new Set(articles.map(article => String(meta(article).section || 'Articles')))];
+const spotlight = articles.find(a => meta(a).featured) || articles[0];
+const others = articles.filter(a => a.id !== spotlight?.id);
+---
+<BaseLayout title="Opinions | The Naxal Archive" description="Perspectives, analysis and interviews from The Naxal Archive.">
+  <Header />
+  <main class="na-library" id="main-content">
+    <div class="na-library-shell">
+      <div class="na-library-breadcrumb"><a href={url('')}>Home</a><span>/</span><span>Opinions</span></div>
+      <header class="na-library-intro">
+        <div>
+          <span class="na-kicker">THE NAXAL ARCHIVE / EDITORIAL</span>
+          <h1>Perspectives <em>&amp; Voices.</em></h1>
+          <p>Explore analyses, opinions and interviews about the history, ideas and human experiences behind Left-Wing Extremism.</p>
+        </div>
+        <div class="na-library-tally"><strong>{String(articles.length).padStart(2,'0')}</strong><span>PIECES IN<br/>THE ARCHIVE</span></div>
+      </header>
+      {spotlight && (
+        <section class="na-spotlight" aria-labelledby="na-spotlight-heading">
+          <a class="na-spotlight-image" href={url(`articles/${spotlight.id}/`)}>
+            {cover(spotlight) ? <img src={cover(spotlight)} alt={`Cover illustration for ${meta(spotlight).title}`} /> : <span class="na-placeholder">THE NAXAL ARCHIVE</span>}
+          </a>
+          <div class="na-spotlight-copy">
+            <span class="na-kicker">FEATURED STORY <span class="na-spotlight-divider">/</span> {meta(spotlight).section || 'Articles'}</span>
+            <h2 id="na-spotlight-heading"><a href={url(`articles/${spotlight.id}/`)}>{meta(spotlight).title}</a></h2>
+            <p>{description(spotlight)}</p>
+            <span class="na-feature-date">{when(spotlight)}</span>
+            <a class="na-read-button" href={url(`articles/${spotlight.id}/`)}>Read the story <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+      )}
+      <section class="na-library-all" aria-labelledby="na-all-heading">
+        <div class="na-library-bar">
+          <div><span class="na-kicker">BROWSE THE ARCHIVE</span><h2 id="na-all-heading">More to explore</h2></div>
+          <div class="na-library-filter" data-na-article-filters>
+            <button type="button" data-na-category="all" class="is-selected" aria-pressed="true">All</button>
+            {categories.map(category => <button type="button" data-na-category={category} aria-pressed="false">{category}</button>)}
+          </div>
+        </div>
+        {others.length > 0 ? (
+          <div class="na-library-grid">
+            {others.map(item => (
+              <article class="na-article-tile" data-na-tile data-na-section={meta(item).section || 'Articles'}>
+                <a class="na-tile-image" href={url(`articles/${item.id}/`)}>
+                  {cover(item) ? <img src={cover(item)} alt={`Cover illustration for ${meta(item).title}`} loading="lazy" decoding="async"/> : <span class="na-placeholder">THE NAXAL ARCHIVE</span>}
+                </a>
+                <div class="na-tile-text">
+                  <span class="na-kicker">{meta(item).section || 'Articles'} <span class="na-bullet">·</span> {when(item)}</span>
+                  <h3><a href={url(`articles/${item.id}/`)}>{meta(item).title}</a></h3>
+                  <p>{description(item)}</p>
+                  <a class="na-tile-link" href={url(`articles/${item.id}/`)}>Read article <span aria-hidden="true">↗</span></a>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : <div class="na-library-empty">More stories will be added to the archive.</div>}
+        <div class="na-library-empty" data-na-no-match hidden>No additional stories in this category. Try All.</div>
+      </section>
+    </div>
+  
+    <!-- ARCHIVE VOICES: interviews -->
+    <ArchiveVideoCollection mode="interviews" />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const root = document.querySelector('[data-na-article-filters]');
+  if (root) {
+    const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-na-category]'));
+    const tiles = Array.from(document.querySelectorAll<HTMLElement>('[data-na-tile]'));
+    const empty = document.querySelector<HTMLElement>('[data-na-no-match]');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const value = button.dataset.naCategory || 'all';
+      buttons.forEach(other => {
+        const selected = other === button;
+        other.classList.toggle('is-selected',selected);
+        other.setAttribute('aria-pressed',String(selected));
+      });
+      let visible = 0;
+      tiles.forEach(tile => {
+        const match = value === 'all' || tile.dataset.naSection === value;
+        tile.hidden = !match;
+        if (match) visible++;
+      });
+      if (empty) empty.hidden = visible > 0 || tiles.length === 0;
+    }));
+  }
+</script>
+
+<style>
+  .na-library{background:#f3efe6;color:#1b2b26;min-height:100vh;padding:30px 0 100px;}
+  .na-library *{box-sizing:border-box;}
+  .na-library-shell{width:min(1180px,calc(100% - 56px));margin:auto;}
+  .na-library-breadcrumb{display:flex;gap:12px;color:#8b928c;font:600 11px/1.4 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;}
+  .na-library-breadcrumb a{color:#475f56;text-decoration:none;}
+  .na-library-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;padding:70px 0 48px;}
+  .na-kicker{font:700 10px/1.5 system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#a85b3d;}
+  .na-library-intro h1{font:500 clamp(43px,6.1vw,78px)/1.04 Georgia,serif;letter-spacing:-.048em;max-width:880px;margin:14px 0 20px;}
+  .na-library-intro h1 em{color:#a35c42;font-weight:400;}
+  .na-library-intro p{color:#5f6b64;font:18px/1.65 Georgia,serif;max-width:650px;margin:0;}
+  .na-library-tally{flex:none;display:flex;align-items:center;gap:17px;border-left:1px solid #c4c9c0;padding:5px 0 5px 24px;}
+  .na-library-tally strong{font:400 48px/1 Georgia,serif;}
+  .na-library-tally span{font:700 10px/1.6 system-ui,sans-serif;color:#7b8a80;letter-spacing:.1em;}
+  .na-spotlight{display:grid;grid-template-columns:1.08fr .92fr;min-height:440px;box-shadow:0 15px 30px #162f220b;}
+  .na-spotlight-image{display:block;min-height:440px;position:relative;overflow:hidden;background:#355348;}
+  .na-spotlight-image img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0;transition:transform .4s;}
+  .na-spotlight-image:hover img{transform:scale(1.04);}
+  .na-spotlight-copy{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(28px,4.6vw,64px);background:#15372d;color:#fffaf0;}
+  .na-spotlight-copy .na-kicker{color:#d5a78f;}
+  .na-spotlight-divider{margin:0 10px;opacity:.55;}
+  .na-spotlight-copy h2{font:500 clamp(34px,3.7vw,53px)/1.1 Georgia,serif;letter-spacing:-.035em;margin:30px 0 20px;}
+  .na-spotlight-copy h2 a{color:inherit;text-decoration:none;}
+  .na-spotlight-copy h2 a:hover{text-decoration:underline;text-decoration-color:#ca9474;}
+  .na-spotlight-copy p{font:17px/1.6 Georgia,serif;color:#cfdbd0;margin:0 0 26px;}
+  .na-feature-date{color:#9cb4a8;font:12px system-ui,sans-serif;margin-top:auto;}
+  .na-read-button{display:flex;justify-content:space-between;gap:55px;align-items:center;padding:14px 18px;background:#f9f3e8;color:#1c392d;text-decoration:none;font:700 13px system-ui,sans-serif;margin-top:24px;}
+  .na-read-button:hover{background:#d6b19a;}
+  .na-library-all{margin-top:88px;}
+  .na-library-bar{display:flex;align-items:end;justify-content:space-between;gap:20px;border-bottom:1px solid #cbc9bf;padding-bottom:22px;margin-bottom:29px;}
+  .na-library-bar h2{font:500 clamp(30px,3.3vw,45px)/1.15 Georgia,serif;letter-spacing:-.03em;margin:9px 0 0;}
+  .na-library-filter{display:flex;flex-wrap:wrap;gap:7px;}
+  .na-library-filter button{border:1px solid #c9c9be;background:transparent;color:#53675b;padding:10px 16px;cursor:pointer;font:700 11px system-ui,sans-serif;border-radius:99px;}
+  .na-library-filter button.is-selected,.na-library-filter button:hover{background:#204337;color:#fff;border-color:#204337;}
+  .na-library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
+  .na-article-tile{background:#fffdf7;border:1px solid #dfded5;display:flex;flex-direction:column;min-width:0;}
+  .na-article-tile[hidden]{display:none!important;}
+  .na-tile-image{display:block;aspect-ratio:16/10;position:relative;background:#244136;overflow:hidden;}
+  .na-tile-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+  .na-tile-image:hover img{transform:scale(1.05);}
+  .na-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(115deg,#16382e,#547366);color:#f7f2e8;font:700 17px Georgia,serif;letter-spacing:.14em;}
+  .na-tile-text{padding:25px 26px 28px;display:flex;flex-direction:column;flex:1;}
+  .na-bullet{margin:0 6px;color:#a09c91;}
+  .na-tile-text h3{font:500 clamp(25px,2.1vw,31px)/1.18 Georgia,serif;letter-spacing:-.025em;margin:15px 0 12px;}
+  .na-tile-text h3 a{color:#19362b;text-decoration:none;}
+  .na-tile-text h3 a:hover{color:#ac5a3f;}
+  .na-tile-text p{font:15px/1.65 Georgia,serif;color:#68736a;margin:0 0 27px;}
+  .na-tile-link{display:flex;justify-content:space-between;padding-top:15px;border-top:1px solid #dfded5;margin-top:auto;color:#214538;text-decoration:none;font:700 12px system-ui,sans-serif;}
+  .na-library-empty{padding:32px 25px;background:#fffdf7;color:#69766e;}
+  .na-library-empty[hidden]{display:none!important;}
+  @media(max-width:900px){.na-library-intro{padding:48px 0 38px;}.na-spotlight{grid-template-columns:1fr;}.na-spotlight-image{min-height:0;aspect-ratio:16/9;}.na-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media(max-width:600px){.na-library{padding:23px 0 65px;}.na-library-shell{width:calc(100% - 32px);}.na-library-intro{display:block;padding:42px 0 30px;}.na-library-intro h1{font-size:46px;}.na-library-intro p{font-size:17px;}.na-library-tally{margin-top:27px;padding:5px 0 5px 15px;}.na-spotlight-copy{padding:30px 24px;}.na-spotlight-copy h2{font-size:37px;margin:20px 0 12px;}.na-library-all{margin-top:55px;}.na-library-bar{display:block;}.na-library-filter{margin-top:23px;}.na-library-grid{grid-template-columns:1fr;}.na-tile-text{padding:22px;}}
+</style>
+
+
+<style is:global>
+/* NA_BROKEN_COVER_FALLBACK_V1 */
+.na-cover-art-fallback{position:absolute;inset:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:18px;padding:clamp(25px,5vw,60px);background:radial-gradient(circle at 75% 20%,#496e5c,#18382f 65%,#102b25);color:#f6f0e4;box-sizing:border-box;overflow:hidden;text-align:left;}
+.na-cover-art-fallback::before{content:'✳';position:absolute;right:-26px;top:-45px;font:normal 280px/1 Georgia,serif;color:#ffffff0d;pointer-events:none;}
+.na-cover-art-fallback .na-fallback-eyebrow{position:relative;font:700 11px/1.5 system-ui,sans-serif;letter-spacing:.19em;color:#e8ba8f;}
+.na-cover-art-fallback .na-fallback-title{position:relative;max-width:95%;font:normal clamp(25px,3.6vw,49px)/1.13 Georgia,serif;letter-spacing:-.025em;overflow-wrap:anywhere;}
+.na-stage-media .na-cover-art-fallback,.na-spotlight-image .na-cover-art-fallback,.na-tile-image .na-cover-art-fallback,.na-related-img .na-cover-art-fallback{position:absolute;inset:0;}
+.na-tile-image .na-cover-art-fallback,.na-related-img .na-cover-art-fallback{gap:11px;padding:24px;}
+.na-tile-image .na-fallback-title,.na-related-img .na-fallback-title{font-size:clamp(21px,2.1vw,28px);}
+.na-cover .na-cover-art-fallback{position:relative;inset:auto;min-height:330px;aspect-ratio:16/8;justify-content:center;}
+@media(max-width:600px){.na-cover-art-fallback{padding:26px;gap:12px;}.na-cover-art-fallback .na-fallback-title{font-size:clamp(24px,6vw,37px);}.na-cover .na-cover-art-fallback{min-height:220px;}}
+/* END_NA_BROKEN_COVER_FALLBACK_V1 */
+</style>
+
+
+<script>
+  // NA_BROKEN_COVER_FALLBACK_V1: If a source image is missing, show an editorial card.
+  const coverSelectors = '.na-stage-media > img, .na-spotlight-image > img, .na-tile-image > img, .na-cover > img, .na-related-img > img';
+  document.querySelectorAll<HTMLImageElement>(coverSelectors).forEach(img => {
+    const onBroken = () => {
+      if (!img.isConnected) return;
+      const holder = img.parentElement;
+      if (!holder || holder.querySelector('.na-cover-art-fallback')) return;
+      const art = document.createElement('span');
+      art.className = 'na-cover-art-fallback';
+      art.setAttribute('aria-label', 'Article cover placeholder');
+      const eyebrow = document.createElement('span');
+      eyebrow.className = 'na-fallback-eyebrow';
+      eyebrow.textContent = 'THE NAXAL ARCHIVE / EDITORIAL';
+      const title = document.createElement('strong');
+      title.className = 'na-fallback-title';
+      title.textContent = img.alt.replace(/^Cover (?:illustration|image|for) (?:for )?/i, '').trim() || 'Stories worth understanding.';
+      art.append(eyebrow,title);
+      img.replaceWith(art);
+    };
+    img.addEventListener('error', onBroken, { once: true });
+    if (img.complete && img.naturalWidth === 0) onBroken();
+  });
+</script>

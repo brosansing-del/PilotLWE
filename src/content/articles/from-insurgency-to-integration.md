@@ -1,6 +1,9 @@
----
+﻿---
 title: "From Insurgency to Integration: How Rehabilitation Is Rewriting India’s LWE Story"
 dek: "Rehabilitation, state-led service delivery and livelihood support are reshaping the exit pathways from Left Wing Extremism in some of India’s most affected districts."
+
+cover: "/images/articles/rehabilitation-lwe.png"
+
 section: "News Desk"
 type: "Analysis"
 published: 2026-09-10
@@ -29,3 +32,4 @@ The results are visible and significant. The geographical spread of Naxalism has
 The young man in Sukma is no longer an exception; he is part of a growing cohort of individuals choosing reintegration over rebellion. His story illustrates a broader lesson in governance and conflict resolution. Lasting peace is not secured by force alone, but by credible policies that restore dignity and provide alternatives.
 
 As India moves closer to its goal of a Naxal-Mukt Bharat, the success of these rehabilitation programmes underscores a simple truth: when the state combines firmness with empathy, and security with opportunity, even the most entrenched conflicts can give way to lasting peace.
+

@@ -1,0 +1,531 @@
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArchiveVideoCollection from '../../components/ArchiveVideoCollection.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const home = `${BASE}/`;
+---
+
+<BaseLayout
+  title="Victims’ Corner | The Naxal Archive"
+  description="The Human Cost of Conflict: stories, testimonies and video accounts of people affected by Left-Wing Extremism in India."
+>
+  <Header />
+
+  <main class="vc-page" id="main-content">
+
+    <!-- HERO SECTION -->
+    <section class="vc-intro" aria-labelledby="vc-title">
+      <div class="vc-shell">
+
+        <nav class="vc-breadcrumb" aria-label="Breadcrumb">
+          <a href={home}>Home</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Victims’ Corner</span>
+        </nav>
+
+        <div class="vc-hero-content">
+          <div class="vc-kicker">
+            <span class="vc-kicker-line"></span>
+            THE NAXAL ARCHIVE / HUMAN STORIES
+          </div>
+
+          <h1 id="vc-title">
+            The Human
+            <br />
+            Cost <em>of Conflict.</em>
+          </h1>
+
+          <p class="vc-description">
+            Behind every incident are people, families and
+            communities whose lives have been changed.
+            This space brings together video reports and
+            personal accounts of those affected by
+            Left-Wing Extremism.
+          </p>
+
+          <a class="vc-hero-link" href="#video-stories">
+            <span>Explore the video stories</span>
+            <span class="vc-link-arrow" aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="vc-hero-footer" aria-hidden="true">
+          <span>STORIES</span>
+          <span class="vc-footer-dot"></span>
+          <span>TESTIMONIES</span>
+          <span class="vc-footer-dot"></span>
+          <span>HUMAN IMPACT</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- VIDEO STORIES -->
+    <section class="vc-stories" id="video-stories">
+      <ArchiveVideoCollection mode="victims" />
+    </section>
+
+    <!-- EDITORIAL NOTE -->
+    <section class="vc-editorial-section">
+      <div class="vc-shell">
+
+        <div class="vc-editorial-note">
+          <div>
+            <span class="vc-editorial-label">
+              OUR EDITORIAL APPROACH
+            </span>
+
+            <h2>
+              Every story deserves
+              <em>careful documentation.</em>
+            </h2>
+          </div>
+
+          <div class="vc-editorial-copy">
+            <p>
+              The Naxal Archive brings together documented
+              accounts of individuals, families and communities
+              affected by Maoist violence.
+            </p>
+
+            <p>
+              Original videos remain available through their
+              respective YouTube channels. We distinguish
+              personal testimony and reported allegations from
+              independently verified findings.
+            </p>
+
+            <p>
+              Names, dates, locations and other details are
+              reviewed as supporting sources become available.
+              Some recordings may contain distressing
+              descriptions or imagery.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* PAGE */
+  .vc-page {
+    --vc-paper: #f5f0e8;
+    --vc-paper-deep: #eee6dc;
+    --vc-charcoal: #202832;
+    --vc-navy: #17212b;
+    --vc-navy-deep: #111922;
+    --vc-ink: #25272b;
+    --vc-copper: #b87952;
+    --vc-copper-soft: #e9c3a4;
+    --vc-cream: #fff9f0;
+    --vc-muted: #d8d1c8;
+    --vc-line: #d8cec1;
+
+    width: 100%;
+    overflow-x: clip;
+    background: var(--vc-paper);
+    color: var(--vc-ink);
+  }
+
+  .vc-page *,
+  .vc-page *::before,
+  .vc-page *::after {
+    box-sizing: border-box;
+  }
+
+  .vc-shell {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  /* HERO */
+
+  .vc-intro {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 43px 0 44px;
+
+    background:
+      radial-gradient(
+        ellipse at 95% 10%,
+        rgba(200, 164, 129, 0.10),
+        transparent 36%
+      ),
+      linear-gradient(
+        125deg,
+        #26313c 0%,
+        #19232d 52%,
+        #111922 100%
+      );
+
+    color: var(--vc-cream);
+  }
+
+  /* Restrained circular background pattern */
+  .vc-intro::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    width: 680px;
+    height: 680px;
+
+    right: -280px;
+    top: -145px;
+
+    border: 1px solid rgba(233, 195, 164, 0.11);
+    border-radius: 50%;
+
+    box-shadow:
+      0 0 0 92px rgba(233, 195, 164, 0.025),
+      0 0 0 185px rgba(233, 195, 164, 0.018);
+
+    pointer-events: none;
+  }
+
+  .vc-intro::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    width: 380px;
+    height: 380px;
+
+    right: -85px;
+    top: 5px;
+
+    border: 1px solid rgba(233, 195, 164, 0.09);
+    border-radius: 50%;
+
+    pointer-events: none;
+  }
+
+  /* BREADCRUMB */
+
+  .vc-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font: 600 12px/1.5 Arial, Helvetica, sans-serif;
+    color: #e1d9cf;
+  }
+
+  .vc-breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .vc-breadcrumb a:hover {
+    color: var(--vc-copper-soft);
+  }
+
+  /* HERO CONTENT */
+
+  .vc-hero-content {
+    position: relative;
+    max-width: 970px;
+    padding: 94px 0 80px;
+  }
+
+  .vc-kicker {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    margin-bottom: 27px;
+
+    font: 800 11px/1.4 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.17em;
+    color: var(--vc-copper-soft);
+  }
+
+  .vc-kicker-line {
+    flex: 0 0 26px;
+    height: 2px;
+    background: var(--vc-copper);
+  }
+
+  .vc-hero-content h1 {
+    max-width: 1050px;
+
+    margin: 0 0 31px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(55px, 6.9vw, 94px);
+    line-height: 0.97;
+    font-weight: 700;
+    letter-spacing: -0.055em;
+
+    color: var(--vc-cream);
+  }
+
+  .vc-hero-content h1 em {
+    font-weight: 400;
+    color: var(--vc-copper-soft);
+  }
+
+  .vc-description {
+    max-width: 780px;
+
+    margin: 0;
+
+    font: 400 19px/1.75 Georgia, "Times New Roman", serif;
+    color: #e5ded6;
+  }
+
+  /* EXPLORE LINK */
+
+  .vc-hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 19px;
+
+    margin-top: 35px;
+    padding: 0 0 11px;
+
+    border-bottom: 1px solid var(--vc-copper-soft);
+
+    color: var(--vc-cream);
+    text-decoration: none;
+
+    font: 800 12px/1.4 Arial, Helvetica, sans-serif;
+    transition:
+      color 0.2s ease,
+      gap 0.2s ease;
+  }
+
+  .vc-hero-link:hover {
+    color: var(--vc-copper-soft);
+    gap: 25px;
+  }
+
+  .vc-link-arrow {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  /* HERO BOTTOM DETAILS */
+
+  .vc-hero-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+
+    color: #d6c4b4;
+
+    font: 800 10px/1.5 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.14em;
+  }
+
+  .vc-footer-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--vc-copper-soft);
+  }
+
+  /* STORIES */
+
+  .vc-stories {
+    background: var(--vc-paper);
+    scroll-margin-top: 30px;
+  }
+
+  /*
+    The existing ArchiveVideoCollection component
+    renders the video cards, thumbnails and links.
+
+    Its internal styles remain intact.
+  */
+
+  /* EDITORIAL SECTION */
+
+  .vc-editorial-section {
+    background: var(--vc-paper-deep);
+    padding: 75px 0 90px;
+  }
+
+  .vc-editorial-note {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: start;
+    gap: 80px;
+
+    padding-top: 30px;
+    border-top: 1px solid var(--vc-line);
+  }
+
+  .vc-editorial-label {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    font: 800 11px/1.5 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.14em;
+    color: #965333;
+  }
+
+  .vc-editorial-note h2 {
+    max-width: 500px;
+
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1.12;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+
+    color: var(--vc-ink);
+  }
+
+  .vc-editorial-note h2 em {
+    display: block;
+    margin-top: 7px;
+    font-weight: 400;
+    color: #975538;
+  }
+
+  .vc-editorial-copy p {
+    margin: 0 0 19px;
+
+    font: 400 16px/1.8 Georgia, "Times New Roman", serif;
+    color: #58534f;
+  }
+
+  /* ACCESSIBILITY */
+
+  .vc-breadcrumb a:focus-visible,
+  .vc-hero-link:focus-visible {
+    outline: 3px solid var(--vc-copper-soft);
+    outline-offset: 5px;
+  }
+
+  /* TABLET */
+
+  @media (max-width: 900px) {
+    .vc-intro {
+      padding-top: 38px;
+    }
+
+    .vc-hero-content {
+      padding-top: 75px;
+      padding-bottom: 70px;
+    }
+
+    .vc-hero-content h1 {
+      font-size: clamp(55px, 8.8vw, 75px);
+    }
+
+    .vc-editorial-note {
+      gap: 42px;
+    }
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 600px) {
+    .vc-shell {
+      width: calc(100% - 36px);
+    }
+
+    .vc-intro {
+      padding: 30px 0 35px;
+    }
+
+    .vc-intro::before {
+      width: 430px;
+      height: 430px;
+      right: -260px;
+      top: 40px;
+    }
+
+    .vc-intro::after {
+      width: 240px;
+      height: 240px;
+      right: -120px;
+      top: 100px;
+    }
+
+    .vc-breadcrumb {
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .vc-hero-content {
+      padding: 69px 0 63px;
+    }
+
+    .vc-kicker {
+      font-size: 9px;
+      gap: 10px;
+      letter-spacing: 0.12em;
+    }
+
+    .vc-kicker-line {
+      flex-basis: 20px;
+    }
+
+    .vc-hero-content h1 {
+      font-size: clamp(43px, 11vw, 60px);
+      letter-spacing: -0.045em;
+      line-height: 1.02;
+      margin-bottom: 27px;
+    }
+
+    .vc-description {
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .vc-hero-link {
+      margin-top: 29px;
+    }
+
+    .vc-hero-footer {
+      font-size: 9px;
+      gap: 10px;
+    }
+
+    .vc-editorial-section {
+      padding: 55px 0 65px;
+    }
+
+    .vc-editorial-note {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .vc-editorial-note h2 {
+      font-size: 36px;
+    }
+
+    .vc-editorial-copy p {
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vc-breadcrumb a,
+    .vc-hero-link {
+      transition: none;
+    }
+  }
+</style>

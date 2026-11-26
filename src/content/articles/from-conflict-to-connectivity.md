@@ -1,6 +1,7 @@
----
+﻿---
 title: "From Conflict to Connectivity: How Digital Governance and Infrastructure Are Redefining India’s Former Naxal Strongholds"
 dek: "Mobile connectivity, digital public services and last-mile infrastructure are changing how the state reaches communities across former and current LWE-affected areas."
+cover: "/images/articles/digital-connectivity-lwe.webp"
 section: "News Desk"
 type: "Analysis"
 published: 2026-09-10
@@ -74,3 +75,4 @@ Digital infrastructure has emerged as a force multiplier. It weakens insurgent i
 As connectivity deepens and governance becomes more responsive, the ideological and operational foundations of Naxalism continue to erode. The transformation of the Red Corridor is thus not only territorial—it is informational, economic and psychological.
 
 India’s experience demonstrates a critical lesson: insurgencies rooted in exclusion cannot survive sustained inclusion.
+

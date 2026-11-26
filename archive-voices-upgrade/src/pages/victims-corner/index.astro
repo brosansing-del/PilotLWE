@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ArchiveVideoCollection from '../../components/ArchiveVideoCollection.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const home = `${BASE}/`;
+---
+<BaseLayout title="Victims' Corner | The Naxal Archive" description="The Human Cost of Conflict: testimonies and video accounts about the people affected by Left-Wing Extremism.">
+  <Header />
+  <main class="vc-page" id="main-content">
+    <section class="vc-intro">
+      <div class="vc-shell">
+        <nav class="vc-breadcrumb" aria-label="Breadcrumb"><a href={home}>Home</a><span>/</span><span>Victims&rsquo; Corner</span></nav>
+        <div class="vc-hero-body">
+          <div>
+            <span class="vc-kicker">THE NAXAL ARCHIVE / HUMAN STORIES</span>
+            <h1>The Human Cost <em>of Conflict.</em></h1>
+            <p>Behind every incident are people, families and communities whose lives have been changed. This space brings together video reports and personal accounts of those affected by Left-Wing Extremism.</p>
+            <a class="vc-hero-link" href="#video-stories">Explore the video stories <span aria-hidden="true">&#8595;</span></a>
+          </div>
+          <div class="vc-feature-note" aria-label="About this collection">
+            <span>FROM THE RECORD</span>
+            <strong>Stories that should not be overlooked.</strong>
+            <p>The initial collection focuses on security-force victims. More first-person accounts can be added as they are verified.</p>
+            <b>05 <small>VIDEOS</small></b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ArchiveVideoCollection mode="victims" />
+
+    <div class="vc-shell vc-editorial-note">
+      <div><span>EDITORIAL NOTE</span><h2>Context comes first.</h2></div>
+      <p>Original videos remain on YouTube. We distinguish a testimony or reported allegation from an independently verified finding. Summaries, dates and identifications will be added as the material is reviewed. Some recordings may contain distressing descriptions or imagery.</p>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .vc-page{background:#f5f0e7;color:#1b2a25;}
+  .vc-shell{width:min(1180px,calc(100% - 40px));margin:auto;}
+  .vc-intro{background:linear-gradient(115deg,#113d31,#1e4c3b 62%,#2f5946);color:#fff8e9;padding:48px 0 66px;overflow:hidden;position:relative;}
+  .vc-intro:after{content:'';pointer-events:none;position:absolute;width:420px;height:420px;right:-180px;top:80px;border:1px solid rgba(249,231,193,.19);border-radius:50%;box-shadow:0 0 0 68px rgba(255,255,255,.015),0 0 0 138px rgba(255,255,255,.018);}
+  .vc-breadcrumb{display:flex;align-items:center;gap:12px;font:700 11px/1.4 system-ui,sans-serif;color:#d4d4c6;}
+  .vc-breadcrumb a{color:#d4d4c6;text-decoration:none;}.vc-breadcrumb a:hover{color:white;}
+  .vc-hero-body{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.65fr);align-items:end;gap:60px;padding-top:78px;position:relative;z-index:1;}
+  .vc-kicker{display:inline-block;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.16em;color:#eabd80;}
+  .vc-hero-body h1{font:600 clamp(55px,6vw,90px)/.96 Georgia,serif;letter-spacing:-.055em;margin:19px 0 24px;max-width:900px;}
+  .vc-hero-body h1 em{font-weight:400;color:#efc68e;}
+  .vc-hero-body p{font:17px/1.65 Georgia,serif;color:#e2e7da;max-width:760px;margin:0;}
+  .vc-hero-link{display:inline-block;text-decoration:none;margin-top:31px;padding-bottom:10px;border-bottom:1px solid #b2bfa8;color:#fff6dd;font:800 12px/1.4 system-ui,sans-serif;}
+  .vc-feature-note{border-top:3px solid #e3ac72;background:rgba(7,37,28,.45);padding:26px;}
+  .vc-feature-note span{font:800 10px/1.3 system-ui,sans-serif;letter-spacing:.12em;color:#ecc68f;}
+  .vc-feature-note strong{display:block;font:600 28px/1.1 Georgia,serif;margin:17px 0 12px;}
+  .vc-feature-note p{font:14px/1.65 Georgia,serif;}
+  .vc-feature-note b{display:block;color:#ecd2a9;margin-top:30px;font:600 34px/1 Georgia,serif;}.vc-feature-note small{font:800 10px/1 system-ui,sans-serif;letter-spacing:.12em;}
+  .vc-editorial-note{display:grid;grid-template-columns:minmax(210px,.35fr) 1fr;gap:70px;border-top:1px solid #d5cdc1;padding:35px 0 80px;}
+  .vc-editorial-note span{font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.1em;color:#aa553c;}
+  .vc-editorial-note h2{font:600 31px/1.1 Georgia,serif;margin:10px 0 0;}
+  .vc-editorial-note p{font:15px/1.7 Georgia,serif;color:#5b625d;margin:0;}
+  @media(max-width:900px){.vc-hero-body{grid-template-columns:1fr;gap:38px;padding-top:60px;}.vc-feature-note{max-width:520px;}.vc-intro{padding-bottom:46px;}}
+  @media(max-width:600px){.vc-intro{padding-top:28px;}.vc-hero-body{padding-top:50px;}.vc-hero-body h1{font-size:53px;}.vc-hero-body p{font-size:16px;}.vc-editorial-note{grid-template-columns:1fr;gap:18px;padding-bottom:55px;}}
+</style>
