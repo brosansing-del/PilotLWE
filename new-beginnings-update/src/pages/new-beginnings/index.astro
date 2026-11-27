@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// This page is self-contained. Update these records to add more coverage later.
+// The seven IDs and the five report links below are retained from the supplied page.
+const videos = {
+  rehabilitation: [
+    { id: 's8zKJ2IODYk', title: 'From Rifles to Sewing Machines: A New Life in Konagud', summary: 'A video report about former Maoist cadres working at a factory in Konagud and building new livelihoods through tailoring.', context: 'Livelihoods / Konagud' },
+    { id: 'fyR4jplJGRY', title: 'A Chance at Parenthood: Vasectomy Reversal in Bastar', summary: 'A report on sterilisation-reversal procedures for surrendered Maoist cadres seeking to start or expand their families.', context: 'Family and rehabilitation / Bastar' },
+    { id: '1kMIIOAQSLE', title: 'Fagni\u2019s Journey: From the Underground to Pandum Caf\u00e9', summary: 'The supplied video headline follows Fagni, described as a former Maoist medical worker who is now associated with Pandum Caf\u00e9.', context: 'New livelihoods / Personal account' },
+  ],
+  outreach: [
+    { id: 'ZPs3vZy_n_0', title: 'From Vehicle Burnings to Administrative Camps', summary: 'A field report describing the arrival of administrative outreach camps in an area previously affected by Maoist violence.', context: 'Governance / Service delivery' },
+    { id: '_aeRRpVZB8I', title: 'A Village After Two Decades of Conflict', summary: 'The report describes a district collector walking approximately four kilometres to hear residents\u2019 concerns in a conflict-affected village.', context: 'Local administration / Community access' },
+  ],
+  democracy: [
+    { id: 'xIIu44nAJAQ', title: 'Panchayat Elections in Abujhmad, 2025', summary: 'A report on changes in local electoral participation and the panchayat election process in Abujhmad.', context: 'Local elections / Abujhmad' },
+    { id: 'vatiFZ1jc_E', title: 'Polling Teams Reach Highly Sensitive Areas', summary: 'A report on plans to conduct voting in highly sensitive areas and the use of helicopters to deploy polling personnel.', context: 'Voting access / Remote regions' },
+  ],
+};
+
+const reports = {
+  rehabilitation: [
+    { publisher: 'Deccan Herald', title: 'Red Corridor to Factory Floor: The Story of Gadchiroli\u2019s Former Maoists', url: 'https://www.deccanherald.com/india/maharashtra/red-corridor-to-factory-floor-the-story-of-gadchirolis-former-maoists-3849907' },
+  ],
+  outreach: [
+    { publisher: 'Deccan Chronicle', title: 'Another Remote Forested Village in Bastar Sees Light After Dusk for First Time', url: 'https://www.deccanchronicle.com/nation/chhattisgarh-another-remote-forested-village-in-bastar-sees-light-after-dusk-for-first-time-1955274' },
+    { publisher: 'Web Bulletin', title: 'Light Reaches Abujhmad\u2019s Irpanar Village for the First Time', url: 'https://webbulletin.in/light-reaches-abujhmads-irpanar-village-for-the-first-time-ending-decades-of-darkness/' },
+  ],
+  democracy: [
+    { publisher: 'The Morning Voice', title: '92 Bastar Villages Set to Hoist Tricolour for First Time Since Independence', url: 'https://tmv.in/article/92-bastar-villages-set-to-hoist-tricolour-for-first-time-since-independence' },
+    { publisher: 'Organiser', title: 'Bastar Witnesses a Peaceful \u201cShaheedi Week\u201d, Reports Weaker Maoist Influence', url: 'https://organiser.org/2026/08/03/373239/bharat/from-fear-to-freedom-bastar-witnesses-peaceful-shaheedi-week-as-maoist-influence-continues-to-weaken/' },
+  ],
+};
+
+const youtubeWatchUrl = (id: string) => `https://www.youtube.com/watch?v=${id}`;
+const youtubeThumbnail = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+const sections = [
+  { id: 'rehabilitation', label: 'Rehabilitation & Livelihoods' },
+  { id: 'administrative-outreach', label: 'Administrative Outreach' },
+  { id: 'changing-democracy', label: 'Changing State of Democracy' },
+];
+---
+
+<BaseLayout
+  title="New Beginnings | The Naxal Archive"
+  description="Accounts of rehabilitation, administrative outreach and election participation in regions affected by Left-Wing Extremism."
+>
+  <Header />
+  <main class="nb-page" id="main-content">
+    <header class="nb-hero">
+      <div class="nb-shell">
+        <h1>New <em>Beginnings.</em></h1>
+        <p>New livelihoods, public services and civic participation in communities affected by Left-Wing Extremism.</p>
+        <nav class="nb-onpage" aria-label="Jump to a section">
+          {sections.map((section) => <a href={`#${section.id}`}>{section.label}<span aria-hidden="true">&darr;</span></a>)}
+        </nav>
+      </div>
+    </header>
+
+    <section class="nb-section" id="rehabilitation" aria-labelledby="rehab-title">
+      <div class="nb-shell">
+        <header class="nb-section-heading">
+          <div>
+            <span class="nb-eyebrow">REHABILITATION &amp; LIVELIHOODS</span>
+            <h2 id="rehab-title">Weapons Down, Lives Up</h2>
+          </div>
+          <p>Accounts of former cadres finding new work, rebuilding family life and entering civilian livelihoods.</p>
+        </header>
+        <div class="nb-videos">
+          {videos.rehabilitation.map((video) => (
+            <article class="nb-video-card">
+              <a class="nb-thumbnail" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title} on YouTube`}>
+                <span class="nb-thumbnail-fallback" aria-hidden="true">VIDEO STORY</span>
+                <img src={youtubeThumbnail(video.id)} alt={`Thumbnail for ${video.title}`} loading="lazy" decoding="async" data-nb-thumbnail />
+                <span class="nb-play" aria-hidden="true">&#9654;</span>
+              </a>
+              <div class="nb-video-body">
+                <p class="nb-context">{video.context}</p>
+                <h3>{video.title}</h3>
+                <p class="nb-summary">{video.summary}</p>
+                <a class="nb-source-link" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer">Watch Original <span aria-hidden="true">&nearr;</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="nb-reports" aria-label="Related articles about rehabilitation">
+          <h3>Related reporting</h3>
+          <div class="nb-reports-grid">
+            {reports.rehabilitation.map((report) => (
+              <article class="nb-report-card">
+                <span class="nb-publisher">{report.publisher}</span>
+                <h4>{report.title}</h4>
+                <a class="nb-source-link" href={report.url} target="_blank" rel="noopener noreferrer">Read Original <span aria-hidden="true">&nearr;</span></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nb-section nb-section-soft" id="administrative-outreach" aria-labelledby="outreach-title">
+      <div class="nb-shell">
+        <header class="nb-section-heading">
+          <div>
+            <span class="nb-eyebrow">ADMINISTRATIVE OUTREACH</span>
+            <h2 id="outreach-title">Reaching the Last Mile</h2>
+          </div>
+          <p>Reporting on village visits, electricity and the extension of public services into previously hard-to-reach areas.</p>
+        </header>
+        <div class="nb-videos">
+          {videos.outreach.map((video) => (
+            <article class="nb-video-card">
+              <a class="nb-thumbnail" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title} on YouTube`}>
+                <span class="nb-thumbnail-fallback" aria-hidden="true">VIDEO STORY</span>
+                <img src={youtubeThumbnail(video.id)} alt={`Thumbnail for ${video.title}`} loading="lazy" decoding="async" data-nb-thumbnail />
+                <span class="nb-play" aria-hidden="true">&#9654;</span>
+              </a>
+              <div class="nb-video-body">
+                <p class="nb-context">{video.context}</p>
+                <h3>{video.title}</h3>
+                <p class="nb-summary">{video.summary}</p>
+                <a class="nb-source-link" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer">Watch Original <span aria-hidden="true">&nearr;</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="nb-reports" aria-label="Related articles about administrative outreach">
+          <h3>Related reporting</h3>
+          <div class="nb-reports-grid">
+            {reports.outreach.map((report) => (
+              <article class="nb-report-card">
+                <span class="nb-publisher">{report.publisher}</span>
+                <h4>{report.title}</h4>
+                <a class="nb-source-link" href={report.url} target="_blank" rel="noopener noreferrer">Read Original <span aria-hidden="true">&nearr;</span></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="nb-section" id="changing-democracy" aria-labelledby="democracy-title">
+      <div class="nb-shell">
+        <header class="nb-section-heading">
+          <div>
+            <span class="nb-eyebrow">CHANGING STATE OF DEMOCRACY</span>
+            <h2 id="democracy-title">Voting &amp; Civic Participation</h2>
+          </div>
+          <p>Coverage of local elections, access to polling stations and changes in public participation.</p>
+        </header>
+
+        <div class="nb-election-panel" aria-label="Reported election participation figures">
+          <div class="nb-election-stat">
+            <span class="nb-data-label">FEB 2025 / CHHATTISGARH PANCHAYAT POLLS</span>
+            <strong>81%+</strong>
+            <span class="nb-data-caption">Reported voter turnout in the statewide third phase on 23 February 2025</span>
+            <a href="https://newsonair.gov.in/hi/%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%B0%E0%A5%80%E0%A4%AF-%E0%A4%AA%E0%A4%82%E0%A4%9A%E0%A4%BE%E0%A4%AF%E0%A4%A4-%E0%A4%9A%E0%A5%81%E0%A4%A8%E0%A4%BE%E0%A4%B5-2/" target="_blank" rel="noopener noreferrer">Source: Akashvani News <span aria-hidden="true">&nearr;</span></a>
+          </div>
+          <div class="nb-election-context">
+            <span class="nb-data-label">ORCHHA BLOCK / NARAYANPUR</span>
+            <strong>21,437 <small>electors</small></strong>
+            <p>Registered for the February 2025 panchayat election across 36 gram panchayats, with 37 polling stations reported.</p>
+            <a href="https://inn24news.in/last-phase-of-panchayat-elections-tomorrow/" target="_blank" rel="noopener noreferrer">Source: election preparations report <span aria-hidden="true">&nearr;</span></a>
+          </div>
+          <p class="nb-data-note">The 81%+ turnout is for Chhattisgarh's third phase overall, <strong>not</strong> the turnout for Orchha or Abujhmad. The Orchha figure is registered electors, not votes cast. These are different measures and should not be compared as a trend.</p>
+        </div>
+
+        <div class="nb-videos">
+          {videos.democracy.map((video) => (
+            <article class="nb-video-card">
+              <a class="nb-thumbnail" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title} on YouTube`}>
+                <span class="nb-thumbnail-fallback" aria-hidden="true">VIDEO STORY</span>
+                <img src={youtubeThumbnail(video.id)} alt={`Thumbnail for ${video.title}`} loading="lazy" decoding="async" data-nb-thumbnail />
+                <span class="nb-play" aria-hidden="true">&#9654;</span>
+              </a>
+              <div class="nb-video-body">
+                <p class="nb-context">{video.context}</p>
+                <h3>{video.title}</h3>
+                <p class="nb-summary">{video.summary}</p>
+                <a class="nb-source-link" href={youtubeWatchUrl(video.id)} target="_blank" rel="noopener noreferrer">Watch Original <span aria-hidden="true">&nearr;</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="nb-reports" aria-label="Related articles about civic life">
+          <h3>Related reporting</h3>
+          <div class="nb-reports-grid">
+            {reports.democracy.map((report) => (
+              <article class="nb-report-card">
+                <span class="nb-publisher">{report.publisher}</span>
+                <h4>{report.title}</h4>
+                <a class="nb-source-link" href={report.url} target="_blank" rel="noopener noreferrer">Read Original <span aria-hidden="true">&nearr;</span></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLImageElement>('[data-nb-thumbnail]').forEach((img) => {
+    if (img.complete && img.naturalWidth === 0) img.remove();
+    else img.addEventListener('error', () => img.remove(), { once: true });
+  });
+</script>
+
+<style>
+  .nb-page { --ink:#242b2c; --paper:#f6f1e9; --paper-soft:#ede6dc; --surface:#fffdf8; --accent:#9c5134; --line:#d8cfc2; --muted:#646058; color:var(--ink); background:var(--paper); font-family:Georgia,"Times New Roman",serif; }
+  .nb-page * { box-sizing:border-box; }
+  .nb-shell { width:min(1150px,calc(100% - 48px)); margin-inline:auto; }
+  .nb-page h1,.nb-page h2,.nb-page h3,.nb-page h4,.nb-page p { margin-top:0; }
+
+  /* A compact hero replaces the previous oversized banner. */
+  .nb-hero { background:#282b32; color:#fff8ef; padding:39px 0 31px; }
+  .nb-hero h1 { font-size:clamp(44px,5.2vw,68px); line-height:1.07; letter-spacing:-.052em; font-weight:700; margin:0 0 13px; }
+  .nb-hero h1 em { font-weight:400; color:#e3b692; }
+  .nb-hero>div>p { color:#e6dcd0; font:400 clamp(16px,1.5vw,19px)/1.55 Georgia,serif; max-width:770px; margin:0 0 22px; }
+  .nb-onpage { display:flex; flex-wrap:wrap; gap:9px; border-top:1px solid rgba(255,255,255,.17); padding-top:16px; }
+  .nb-onpage a { display:inline-flex; align-items:center; gap:12px; color:#fff7ec; border:1px solid rgba(255,255,255,.22); padding:9px 12px; border-radius:2px; font:700 11px/1.4 Arial,sans-serif; text-decoration:none; transition:background .2s ease,border-color .2s ease; }
+  .nb-onpage a span { color:#e3b692; font-size:14px; }
+  .nb-onpage a:hover { background:rgba(255,255,255,.10); border-color:#e3b692; }
+
+  .nb-section { padding:51px 0 63px; scroll-margin-top:10px; }
+  .nb-section-soft { background:var(--paper-soft); }
+  .nb-section-heading { display:flex; justify-content:space-between; align-items:end; gap:26px; padding-bottom:19px; margin-bottom:22px; border-bottom:1px solid var(--line); }
+  .nb-section-heading>div { min-width:0; }
+  .nb-eyebrow,.nb-data-label { display:block; color:var(--accent); font:800 10px/1.5 Arial,sans-serif; letter-spacing:.13em; }
+  .nb-section-heading h2 { font:700 clamp(31px,3.6vw,44px)/1.1 Georgia,serif; letter-spacing:-.035em; margin:9px 0 0; }
+  .nb-section-heading>p { max-width:440px; margin:0; color:var(--muted); font:400 15px/1.6 Georgia,serif; }
+
+  .nb-videos { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  .nb-video-card { background:var(--surface); border:1px solid var(--line); min-width:0; display:flex; flex-direction:column; box-shadow:0 2px 6px rgba(32,30,27,.025); transition:transform .2s ease,box-shadow .2s ease; }
+  .nb-video-card:hover,.nb-report-card:hover { transform:translateY(-3px); box-shadow:0 9px 21px rgba(34,29,24,.085); }
+  .nb-thumbnail { display:block; position:relative; aspect-ratio:16/9; overflow:hidden; background:linear-gradient(135deg,#42454b,#272c33); }
+  .nb-thumbnail>img { position:absolute; z-index:1; inset:0; width:100%; height:100%; object-fit:cover; }
+  .nb-thumbnail-fallback { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#e7d7c8; font:800 10px Arial,sans-serif; letter-spacing:.12em; }
+  .nb-play { display:grid; place-items:center; width:47px; height:47px; position:absolute; z-index:2; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; background:rgba(32,37,42,.8); border:1px solid rgba(255,255,255,.6); border-radius:50%; font:16px/1 Arial,sans-serif; padding-left:2px; }
+  .nb-video-body { padding:19px 20px 18px; display:flex; flex-direction:column; flex:1; }
+  .nb-context { color:var(--accent); font:800 10px/1.5 Arial,sans-serif; letter-spacing:.035em; margin:0 0 10px; }
+  .nb-video-body h3 { font:700 clamp(20px,1.85vw,25px)/1.18 Georgia,serif; letter-spacing:-.022em; margin:0 0 11px; }
+  .nb-summary { color:#625d57; font:400 14px/1.63 Georgia,serif; margin:0 0 16px; }
+  .nb-source-link { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:auto; padding-top:13px; border-top:1px solid var(--line); color:var(--ink); text-decoration:none; font:800 11px/1.3 Arial,sans-serif; }
+  .nb-source-link span { color:var(--accent); font-size:19px; }
+  .nb-source-link:hover { color:var(--accent); }
+
+  .nb-reports { margin-top:23px; }
+  .nb-reports>h3 { margin:0 0 11px; color:#6f6258; font:800 10px/1.5 Arial,sans-serif; text-transform:uppercase; letter-spacing:.14em; }
+  .nb-reports-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:13px; }
+  .nb-report-card { display:flex; flex-direction:column; padding:17px 19px; border:1px solid var(--line); background:rgba(255,253,248,.85); min-height:151px; transition:transform .2s ease,box-shadow .2s ease; }
+  .nb-publisher { color:var(--accent); font:800 10px/1.3 Arial,sans-serif; letter-spacing:.07em; text-transform:uppercase; }
+  .nb-report-card h4 { color:var(--ink); font:700 19px/1.24 Georgia,serif; letter-spacing:-.017em; margin:13px 0 16px; }
+
+  /* Election data is grounded and scope-labelled: no local turnout is invented. */
+  .nb-election-panel { display:grid; grid-template-columns:1fr 1fr; gap:0; background:#f1e6d7; border:1px solid #d9c8b4; margin:2px 0 23px; }
+  .nb-election-stat,.nb-election-context { padding:22px 25px 17px; }
+  .nb-election-stat { border-right:1px solid #d9c8b4; }
+  .nb-election-stat>strong,.nb-election-context>strong { display:block; font:700 45px/1 Georgia,serif; letter-spacing:-.045em; color:#282d30; margin:13px 0 10px; }
+  .nb-election-stat>strong small,.nb-election-context>strong small { font:600 14px/1.4 Arial,sans-serif; letter-spacing:0; }
+  .nb-data-caption,.nb-election-context p { display:block; color:#64584e; font:400 14px/1.55 Georgia,serif; margin:0 0 11px; }
+  .nb-election-stat>a,.nb-election-context>a { color:#8b482e; font:700 11px/1.5 Arial,sans-serif; text-decoration:underline; text-underline-offset:3px; }
+  .nb-data-note { grid-column:1/-1; border-top:1px solid #d9c8b4; padding:10px 24px 13px; margin:0; color:#61564c; font:400 12px/1.55 Arial,sans-serif; }
+
+  .nb-page a:focus-visible { outline:3px solid #b86b3f; outline-offset:3px; }
+  @media(max-width:960px) { .nb-section-heading { flex-direction:column; align-items:flex-start; gap:9px; } .nb-videos,.nb-reports-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media(max-width:650px) { .nb-shell { width:calc(100% - 34px); } .nb-hero { padding:31px 0 24px; } .nb-hero h1 { font-size:clamp(40px,10vw,54px); } .nb-onpage a { width:100%; justify-content:space-between; } .nb-section { padding:38px 0 48px; } .nb-section-heading h2 { font-size:32px; } .nb-videos,.nb-reports-grid { grid-template-columns:1fr; gap:13px; } .nb-election-panel { grid-template-columns:1fr; } .nb-election-stat { border-right:0; border-bottom:1px solid #d9c8b4; } .nb-election-stat,.nb-election-context { padding:19px; } .nb-election-stat>strong,.nb-election-context>strong { font-size:38px; } .nb-data-note { padding:11px 19px 14px; } }
+  @media(prefers-reduced-motion:reduce) { .nb-video-card,.nb-report-card,.nb-onpage a { transition:none; } }
+</style>

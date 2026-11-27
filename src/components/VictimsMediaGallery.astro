@@ -3,7 +3,12 @@ import { archiveVideos, youtubeThumbnail, youtubeWatchUrl } from '../data/archiv
 import { victimsArticles } from '../data/victimsArticles';
 
 // Deliberately reuses the existing video records, without changing their data.
-const videos = archiveVideos.filter((entry) => entry.kind === 'victim');
+const akashRaoFirst = (video: (typeof archiveVideos)[number]) =>
+  video.youtubeId === 'Vh2MLbve1XA' || /akash\s*rao/i.test(video.title);
+// Victims' Corner-only display order; the shared catalogue is never mutated.
+const videos = archiveVideos
+  .filter((entry) => entry.kind === 'victim')
+  .sort((a, b) => Number(akashRaoFirst(b)) - Number(akashRaoFirst(a)));
 const articles = victimsArticles;
 const total = videos.length + articles.length;
 ---
@@ -11,9 +16,7 @@ const total = videos.length + articles.length;
   <div class="vm-shell">
     <header class="vm-head">
       <div>
-        <span class="vm-eyebrow">EXPLORE THE COLLECTION</span>
-        <h2 id="vm-title">Selected coverage</h2>
-        <p>Media reports and firsthand accounts from people affected by Maoist violence.</p>
+        <h2 id="vm-title">Reports &amp; Testimonies</h2>
       </div>
       <div class="vm-filter-wrap" role="group" aria-label="Filter media stories">
         <button class="vm-filter is-selected" type="button" data-vm-filter="all" aria-pressed="true">All Stories</button>
@@ -41,7 +44,9 @@ const total = videos.length + articles.length;
             <h3>{video.title}</h3>
             <p class="vm-description">{video.description}</p>
             <div class="vm-footer">
-              <span class="vm-courtesy">Courtesy: {('publisher' in video && video.publisher) ? video.publisher : 'YouTube source'}</span>
+              {('publisher' in video && typeof video.publisher === 'string' && video.publisher.trim() && video.publisher.trim().toLowerCase() !== 'thevjmovement') && (
+                <span class="vm-courtesy">Courtesy: {video.publisher}</span>
+              )}
               <a href={youtubeWatchUrl(video)} target="_blank" rel="noopener noreferrer">Watch Original ↗</a>
             </div>
           </div>
@@ -99,11 +104,11 @@ const total = videos.length + articles.length;
   });
 </script>
 <style>
-  .vm-section{--vm-green:#20372e;--vm-rust:#a45538;--vm-paper:#f6f1e9;--vm-line:#d9d0c3;background:var(--vm-paper);padding:62px 0 90px;color:var(--vm-green)}
+  .vm-section{--vm-green:#20372e;--vm-rust:#a45538;--vm-paper:#f6f1e9;--vm-line:#d9d0c3;background:var(--vm-paper);padding:35px 0 80px;color:var(--vm-green)}
   .vm-shell{width:min(1180px,calc(100% - 40px));margin:0 auto}
-  .vm-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:28px}
+  .vm-head{display:flex;align-items:center;justify-content:space-between;gap:22px;margin-bottom:24px}
   .vm-eyebrow{font:800 11px/1.4 system-ui,sans-serif;letter-spacing:.12em;color:var(--vm-rust)}
-  .vm-head h2{font:700 clamp(30px,3.5vw,45px)/1.1 Georgia,serif;letter-spacing:-.035em;margin:12px 0 8px;color:var(--vm-green)}
+  .vm-head h2{font:700 clamp(28px,3.1vw,39px)/1.1 Georgia,serif;letter-spacing:-.035em;margin:0;color:var(--vm-green)}
   .vm-head p{max-width:620px;font:16px/1.55 Georgia,serif;color:#625e56;margin:0}
   .vm-filter-wrap{display:flex;gap:5px;align-items:center;padding:4px;background:#eee7dd;border:1px solid var(--vm-line);border-radius:8px;flex-shrink:0}
   .vm-filter{border:0;border-radius:5px;padding:10px 15px;background:transparent;color:#57574e;font:750 12px/1.4 system-ui,sans-serif;cursor:pointer}
@@ -122,7 +127,7 @@ const total = videos.length + articles.length;
   .vm-description{font:15px/1.65 Georgia,serif;color:#5f5d56;margin:0 0 24px;flex:1}
   .vm-footer{border-top:1px solid #e6ded3;padding-top:16px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .vm-courtesy{font:650 11px/1.45 system-ui,sans-serif;color:#777064}
-  .vm-footer a{font:800 11px/1.4 system-ui,sans-serif;text-decoration:none;color:var(--vm-rust);white-space:nowrap}
+  .vm-footer a{font:800 11px/1.4 system-ui,sans-serif;text-decoration:none;color:var(--vm-rust);white-space:nowrap;margin-left:auto}
   .vm-footer a:hover{text-decoration:underline}
   .vm-empty{border:1px dashed #c6b8a7;background:#fffdfa;border-radius:8px;padding:38px 25px;text-align:center;color:var(--vm-green)}
   .vm-empty strong{font:700 23px Georgia,serif}.vm-empty p{font:15px Georgia,serif;color:#6c665e}
@@ -130,6 +135,6 @@ const total = videos.length + articles.length;
   .vm-card[hidden],.vm-empty[hidden]{display:none!important}
   .vm-filter:focus-visible,.vm-media:focus-visible,.vm-footer a:focus-visible{outline:3px solid var(--vm-rust);outline-offset:3px}
   @media(max-width:960px){.vm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vm-head{align-items:start;flex-direction:column}.vm-filter-wrap{flex-wrap:wrap}}
-  @media(max-width:610px){.vm-section{padding:43px 0 65px}.vm-shell{width:calc(100% - 32px)}.vm-grid{grid-template-columns:1fr;gap:15px}.vm-filter-wrap{width:100%}.vm-filter{flex:1;padding:11px 8px}.vm-body{padding:20px}.vm-head h2{font-size:34px}}
+  @media(max-width:610px){.vm-section{padding:28px 0 65px}.vm-shell{width:calc(100% - 32px)}.vm-grid{grid-template-columns:1fr;gap:15px}.vm-filter-wrap{width:100%}.vm-filter{flex:1;padding:11px 8px}.vm-body{padding:20px}.vm-head h2{font-size:34px}}
   @media(prefers-reduced-motion:reduce){.vm-card{transition:none}}
 </style>

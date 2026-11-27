@@ -1,0 +1,135 @@
+---
+import { archiveVideos, youtubeThumbnail, youtubeWatchUrl } from '../data/archiveVideos';
+import { victimsArticles } from '../data/victimsArticles';
+
+// Deliberately reuses the existing video records, without changing their data.
+const videos = archiveVideos.filter((entry) => entry.kind === 'victim');
+const articles = victimsArticles;
+const total = videos.length + articles.length;
+---
+<section class="vm-section" id="media-coverage" aria-labelledby="vm-title" data-vm-gallery>
+  <div class="vm-shell">
+    <header class="vm-head">
+      <div>
+        <span class="vm-eyebrow">EXPLORE THE COLLECTION</span>
+        <h2 id="vm-title">Selected coverage</h2>
+        <p>Media reports and firsthand accounts from people affected by Maoist violence.</p>
+      </div>
+      <div class="vm-filter-wrap" role="group" aria-label="Filter media stories">
+        <button class="vm-filter is-selected" type="button" data-vm-filter="all" aria-pressed="true">All Stories</button>
+        <button class="vm-filter" type="button" data-vm-filter="video" aria-pressed="false">Videos</button>
+        <button class="vm-filter" type="button" data-vm-filter="article" aria-pressed="false">Articles</button>
+      </div>
+    </header>
+
+    <div class="vm-grid" data-vm-grid>
+      {videos.map((video) => (
+        <article class="vm-card" data-vm-type="video">
+          <a class="vm-media" href={youtubeWatchUrl(video)} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${video.title} on YouTube (new tab)`}>
+            <span class="vm-fallback" aria-hidden="true">VIDEO REPORT</span>
+            <img src={youtubeThumbnail(video)} alt={`Thumbnail for ${video.title}`} loading="lazy" decoding="async" data-vm-image />
+            <span class="vm-play" aria-hidden="true">▶</span>
+          </a>
+          <div class="vm-body">
+            {/* Use only explicit metadata, never misleading placeholders or numbering. */}
+            {(('date' in video && typeof video.date === 'string' && video.date) || ('location' in video && typeof video.location === 'string' && video.location)) && (
+              <p class="vm-meta">{[
+                'date' in video && typeof video.date === 'string' ? video.date : '',
+                'location' in video && typeof video.location === 'string' ? video.location : '',
+              ].filter(Boolean).join(' · ')}</p>
+            )}
+            <h3>{video.title}</h3>
+            <p class="vm-description">{video.description}</p>
+            <div class="vm-footer">
+              <span class="vm-courtesy">Courtesy: {('publisher' in video && video.publisher) ? video.publisher : 'YouTube source'}</span>
+              <a href={youtubeWatchUrl(video)} target="_blank" rel="noopener noreferrer">Watch Original ↗</a>
+            </div>
+          </div>
+        </article>
+      ))}
+      {articles.map((article) => (
+        <article class="vm-card" data-vm-type="article">
+          <a class="vm-media vm-article-media" href={article.url} target="_blank" rel="noopener noreferrer" aria-label={`Read ${article.title} (new tab)`}>
+            {article.image ? <img src={article.image} alt="" loading="lazy" decoding="async" data-vm-image /> : <span class="vm-article-fallback" aria-hidden="true">FROM THE PRESS<span>REPORT &amp; ANALYSIS</span></span>}
+          </a>
+          <div class="vm-body">
+            {(article.date || article.location) && <p class="vm-meta">{[article.date, article.location].filter(Boolean).join(' · ')}</p>}
+            <h3>{article.title}</h3>
+            <p class="vm-description">{article.description}</p>
+            <div class="vm-footer">
+              <span class="vm-courtesy">Courtesy: {article.publisher}</span>
+              <a href={article.url} target="_blank" rel="noopener noreferrer">Read Original ↗</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="vm-empty" data-vm-empty hidden role="status">
+      <strong>No articles in this collection yet.</strong>
+      <p>Verified reports will appear here as they are added.</p>
+    </div>
+    {total === 0 && <p class="vm-empty-static">No media entries have been added yet.</p>}
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-vm-gallery]').forEach((gallery) => {
+    const buttons = [...gallery.querySelectorAll<HTMLButtonElement>('[data-vm-filter]')];
+    const cards = [...gallery.querySelectorAll<HTMLElement>('[data-vm-type]')];
+    const empty = gallery.querySelector<HTMLElement>('[data-vm-empty]');
+    const show = (filter: string) => {
+      let visible = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.vmType === filter;
+        card.hidden = !match;
+        if (match) visible++;
+      });
+      buttons.forEach((button) => {
+        const selected = button.dataset.vmFilter === filter;
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      if (empty) empty.hidden = visible > 0;
+    };
+    buttons.forEach((button) => button.addEventListener('click', () => show(button.dataset.vmFilter || 'all')));
+    gallery.querySelectorAll<HTMLImageElement>('[data-vm-image]').forEach((img) => {
+      if (img.complete && img.naturalWidth === 0) img.remove();
+      else img.addEventListener('error', () => img.remove(), { once: true });
+    });
+    show('all');
+  });
+</script>
+<style>
+  .vm-section{--vm-green:#20372e;--vm-rust:#a45538;--vm-paper:#f6f1e9;--vm-line:#d9d0c3;background:var(--vm-paper);padding:62px 0 90px;color:var(--vm-green)}
+  .vm-shell{width:min(1180px,calc(100% - 40px));margin:0 auto}
+  .vm-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:28px}
+  .vm-eyebrow{font:800 11px/1.4 system-ui,sans-serif;letter-spacing:.12em;color:var(--vm-rust)}
+  .vm-head h2{font:700 clamp(30px,3.5vw,45px)/1.1 Georgia,serif;letter-spacing:-.035em;margin:12px 0 8px;color:var(--vm-green)}
+  .vm-head p{max-width:620px;font:16px/1.55 Georgia,serif;color:#625e56;margin:0}
+  .vm-filter-wrap{display:flex;gap:5px;align-items:center;padding:4px;background:#eee7dd;border:1px solid var(--vm-line);border-radius:8px;flex-shrink:0}
+  .vm-filter{border:0;border-radius:5px;padding:10px 15px;background:transparent;color:#57574e;font:750 12px/1.4 system-ui,sans-serif;cursor:pointer}
+  .vm-filter:hover{color:var(--vm-rust)}.vm-filter.is-selected{background:#fffdfa;color:var(--vm-green);box-shadow:0 1px 7px #26261b15}
+  .vm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .vm-card{min-width:0;display:flex;flex-direction:column;overflow:hidden;background:#fffdfa;border:1px solid var(--vm-line);border-radius:8px;box-shadow:0 5px 18px #1d2f2508;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+  .vm-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px #1d2f2517;border-color:#c3ab95}
+  .vm-media{display:block;position:relative;overflow:hidden;aspect-ratio:16/9;background:linear-gradient(135deg,#2c453c,#172c25);color:#fff9ec}
+  .vm-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .vm-fallback{position:absolute;bottom:18px;left:19px;font:800 11px system-ui,sans-serif;letter-spacing:.12em}
+  .vm-play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);width:49px;height:49px;display:grid;place-items:center;padding-left:3px;border-radius:50%;background:#14241bd9;color:#fff;font:18px system-ui,sans-serif;border:1px solid #ffffffb0}
+  .vm-article-media{background:linear-gradient(135deg,#e4d3bc,#b7a089);color:#24382f}.vm-article-fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:7px;font:700 clamp(19px,2vw,27px) Georgia,serif}.vm-article-fallback span{font:800 9px system-ui,sans-serif;letter-spacing:.14em;color:#79583e}
+  .vm-body{padding:21px 22px 20px;display:flex;flex:1;flex-direction:column}
+  .vm-meta{font:750 11px/1.45 system-ui,sans-serif;color:var(--vm-rust);margin:0 0 12px}
+  .vm-body h3{font:700 clamp(20px,1.65vw,24px)/1.2 Georgia,serif;letter-spacing:-.02em;color:var(--vm-green);margin:0 0 13px}
+  .vm-description{font:15px/1.65 Georgia,serif;color:#5f5d56;margin:0 0 24px;flex:1}
+  .vm-footer{border-top:1px solid #e6ded3;padding-top:16px;margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .vm-courtesy{font:650 11px/1.45 system-ui,sans-serif;color:#777064}
+  .vm-footer a{font:800 11px/1.4 system-ui,sans-serif;text-decoration:none;color:var(--vm-rust);white-space:nowrap}
+  .vm-footer a:hover{text-decoration:underline}
+  .vm-empty{border:1px dashed #c6b8a7;background:#fffdfa;border-radius:8px;padding:38px 25px;text-align:center;color:var(--vm-green)}
+  .vm-empty strong{font:700 23px Georgia,serif}.vm-empty p{font:15px Georgia,serif;color:#6c665e}
+  .vm-empty-static{font:16px Georgia,serif}
+  .vm-card[hidden],.vm-empty[hidden]{display:none!important}
+  .vm-filter:focus-visible,.vm-media:focus-visible,.vm-footer a:focus-visible{outline:3px solid var(--vm-rust);outline-offset:3px}
+  @media(max-width:960px){.vm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vm-head{align-items:start;flex-direction:column}.vm-filter-wrap{flex-wrap:wrap}}
+  @media(max-width:610px){.vm-section{padding:43px 0 65px}.vm-shell{width:calc(100% - 32px)}.vm-grid{grid-template-columns:1fr;gap:15px}.vm-filter-wrap{width:100%}.vm-filter{flex:1;padding:11px 8px}.vm-body{padding:20px}.vm-head h2{font-size:34px}}
+  @media(prefers-reduced-motion:reduce){.vm-card{transition:none}}
+</style>

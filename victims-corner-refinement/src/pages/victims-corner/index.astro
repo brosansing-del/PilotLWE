@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import VictimsMediaGallery from '../../components/VictimsMediaGallery.astro';
+
+---
+<BaseLayout
+  title="Victims’ Corner | The Naxal Archive"
+  description="Selected media reports, survivor testimonies and firsthand accounts documenting the human cost of Maoist violence."
+>
+  <Header />
+  <main class="vc-page" id="main-content">
+    <section class="vc-hero" aria-labelledby="victims-title">
+      <div class="vc-shell">
+        <div class="vc-hero-copy">
+          <span class="vc-eyebrow">VICTIMS’ CORNER / MEDIA COVERAGE</span>
+          <h1 id="victims-title">The Human Cost <em>of Maoist Violence</em></h1>
+          <p>Selected media reports, survivor testimonies and firsthand accounts documenting the impact of Maoist violence on security personnel, civilians and their families.</p>
+        </div>
+      </div>
+    </section>
+    <VictimsMediaGallery />
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  .vc-page{background:#f6f1e9;color:#20372e;font-family:Georgia,'Times New Roman',serif}
+  .vc-shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+  .vc-hero{background:#f6f1e9;padding:48px 0 32px;border-bottom:1px solid #ded5c8}
+  .vc-hero-copy{max-width:970px}
+  .vc-eyebrow{display:block;color:#a45538;font:800 11px/1.5 system-ui,sans-serif;letter-spacing:.14em}
+  .vc-hero h1{max-width:1040px;margin:13px 0 18px;font:700 clamp(38px,4.6vw,62px)/1.06 Georgia,serif;letter-spacing:-.045em;color:#20372e}
+  .vc-hero h1 em{font-weight:400;color:#a45538}
+  .vc-hero-copy p{max-width:810px;margin:0;font:17px/1.65 Georgia,serif;color:#575d54}
+
+  @media(max-width:600px){.vc-shell{width:calc(100% - 32px)}.vc-hero{padding:32px 0 27px}.vc-hero h1{font-size:clamp(35px,9vw,48px)}.vc-hero-copy p{font-size:16px}}
+</style>
