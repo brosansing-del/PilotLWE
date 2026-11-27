@@ -1,5 +1,6 @@
 ---
 const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+/* Existing Political Organisation analysis is injected from the user's local project. */
 const sections = [
   {
     "title": "The Party’s Organisational Structure",
@@ -126,78 +127,46 @@ const sections = [
     ]
   }
 ];
+// HISTORY_MUSEUM_V1
 ---
-<section class="po-section" id="political-organisation" aria-labelledby="po-title">
-  <div class="po-shell">
-    <header class="po-heading">
-      <p class="po-kicker">HISTORY / PART II</p>
-      <h2 id="po-title">Political Organisation <em>&amp; Leadership</em></h2>
-    </header>
-    <figure class="po-figure">
-      <img src={`${BASE}/images/history/cpi-maoist-hierarchy.png`} alt="Illustrated overview of the CPI (Maoist) hierarchical political and military structure" loading="lazy" decoding="async" />
-      <figcaption>Illustrative organisational diagram supplied for the archive. Refer to the written account for context and source-specific distinctions.</figcaption>
+<section class="po-museum" id="political-organisation" aria-labelledby="po-title">
+  <header class="po-museum-head">
+    <h2 id="po-title">Political Organisation &amp; Leadership</h2>
+  </header>
+  <details class="po-diagram-expand">
+    <summary>View organisational hierarchy diagram</summary>
+    <figure class="po-diagram">
+      <img src={`${BASE}/images/history/cpi-maoist-hierarchy.png`} alt="Editor-provided diagram illustrating the organisational hierarchy of CPI (Maoist)" loading="lazy" decoding="async" />
+      <figcaption>Illustrative diagram provided by the site editor. Verify each organisational relationship against the cited constitutional source.</figcaption>
     </figure>
-    <div class="po-layout">
-      <nav class="po-toc" aria-label="Political organisation topics">
-        <strong>EXPLORE 15 TOPICS</strong>
-        {sections.map((section, i) => <a href={`#po-topic-${i+1}`}><small>{String(i+1).padStart(2,'0')}</small> {section.title}</a>)}
-      </nav>
-      <div class="po-content">
-        {sections.map((section, i) => (
-          <article class="po-item" id={`po-topic-${i+1}`}>
-            <div class="po-counter">SECTION {String(i+1).padStart(2,'0')} <span> / {section.group}</span></div>
-            <h3>{section.title}</h3>
-            {section.paragraphs.map(p => <p>{p}</p>)}
-          </article>
-        ))}
-      <nav class="po-pager" aria-label="Organisation topic navigation">
-            <button type="button" id="po-prev">← Previous topic</button>
-            <span id="po-progress" aria-live="polite">Topic 1 of 15</span>
-            <button type="button" id="po-next">Next topic →</button>
-          </nav></div>
-    </div>
+  </details>
+  
+  <div class="po-reading">
+    {sections.map((section,i)=>(
+      <article class="po-article" id={`po-topic-${i+1}`} data-po-topic={i+1}>
+        
+        <h3>{section.title}</h3>
+        <div class="po-body">{section.paragraphs.map(p=><p>{p}</p>)}</div>
+      </article>
+    ))}
+    
   </div>
 </section>
 <style>
-.po-section{background:#f8f4ed;color:#25282b;padding:90px 0 110px;border-top:1px solid #d8d0c5;scroll-margin-top:40px}.po-shell{width:min(1190px,calc(100% - 42px));margin:auto}.po-kicker,.po-counter,.po-toc strong{font:800 11px/1.5 Arial,sans-serif;letter-spacing:.13em;color:#925032}.po-heading{max-width:990px;margin-bottom:38px}.po-heading h2{font:700 clamp(43px,5.5vw,74px)/1.03 Georgia,serif;letter-spacing:-.04em;margin:18px 0}.po-heading h2 em{color:#a45d3b;font-weight:400}.po-heading>p:last-child{max-width:790px;font:18px/1.7 Georgia,serif;color:#5a5752}.po-figure{margin:0 0 60px;background:#eee9e0;border:1px solid #d8d0c5}.po-figure img{display:block;width:100%;height:auto;max-height:850px;object-fit:contain}.po-figure figcaption{padding:13px 20px;font:12px/1.5 Arial,sans-serif;color:#645e57}.po-layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:65px}.po-toc{position:sticky;top:25px;align-self:start;max-height:85vh;overflow:auto;border-top:3px solid #a45d3b;padding-top:14px}.po-toc strong{display:block;margin-bottom:12px}.po-toc a{display:block;padding:10px 2px;border-top:1px solid #ded5c8;text-decoration:none;font:13px/1.45 Georgia,serif;color:#3a3a37}.po-toc a:hover{color:#925032}.po-toc small{color:#a45d3b;margin-right:5px;font:800 10px Arial,sans-serif}.po-item{padding-bottom:38px;margin-bottom:44px;border-bottom:1px solid #d8d0c5;scroll-margin-top:32px}.po-item h3{font:700 clamp(28px,3.5vw,43px)/1.15 Georgia,serif;letter-spacing:-.025em;margin:14px 0 23px}.po-counter span{color:#867b70;font-weight:650}.po-item p{font:17px/1.84 Georgia,serif;color:#373936;margin:0 0 21px;max-width:760px}.po-item p:last-child{margin-bottom:0}@media(max-width:850px){.po-layout{grid-template-columns:1fr;gap:35px}.po-toc{position:static;max-height:300px}.po-section{padding:60px 0}.po-item p{font-size:16px}}@media(max-width:520px){.po-shell{width:calc(100% - 32px)}.po-heading h2{font-size:41px}.po-counter span{display:block}.po-figure figcaption{font-size:11px}}
+  .po-museum{--po-ink:#192d25;--po-rust:#9e4e32;--po-border:#d8cec0;color:var(--po-ink);font-family:Georgia,serif;scroll-margin-top:35px}
+  .po-museum *{box-sizing:border-box}.po-museum-head{margin:20px 0 24px}.po-museum-head h2{font:700 clamp(34px,4vw,44px)/1.12 Georgia,serif;letter-spacing:-.03em;margin:0}
+  .po-diagram-expand{margin:12px 0 24px}.po-diagram-expand summary{display:inline-block;cursor:pointer;color:#9e4e32;border-bottom:1px solid #a75a37;padding-bottom:5px;font:750 12px/1.5 system-ui,sans-serif}.po-diagram{margin:18px auto 28px;max-width:980px}.po-diagram img{display:block;width:100%;height:auto;max-height:530px;object-fit:contain;background:#fff;border:1px solid #d5cabc}.po-diagram figcaption{font:12px/1.5 system-ui,sans-serif;color:#71685c;margin-top:7px}
+  .po-reading{max-width:780px;margin:0 auto}.po-article{scroll-margin-top:35px}.po-meta{font:800 10px/1.5 system-ui,sans-serif;letter-spacing:.08em;color:var(--po-rust)}.po-meta span{margin-left:14px;color:#81786c}.po-article h3{font:700 clamp(30px,3.6vw,42px)/1.16 Georgia,serif;letter-spacing:-.035em;margin:16px 0 24px}.po-body p{font:400 18px/1.82 Georgia,serif;margin:0 0 23px;color:#343b34}
+  .po-museum a:focus-visible,.po-museum button:focus-visible{outline:3px solid var(--po-rust);outline-offset:3px}
+  @media(max-width:650px){.po-museum-head h2{font-size:35px}.po-topic-nav a{flex-basis:145px}.po-article h3{font-size:32px}.po-body p{font-size:17px;line-height:1.78}.po-pager button{padding:10px}}
+
+  /* Single continuous Political Organisation article; no topic scroller. */
+  .po-reading{max-width:900px;margin:0 auto}
+  .po-article{padding:0 0 28px;margin:0 0 28px;border-bottom:1px solid var(--po-border)}
+  .po-article:last-child{border-bottom:0}
+  .po-article h3{font-size:clamp(24px,2.8vw,32px);margin:12px 0 16px}
+  .po-body p{font-size:18px;line-height:1.8;text-align:justify;text-justify:inter-word;hyphens:auto;overflow-wrap:break-word}
+  .po-meta{opacity:.8}
+  @media(max-width:650px){.po-reading{max-width:100%}.po-body p{font-size:17px;text-align:left}}
 </style>
 
-<style is:global>
-/* PILOTLWE_SEPARATED_HISTORY */
-#political-organisation .po-heading>p:last-child:not(.po-kicker){display:none}
-#political-organisation.po-js .po-item:not(.po-selected){display:none!important}
-#political-organisation .po-toc a.po-active{background:#eee2d4;color:#9a4b2b;border-left:3px solid #a45232;padding-left:11px;font-weight:700}
-#political-organisation .po-figure{max-width:920px;margin-left:auto;margin-right:auto}
-#political-organisation .po-figure img{max-height:520px;object-fit:contain}
-#political-organisation .po-pager{display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:20px;border-top:1px solid #dacfc0}
-#political-organisation .po-pager button{padding:12px 16px;border:1px solid #34383a;background:#292d30;color:#fff9ef;cursor:pointer;font:700 12px system-ui,sans-serif}
-#political-organisation .po-pager button:disabled{opacity:.35;cursor:not-allowed}
-#political-organisation .po-pager button:hover:not(:disabled){background:#a45232}
-#political-organisation .po-pager span{font:700 12px system-ui,sans-serif;color:#6c6054}
-@media(max-width:600px){#political-organisation .po-pager{flex-wrap:wrap}#political-organisation .po-pager span{order:-1;flex:1 0 100%;text-align:center}#political-organisation .po-pager button{flex:1}}
-</style>
-<script>
- // PILOTLWE_SEPARATED_HISTORY
- (()=>{
-   const section=document.getElementById('political-organisation');if(!section)return;
-   const items=[...section.querySelectorAll('.po-item')];
-   const links=[...section.querySelectorAll('.po-toc a[href^="#po-topic-"]')];
-   const prev=section.querySelector('#po-prev');const next=section.querySelector('#po-next');const progress=section.querySelector('#po-progress');
-   if(!items.length)return;
-   let selected=0;
-   function update(){
-     const match=location.hash.match(/^#po-topic-(\d+)$/);
-     if(match) selected=Math.max(0,Math.min(items.length-1,Number(match[1])-1));
-     items.forEach((el,i)=>el.classList.toggle('po-selected',i===selected));
-     links.forEach((el,i)=>{el.classList.toggle('po-active',i===selected);if(i===selected)el.setAttribute('aria-current','location');else el.removeAttribute('aria-current')});
-     if(prev)prev.disabled=selected===0;if(next)next.disabled=selected===items.length-1;
-     if(progress)progress.textContent='Topic '+(selected+1)+' of '+items.length;
-   }
-   function navigate(i){selected=i;history.pushState(null,'','#po-topic-'+(i+1));update();section.querySelector('.po-layout')?.scrollIntoView({behavior:'smooth',block:'start'});window.dispatchEvent(new Event('hashchange'));}
-   prev?.addEventListener('click',()=>{if(selected>0)navigate(selected-1)});
-   next?.addEventListener('click',()=>{if(selected<items.length-1)navigate(selected+1)});
-   links.forEach((el,i)=>el.addEventListener('click',e=>{e.preventDefault();navigate(i)}));
-   window.addEventListener('hashchange',update);window.addEventListener('history-part-change',update);
-   section.classList.add('po-js');update();
- })();
-</script>

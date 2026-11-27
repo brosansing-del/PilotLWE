@@ -1,0 +1,181 @@
+---
+import PoliticalOrganisation from '../../components/PoliticalOrganisation.astro';
+import '../../styles/naxal-section-headings.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const home = `${BASE}/`;
+// Historical text supplied by the site editor; reproduced without changing its wording.
+const chapters = [
+  {
+    "id": "naxalbari",
+    "number": "01",
+    "title": "Naxalbari",
+    "period": "1967",
+    "intro": "The uprising, its agrarian roots and the events that shaped the early Naxalite movement.",
+    "paragraphs": [
+      "The Naxalbari uprising of 1967 emerged from longstanding agrarian tensions in the Naxalbari region of Darjeeling district in West Bengal. The conflict was rooted in the unequal distribution of land, the exploitation of sharecroppers and agricultural labourers, and the power exercised by jotedars and other landed interests over the rural population. Peasants faced insecure tenancy arrangements, arbitrary evictions, high rents and the denial of their rights over the land they cultivated. These conditions had produced considerable resentment among the rural poor, particularly among sections of the tribal and tea-garden populations. Although the Communist movement had been active in the region for several years, the existing political and organisational methods had not brought about the fundamental changes that the peasants demanded. The question of land therefore became central to the developing conflict. The Naxalbari movement was not simply a sudden outbreak of violence; it grew out of a history of agrarian discontent and the increasing conviction among a section of communist activists that the existing political leadership was unwilling or unable to carry the struggle forward.",
+      "The political developments within the Communist movement during the 1960s provided an important background to the uprising. The formation of the Communist Party of India (Marxist), or CPI(M), in November 1964 had followed a prolonged ideological conflict within the Communist Party of India over the character of the Indian state, the role of parliamentary politics and the path towards revolution. Many activists who later became associated with Naxalbari believed that the CPI(M), despite its criticism of the earlier CPI leadership, was gradually moving towards parliamentary politics and away from revolutionary struggle. Charu Majumdar became one of the most influential advocates of this position. His writings, circulated in pamphlet form in Siliguri during 1966, argued for an armed agrarian revolution and drew heavily on the Chinese revolutionary experience. He increasingly maintained that the CPI(M) leadership could not provide an effective direction to the peasant movement. Kanu Sanyal and Jangal Santhal, along with other local activists, were drawn towards these ideas, although their involvement was shaped as much by their direct experience of agrarian conditions as by ideological debates within the party.",
+      "The formation of the United Front government in West Bengal in March 1967 raised expectations among sections of the left that land reform and other agrarian changes might be pursued through government institutions. However, dissatisfaction with the pace and nature of these changes contributed to the growing conviction among the Naxalbari activists that the peasants themselves would have to take direct action. The movement began on 3 March 1967, shortly after the United Front government assumed office. Charu Majumdar provided much of its ideological direction, while Kanu Sanyal and Jangal Santhal played central roles in organising and leading the struggle on the ground. Other important figures included Kadam Mallik, Khokon Majumdar and Keshab Sarkar. Their work involved mobilising peasants, organising resistance to landlords and encouraging cultivators to assert their claims over land. The movement therefore brought together a particular revolutionary interpretation of agrarian struggle and the practical grievances of peasants who had long experienced exploitation and insecurity.",
+      "The immediate conflict increasingly centred on the question of possession and control of land. Peasants began asserting their rights against landlords and jotedars, and the movement developed into a confrontation over the existing agrarian order. The killing of a police inspector, Sonam Wangdi, on 24 May 1967, followed by police firing at Prasadujote on 25 May, marked a major escalation. Ten people, including women and children, were killed in the firing. These events brought the uprising to national attention and intensified the confrontation between the state and the peasant movement. For the government, the uprising represented a challenge to law and order; for the revolutionary activists, it demonstrated the coercive character of the existing state apparatus and reinforced their belief that the agrarian question could not be resolved through conventional political methods. The police response, however, also exposed the organisational and military limitations of the movement, which had developed rapidly without the preparation required to sustain a prolonged confrontation with the state.",
+      "The movement faced increasing pressure from the police during June and July 1967. Large-scale operations were conducted in the affected areas, including Operation Hatighisa on 12 July and Operation Buraganj on 13 July. Raids, arrests and the deployment of police forces weakened the organisation's local structure. Jangal Santhal was arrested on 10 August 1967, while several other organisers and activists were also detained or driven underground. Kanu Sanyal managed to evade arrest for a longer period, but the movement had already suffered a serious organisational setback. By the end of July 1967, its activities in the region had largely collapsed. The repression did not merely remove leading activists; it also disrupted the close relationship that had developed between organisers and the local peasantry. The movement's inability to withstand the police offensive revealed the consequences of inadequate preparation, tactical errors and the absence of a sufficiently developed organisational base for a prolonged struggle.",
+      "The differences over the direction of the movement were also becoming increasingly significant. Charu Majumdar favoured a more immediate and militant course, while the experience of the local organisers highlighted the importance of maintaining close links with the peasantry and developing the struggle gradually. The movement's rapid turn towards violent actions and the emphasis on the seizure of political power created difficulties in sustaining the original agrarian mobilisation. The arrests of field-level leaders and the disruption of peasant networks further weakened its prospects. Nevertheless, Naxalbari acquired a significance far beyond the geographical limits of the region. It became a symbol of revolutionary resistance among sections of the radical left and inspired communist activists in different parts of India to question the existing leadership of the CPI and CPI(M). The uprising also helped establish the political identity of a new current within Indian communism, one that rejected parliamentary participation and regarded armed agrarian struggle as the principal route to revolution.",
+      "The political response to Naxalbari was not confined to the local region. Supporters of the uprising began organising solidarity activities and building networks among communist revolutionaries in other parts of the country. A committee known as the Naxalbari-O-Krishak Sangram Sahayak Samity was formed in Calcutta around May or June 1967. It sought to extend support to the movement and draw attention to its political significance. A rally was organised in Calcutta in the first week of November 1967. At the same time, the ideological and organisational differences between the radical activists and the CPI(M) leadership became sharper. Charu Majumdar and other supporters of the Naxalbari line were expelled from the CPI(M) in September 1967. The movement thus became the starting point for a wider effort to create a separate revolutionary organisation that would reject parliamentary politics and adopt armed struggle as its central strategy."
+    ]
+  },
+  {
+    "id": "formation-of-cpi-ml",
+    "number": "02",
+    "title": "Formation of CPI (ML) and early fragmentation",
+    "period": "1967–1972",
+    "intro": "The formation of the AICCCR, establishment of CPI(ML) and its early organisational divisions.",
+    "paragraphs": [
+      "The decline of the Naxalbari uprising did not bring an end to the political current it had inspired. Instead, it encouraged efforts to establish an all-India organisation that could coordinate communist revolutionaries who supported the Naxalbari line. Towards the end of 1967, the All India Coordination Committee of Communist Revolutionaries (AICCCR) was formed. Its members included Charu Majumdar, Sushital Roy Choudhuri, Saroj Dutta, Parimal Dasgupta and Asit Sen from West Bengal; Satyanarain Singh from Bihar; Shiv Kumar Mishra and S. N. Tiwari from Uttar Pradesh; Nagi Reddy from Andhra Pradesh; Appu from Madras; and Kunikkal Narayan from Kerala, among others. The committee brought together activists who had become dissatisfied with the CPI(M) and were seeking a common organisational platform for revolutionary politics. Its formation represented an important step towards the creation of a separate communist party, although differences over political strategy and organisational methods were present from the beginning.",
+      "The AICCCR adopted a clear position against the parliamentary path. Its policy was based on the rejection of parliamentary politics, the acceptance of armed struggle as the only path to liberation, the development of Naxalbari-type movements across India and the eventual construction of a revolutionary communist party through armed struggle. The committee also decided to publish an English-language political organ titled Liberation. These decisions reflected the growing influence of Charu Majumdar's political line, particularly his emphasis on armed agrarian revolution and the rejection of electoral participation. However, not all members agreed with the implications of this approach. Differences emerged over the role of trade unions, mass movements and open mass organisations. Nagi Reddy, for instance, opposed treating the boycott of elections as a permanent slogan and argued that participation in elections might become necessary in certain areas at particular stages of the struggle. Parimal Dasgupta also expressed disagreement with aspects of the committee's political position, including its attitude towards Soviet actions in Czechoslovakia, which had been described in Deshabrati as open aggression. These disagreements reflected broader differences over how revolutionary politics should be organised and how the party should relate to existing mass movements.",
+      "By the end of 1968, the disagreements within the AICCCR had become difficult to contain. Nagi Reddy and Parimal Dasgupta gradually dissociated themselves from the committee, while Kunikkal Narayan also moved away from it. The differences were not simply personal disagreements; they concerned fundamental questions about the character of revolutionary strategy, the importance of mass organisations and the relationship between armed struggle and other forms of political activity. The more uncompromising position associated with Charu Majumdar increasingly shaped the committee's direction, while those who favoured a broader and more flexible approach found themselves marginalised. Despite these divisions, the AICCCR continued to function through state, district and local coordination committees, with West Bengal, Bihar and Uttar Pradesh emerging as important organisational centres. Peasant struggles and revolutionary activities also developed in several other regions, including Andhra Pradesh, Tamil Nadu, Kerala and parts of northern India.",
+      "The final meeting of the AICCCR took place on 22 April 1969 at Tower Hotel on Upper Circular Road in Calcutta. The meeting was attended by several leading figures of the movement, including Charu Majumdar, Sushital Roy Choudhuri, Saroj Dutta, Souren Bose, Kanu Sanyal, Asit Sen, Satyanarain Singh, Shiv Kumar Mishra, S. H. Tiwari, Panchadri Krishnamurti, Tejeswar Rao and Appu. During the discussion, Charu Majumdar emphasised the need to establish a separate communist party that would distinguish itself from both the CPI and the CPI(M). The proposal was accepted by those present, and Satyanarain Singh suggested the name Communist Party of India (Marxist-Leninist), or CPI(ML). The name was approved, and it was decided that the formation of the new party would be publicly announced at a rally at Calcutta's Monument Maidan on 1 May 1969. The creation of the CPI(ML) marked the formal organisational expression of the revolutionary current that had emerged from Naxalbari and the subsequent coordination of communist revolutionaries.",
+      "The public announcement of the party's formation took place on 1 May 1969. The new organisation sought to present itself as the genuine revolutionary alternative to the existing communist parties, which it accused of abandoning the path of revolution in favour of parliamentary politics. Charu Majumdar emerged as its principal ideological leader, while other figures, including Kanu Sanyal, Sushital Roy Choudhuri, Saroj Dutta and Souren Bose, played important organisational and political roles. The party's formation was accompanied by the expectation that the Naxalbari experience could be extended to other parts of India through armed peasant struggles. Its political line emphasised the rejection of elections, the development of guerrilla warfare and the destruction of the existing rural power structure. The party also sought to establish a centralised organisational structure capable of coordinating revolutionary activities across different states.",
+      "The formation of the CPI(ML), however, did not resolve the differences that had existed within the AICCCR. These disagreements continued within the new party and became more pronounced as questions of leadership, political strategy and organisational practice came to the forefront. One important issue was the relationship between guerrilla warfare and mass mobilisation. Some leaders argued that armed actions alone could not provide the basis for a sustained revolutionary movement and that the party needed to maintain links with trade unions, peasant organisations, students and other sections of the population. Others supported the view that guerrilla warfare and the annihilation of class enemies were the principal means of advancing the revolution. The differences became particularly visible in discussions involving Asit Sen and other leaders who questioned whether guerrilla warfare should be treated as the only method of mobilising the masses. Attempts were made to resolve these disagreements through meetings, but they did not produce a lasting settlement. Asit Sen and his associates eventually separated from the CPI(ML).",
+      "The question of the party's political programme and the position of Charu Majumdar also generated debate. At the party's organisational discussions in 1970, disagreements arose over the analysis of Indian society, the nature of economic and industrial development, the proposed democratic front and the place of the peasant struggle in the party programme. There was also considerable discussion about how Majumdar's role in building the party should be represented. Some delegates wanted him explicitly recognised as the revolutionary authority, while others believed that his contribution should be acknowledged without placing him above the collective leadership. These differences reflected competing understandings of party leadership and internal political authority. The discussions eventually led to the formation of a Central Committee and a Politburo, with Charu Majumdar among the leading members. However, the formal establishment of these bodies did not remove the underlying tensions within the organisation.",
+      "The CPI(ML) increasingly faced difficulties as its political line was implemented in different parts of the country. The emphasis on armed actions and the annihilation of class enemies created serious problems in areas where the party lacked a strong organisational base or sufficient support among the peasantry. The approach also encouraged a tendency to judge revolutionary progress by the number of violent actions carried out. In some places, this contributed to the weakening of mass organisations and the alienation of sections of the population whose support was essential for a prolonged movement. Differences over these methods were expressed by several important leaders, including Sushital Roy Choudhuri, Satyanarain Singh, Ashim Chatterjee, Nagi Reddy and Parimal Dasgupta. Their disagreements concerned not only the use of violence but also the party's assessment of the political situation, its relationship with mass organisations and the extent to which local conditions should influence revolutionary strategy.",
+      "The movement also suffered from increasing state repression. Arrests and police operations weakened party structures in several regions, while the deaths and detention of important organisers disrupted communication and coordination between the central leadership and state-level units. The arrests of prominent leaders, including Kanu Sanyal and several figures from Andhra Pradesh, Bihar, Uttar Pradesh and Kerala, created further organisational difficulties. The party's difficulties were compounded by the loss of experienced cadres and the growing inability to maintain a consistent political direction across different areas. Although revolutionary activities continued in a number of states, the organisation increasingly struggled to reconcile its central political line with the different social and political conditions in which its members were operating.",
+      "By 1971, the internal divisions within the CPI(ML) had become increasingly serious. The party's position on elections, the use of armed actions and the role of mass organisations remained contested. The 1971 elections also exposed the limitations of the party's strategy in areas where it had expected its political influence to undermine the electoral process. The results did not produce the developments that some party leaders had anticipated, and the continued success of established political forces demonstrated the difficulty of translating revolutionary activity into wider political influence. At the same time, the party faced a second major phase of setbacks from the beginning of 1970 onwards, following the deaths and arrests of important leaders and the intensification of disagreements within the central leadership. The combination of repression, organisational weakness and strategic differences prevented the party from consolidating the revolutionary movement on an all-India scale.",
+      "The disagreements within the CPI(ML) became particularly sharp over the annihilation programme and the question of mass organisation. Several leaders argued that the emphasis on individual acts of violence was weakening the broader revolutionary movement and isolating the party from the masses. Charu Majumdar, however, continued to defend the central elements of his political line. The differences eventually extended to questions concerning the assessment of the party's past activities and the manner in which its leadership should function. By 1972, disagreements had developed between Majumdar and several important associates, including Sushital Roy Choudhuri, Satyanarain Singh, Ashim Chatterjee and Professor Suniti Ghosh. These conflicts contributed to further fragmentation within the party and weakened its ability to respond collectively to the growing crisis.",
+      "The arrest of Charu Majumdar on 16 July 1972 and his death in police custody on 28 July 1972 marked a major turning point in the history of the early Naxalite movement. By that time, the CPI(ML) had already suffered substantial setbacks as a result of police repression, the arrest and death of leading organisers, disagreements over political strategy and the weakening of its mass influence. The party that had been formed in 1969 with the aim of uniting communist revolutionaries across India had become deeply divided, with different leaders and groups increasingly pursuing separate political positions."
+    ]
+  }
+];
+---
+
+<BaseLayout title="History — The Naxal Archive" description="Explore Naxalbari and the formation of CPI (ML), including the early fragmentation of the movement.">
+  <Header />
+  <main class="history-page" id="top">
+    <div class="history-shell">
+      <div class="history-breadcrumb"><a href={home}>Home</a><span>/</span><span>History</span></div>
+      <header class="history-compact-intro"><span class="history-kicker">THE NAXAL ARCHIVE / HISTORY</span><h1>Explore the historical record.</h1><p>Choose a chapter below. Use Previous and Next to continue reading without scrolling through the entire history.</p></header>
+      <nav class="history-part-tabs" aria-label="History sections">
+          <a href="#naxalbari" data-history-part="evolution">PART I <strong>Historical Evolution</strong></a>
+          <a href="#political-organisation" data-history-part="organisation">PART II <strong>Organisation &amp; Leadership</strong></a>
+        </nav>
+      <div class="history-layout">
+        <aside class="history-toc" aria-label="History chapters">
+          <div class="history-toc-inner">
+            <span class="history-toc-label">EXPLORE HISTORY</span>
+            {chapters.map(chapter => <a href={`#${chapter.id}`}><small>{chapter.number}</small><span>{chapter.title}</span></a>)}
+            <a class="history-political-link" href="#political-organisation">Political Organisation &amp; Leadership →</a>
+            <a class="history-back" href={home}>Back to homepage ↗</a>
+          </div>
+        </aside>
+        <div class="history-content">
+          {chapters.map(chapter => (
+            <article id={chapter.id} class="history-chapter">
+              <div class="history-chapter-head">
+                <span class="history-chapter-number">CHAPTER {chapter.number} <span>·</span> {chapter.period}</span>
+                <h2>{chapter.title}</h2>
+                <p>{chapter.intro}</p>
+              </div>
+              <div class="history-prose">
+                {chapter.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+              </div>
+              <a class="history-to-top" href="#top">Back to top ↑</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+    <nav class="history-pager history-shell" id="history-page-controls" aria-label="Historical phase navigation">
+           <button type="button" id="history-prev">← Previous phase</button>
+           <span id="history-counter" aria-live="polite">Phase 1</span>
+           <button type="button" id="history-next">Next phase →</button>
+         </nav>
+         <PoliticalOrganisation />
+    
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+.history-page{--h-ink:#142620;--h-rust:#a64a2c;--h-border:#d8d0c0;background:#f3efe6;color:var(--h-ink);min-height:100vh}
+.history-shell{max-width:1250px;margin:0 auto;padding:0 28px}
+.history-breadcrumb{display:flex;gap:12px;align-items:center;padding:35px 0;color:#857a6e;font:600 12px system-ui,sans-serif}
+.history-breadcrumb a{color:inherit;text-decoration:none}.history-breadcrumb a:hover{color:var(--h-rust)}
+.history-hero{position:relative;overflow:hidden;border:1px solid #254f43;border-radius:9px;padding:78px clamp(28px,6vw,88px) 66px;background:radial-gradient(circle at 90% 14%,rgba(213,172,98,.2),transparent 26%),linear-gradient(135deg,#1b473a,#102d26);color:#fff9ee}
+.history-hero:after{content:"";position:absolute;right:-90px;bottom:-200px;width:460px;height:460px;border:1px solid rgba(245,227,195,.2);border-radius:50%;box-shadow:0 0 0 60px rgba(245,227,195,.035),0 0 0 130px rgba(245,227,195,.025);pointer-events:none}
+.history-kicker,.history-toc-label,.history-chapter-number{font:800 11px/1.4 system-ui,sans-serif;letter-spacing:.16em}
+.history-kicker{color:#f7bd78}.history-hero h1{max-width:960px;font:700 clamp(44px,6.7vw,91px)/.98 Georgia,serif;letter-spacing:-.045em;margin:26px 0 24px}.history-hero h1 em{color:#eeba82;font-weight:400}
+.history-hero p{max-width:675px;font:400 clamp(17px,1.75vw,22px)/1.6 Georgia,serif;color:#e7e4d9;margin:0}
+.history-years{display:flex;align-items:center;gap:16px;margin-top:47px;font:800 12px system-ui,sans-serif;letter-spacing:.13em;color:#eeba82}.history-years i{width:92px;height:1px;background:#eeba82}
+.history-layout{display:grid;grid-template-columns:275px minmax(0,1fr);gap:75px;padding-top:67px}
+.history-toc-inner{position:sticky;top:30px;padding:24px 0;border-top:3px solid var(--h-rust)}.history-toc-label{color:var(--h-rust);display:block;margin-bottom:25px}
+.history-toc a:not(.history-back){display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--h-border);padding:18px 4px;color:var(--h-ink);font:600 15px/1.4 Georgia,serif;text-decoration:none}.history-toc a:hover{color:var(--h-rust)}.history-toc a small{font:800 11px/1.5 system-ui,sans-serif;color:var(--h-rust)}.history-back{display:block;margin-top:28px;font:700 12px system-ui,sans-serif;color:var(--h-rust);text-decoration:none}
+.history-chapter{scroll-margin-top:30px;padding-bottom:90px;margin-bottom:55px;border-bottom:1px solid var(--h-border)}.history-chapter:last-child{border-bottom:none}
+.history-chapter-number{color:var(--h-rust)}.history-chapter-number span{color:#aaa}
+.history-chapter h2{font:700 clamp(40px,4.8vw,68px)/1.05 Georgia,serif;letter-spacing:-.045em;margin:19px 0}.history-chapter-head>p{font:400 20px/1.52 Georgia,serif;color:#66635c;max-width:710px;border-left:3px solid var(--h-rust);padding-left:19px;margin:24px 0 42px}
+.history-prose{max-width:755px}.history-prose p{font:400 clamp(17px,1.45vw,19px)/1.88 Georgia,serif;margin:0 0 26px;color:#2d332e}.history-prose p:first-child:first-letter{float:left;font:700 70px/.8 Georgia,serif;color:var(--h-rust);margin:8px 10px 0 0}
+.history-to-top{display:inline-block;margin-top:5px;font:750 12px system-ui,sans-serif;color:var(--h-rust);text-decoration:none}
+@media(max-width:820px){.history-layout{grid-template-columns:1fr;gap:25px;padding-top:40px}.history-toc-inner{position:static;padding:17px 0}.history-toc a:not(.history-back){display:inline-flex;width:min(100%,300px);vertical-align:top}.history-back{margin-top:15px}.history-hero{padding:58px 30px}.history-chapter{padding-bottom:55px}}
+@media(max-width:520px){.history-shell{padding:0 16px}.history-hero{padding:45px 24px}.history-hero h1{font-size:44px}.history-years{margin-top:30px}.history-chapter h2{font-size:39px}.history-prose p{font-size:17px;line-height:1.75}.history-toc a:not(.history-back){width:100%}}
+.history-political-link{display:block;padding:18px 4px;border-top:1px solid #d8d0c0;color:#995235;text-decoration:none;font:700 14px/1.4 Georgia,serif}.history-political-link:hover{text-decoration:underline}
+</style>
+
+
+
+
+<style is:global>
+/* PILOTLWE_SEPARATED_HISTORY */
+.history-part-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 0;padding:8px;background:#eae2d7;border:1px solid #d7c9ba}
+.history-part-tabs a{display:flex;flex-direction:column;gap:5px;min-width:230px;flex:1;padding:16px 20px;color:#75685d;text-decoration:none;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.12em}
+.history-part-tabs strong{font:700 clamp(17px,1.8vw,22px)/1.3 Georgia,serif;letter-spacing:0;color:#262a2b}
+.history-part-tabs a.is-active{background:#fffaf3;box-shadow:inset 0 -3px #a45232;color:#a45232}
+.history-page.history-js .history-chapter:not(.chapter-visible){display:none!important}
+.history-page.history-js.organisation-selected .history-layout,.history-page.history-js.organisation-selected #history-page-controls{display:none!important}
+.history-page.history-js:not(.organisation-selected) #political-organisation{display:none!important}
+.history-page .history-layout{padding-top:34px}
+.history-page .history-toc a.is-selected{color:#a45232!important;border-left:3px solid #a45232;background:#efe3d5;padding-left:10px!important}
+.history-pager{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:26px;padding-bottom:46px;margin-top:12px;border-top:1px solid #d8cfc2}
+.history-pager button{border:1px solid #34383a;background:#292d30;color:#fff9ef;padding:12px 18px;font:700 12px system-ui,sans-serif;cursor:pointer}
+.history-pager button:hover:not(:disabled){background:#a45232}.history-pager button:disabled{opacity:.38;cursor:not-allowed}
+.history-pager span{font:700 12px system-ui,sans-serif;color:#6c6054}
+@media(max-width:680px){.history-part-tabs a{min-width:0;flex-basis:100%}.history-pager{flex-wrap:wrap}.history-pager span{order:-1;flex:1 0 100%;text-align:center}.history-pager button{flex:1}}
+</style>
+<script>
+ // PILOTLWE_SEPARATED_HISTORY
+ (() => {
+   const root=document.querySelector('.history-page');
+   if(!root)return;
+   const chapters=[...root.querySelectorAll('.history-chapter')];
+   const political=document.getElementById('political-organisation');
+   const sidebar=[...root.querySelectorAll('.history-toc a[href^="#"]')];
+   const parts=[...root.querySelectorAll('[data-history-part]')];
+   const prev=document.getElementById('history-prev');
+   const next=document.getElementById('history-next');
+   const counter=document.getElementById('history-counter');
+   if(!chapters.length)return;
+   let current=0;
+   function render(scroll=false){
+     const hash=decodeURIComponent(location.hash.replace(/^#/,''));
+     const isOrganisation=hash==='political-organisation'||hash.startsWith('po-topic-');
+     root.classList.toggle('organisation-selected',isOrganisation);
+     if(!isOrganisation){
+       const index=chapters.findIndex(el=>el.id===hash);
+       if(index>=0)current=index;
+       chapters.forEach((el,i)=>el.classList.toggle('chapter-visible',i===current));
+       if(prev)prev.disabled=current===0;
+       if(next)next.disabled=current===chapters.length-1;
+       if(counter)counter.textContent='Phase '+(current+1)+' of '+chapters.length;
+     }
+     parts.forEach(el=>{let active=el.dataset.historyPart===(isOrganisation?'organisation':'evolution');el.classList.toggle('is-active',active);if(active)el.setAttribute('aria-current','location');else el.removeAttribute('aria-current')});
+     sidebar.forEach(el=>{let href=el.getAttribute('href');let active=href==='#'+(isOrganisation?'political-organisation':chapters[current].id);el.classList.toggle('is-selected',active)});
+     if(scroll){let target=isOrganisation?political:root.querySelector('.history-layout');target?.scrollIntoView({block:'start',behavior:'smooth'});}
+   }
+   function navigate(hash){history.pushState(null,'',hash);render(true);window.dispatchEvent(new Event('history-part-change'));}
+   prev?.addEventListener('click',()=>{if(current>0)navigate('#'+chapters[current-1].id)});
+   next?.addEventListener('click',()=>{if(current<chapters.length-1)navigate('#'+chapters[current+1].id)});
+   for(let link of [...parts,...sidebar]){link.addEventListener('click',ev=>{let href=link.getAttribute('href')||'';if(href.startsWith('#')&&(href==='#political-organisation'||chapters.some(ch=>href==='#'+ch.id))){ev.preventDefault();navigate(href)}})}
+   window.addEventListener('hashchange',()=>render(false));
+   root.classList.add('history-js');
+   render(false);
+ })();
+</script>

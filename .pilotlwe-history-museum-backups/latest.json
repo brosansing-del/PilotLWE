@@ -1,0 +1,14 @@
+{
+  "folder": "D:\\PilotLWE\\.pilotlwe-history-museum-backups\\2026-11-27T04-30-49-708Z",
+  "entries": [
+    {
+      "rel": "src/pages/history/index.astro",
+      "existed": true
+    },
+    {
+      "rel": "src/components/PoliticalOrganisation.astro",
+      "existed": true
+    }
+  ],
+  "created": "2026-11-27T04:30:49.713Z"
+}

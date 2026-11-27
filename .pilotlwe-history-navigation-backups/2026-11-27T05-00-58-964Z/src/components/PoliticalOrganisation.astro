@@ -1,0 +1,194 @@
+---
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+/* Existing Political Organisation analysis is injected from the user's local project. */
+const sections = [
+  {
+    "title": "The Party’s Organisational Structure",
+    "group": "Political Organisation and Leadership",
+    "paragraphs": [
+      "The Constitution of the Communist Party of India (Maoist) establishes a hierarchical organisational structure based on geographical divisions and spheres of production. It identifies the Central Committee as the highest organisational body, followed by Special Area Committees, Special Zonal Committees and State Committees. Below these are Regional Committees, Zonal, District and Divisional Committees, Sub-Zonal and Sub-Divisional Committees, and Area Committees. Local-level committees may be established in villages, urban settlements, factories, colleges and other institutions. The party cell is designated as the basic unit of the organisation.",
+      "The Constitution provides that each committee elects its own secretary and may establish a secretariat according to its organisational requirements. Sub-committees and commissions may also be formed at different levels to carry out the party’s work in particular areas. The structure is therefore designed to distribute organisational responsibilities across different levels while maintaining the authority of higher committees over lower ones. The Constitution also distinguishes between professional revolutionaries and part-time members, specifying that leading committees from the Area Committee level upwards are to be composed exclusively of professional revolutionaries."
+    ]
+  },
+  {
+    "title": "The Party Cell as the Basic Organisational Unit",
+    "group": "Political Organisation and Leadership",
+    "paragraphs": [
+      "The party cell is identified as the smallest and most fundamental unit of the organisation. According to the Constitution, a cell generally consists of three to five members and may be established on a geographical or occupational basis, including in villages, factories, educational institutions and localities. Each cell elects its own secretary and is responsible for the day-to-day organisational work of its members.",
+      "The Constitution describes the cell as the link between the party and the broader population in its area. It assigns cells responsibilities relating to the implementation of party decisions, the political education of members and the maintenance of organisational connections with the population. Candidate members are also attached to cells, where they participate in discussions and follow party decisions, although they do not possess voting rights. The cell thus serves as the foundation of the party’s internal organisation and its system of membership and accountability."
+    ]
+  },
+  {
+    "title": "The Party Congress",
+    "group": "Political Organisation and Leadership",
+    "paragraphs": [
+      "The Constitution provides for the Party Congress to be held once every five years, although the Central Committee may decide to postpone or advance it under special circumstances. The Congress reviews the party’s political and organisational activities since the preceding Congress, examines the domestic and international situation, and determines the organisation’s programme, constitution, strategy, policies and future tasks.",
+      "One of its principal responsibilities is to elect the Central Committee, which becomes the highest leading body between two successive Congresses. The Congress also decides the number of Central Committee members and considers financial statements and other organisational matters. Draft documents are circulated in advance to party members, and delegates are permitted to propose amendments or alternative documents. The Constitution therefore presents the Congress as the formal forum through which the party’s broad political and organisational direction is reviewed and established."
+    ]
+  },
+  {
+    "title": "The Central Committee and the Politburo",
+    "group": "Political Organisation and Leadership",
+    "paragraphs": [
+      "The Central Committee is the highest leading body of the party between two Party Congresses. Elected by the Congress, it represents the organisation as a whole and is authorised to take major political, organisational and other decisions on its behalf. The Constitution requires the Central Committee to meet at least once a year and gives it the authority to establish the Politburo, Central Military Commission, Regional Bureaus and other committees or departments considered necessary for the functioning of the organisation.",
+      "The Politburo is constituted by the Central Committee to carry out responsibilities between successive Central Committee meetings. It is authorised to take political, organisational and military decisions in accordance with the party line and the decisions of the Central Committee. These decisions are subsequently placed before the Central Committee for ratification. The General Secretary is elected by the Central Committee and also serves as the person in charge of the Politburo. The Constitution thus establishes a system in which the Central Committee retains overall authority, while the Politburo performs important leadership functions during the intervals between its meetings.",
+      "The Central Committee also has the authority to establish or reorganise committees, appoint members to vacant positions under specified conditions, and send its members to review the functioning of particular organisational units or areas. It may convene special plenums to consider important political and organisational questions. These provisions give the Central Committee a central role in maintaining organisational continuity, supervising subordinate bodies and resolving questions affecting the party as a whole."
+    ]
+  },
+  {
+    "title": "Democratic Centralism and the Relationship Between Higher and Lower Committees",
+    "group": "Political Control, Internal Functioning and Discipline",
+    "paragraphs": [
+      "Democratic centralism is identified in the Constitution as the fundamental organisational principle of the party. It is described as a system combining internal democracy with centralised leadership. The stated intention is to allow discussion and the expression of different opinions within the organisation while ensuring that decisions, once adopted, are implemented uniformly.",
+      "The Constitution establishes a clear hierarchy of authority through the principle that the individual is subordinate to the organisation, the minority to the majority, lower-level bodies to higher-level bodies, and the entire party to the Central Committee. Leading committees at different levels are to be elected through discussion at the relevant conferences, although their formation and functioning remain subject to approval by higher committees. Lower committees are required to report regularly to higher bodies, while higher committees must communicate their decisions and instructions to subordinate units.",
+      "The system also provides members with opportunities to discuss party policies before decisions are adopted. A member who disagrees with a decision may retain a dissenting opinion and, under the procedures laid down in the Constitution, submit it to higher committees. However, once a decision has been made, members are expected to implement it. In this way, the Constitution combines provisions for internal discussion with a firm requirement of organisational unity and compliance."
+    ]
+  },
+  {
+    "title": "Collective Leadership and Individual Responsibility",
+    "group": "Political Control, Internal Functioning and Discipline",
+    "paragraphs": [
+      "The Constitution places importance on collective functioning within party committees. It calls for decisions to be taken through discussion and collective leadership, while assigning individual members responsibility for specific areas and organisational tasks. Committee members are expected to maintain direct contact with the areas for which they are responsible and use their experience to inform the work of the organisation.",
+      "The document also emphasises criticism and self-criticism as methods of reviewing organisational functioning and correcting mistakes. It calls for opposition to individualism, bureaucratic practices, factionalism and other tendencies considered harmful to collective functioning. At the same time, it requires members to accept responsibility for carrying out decisions adopted by their respective committees. The arrangement therefore seeks to combine collective decision-making with clearly assigned responsibilities at different organisational levels."
+    ]
+  },
+  {
+    "title": "Centralised Authority over Political and Organisational Questions",
+    "group": "Political Control, Internal Functioning and Discipline",
+    "paragraphs": [
+      "The Constitution gives the Central Committee the authority to decide questions concerning domestic and international political matters. Committees at lower levels may take decisions on local issues and problems, but these must remain consistent with the policies and decisions of higher committees. This establishes a distinction between matters requiring central direction and those that can be addressed by subordinate bodies within their respective areas.",
+      "The Central Committee may also review the functioning of lower committees, send members to examine their work, reorganise organisational units and establish temporary or special committees when required. Regional and other subordinate committees exercise authority within their respective jurisdictions, but their decisions and activities remain subject to the broader organisational framework. Political control is therefore maintained through a combination of central policy-making, hierarchical supervision and regular reporting between committees."
+    ]
+  },
+  {
+    "title": "Internal Debates and the Handling of Differences",
+    "group": "Political Control, Internal Functioning and Discipline",
+    "paragraphs": [
+      "The Constitution recognises internal discussion and debate as important elements of party functioning. Members and committees are permitted to express disagreements over political and organisational questions and to submit their views to higher bodies through the prescribed channels. The document presents such discussions as a means of developing a common understanding and improving the organisation’s methods of functioning.",
+      "However, it also places limits on the circulation of disagreements and the continuation of internal debates. The Central Committee retains the authority to decide whether differences concerning the party’s basic political line should be circulated throughout the organisation. Certain controversial discussions require the approval of a specified proportion of the concerned committee. The Constitution thus recognises internal differences but places their consideration within a regulated framework under central leadership."
+    ]
+  },
+  {
+    "title": "Party Discipline and Accountability",
+    "group": "Political Control, Internal Functioning and Discipline",
+    "paragraphs": [
+      "Party discipline is presented as essential to maintaining organisational unity and ensuring the implementation of decisions. The Constitution states that discipline applies equally to ordinary members and the leadership. Members are required to follow the party programme, organisational rules, policies and decisions, while safeguarding the organisation’s unity and confidentiality.",
+      "The Constitution specifies a range of disciplinary measures, including warnings, suspension from party responsibilities, removal from organisational posts, suspension or cancellation of membership, and expulsion. Such measures are generally subject to approval by the next higher committee. Members or units facing disciplinary action are entitled to receive an explanation of the charges and may submit objections or appeals through the prescribed organisational channels.",
+      "The document also states that disciplinary action should ordinarily follow attempts at discussion and correction, although it allows for more immediate measures in circumstances considered particularly serious. These provisions show that organisational control is maintained not only through the hierarchy of committees but also through formal rules governing membership, conduct, accountability and the enforcement of decisions."
+    ]
+  },
+  {
+    "title": "The People’s Army and Its Relationship with the Party",
+    "group": "Military Organisation and Political Control",
+    "paragraphs": [
+      "The Constitution places the People’s Army within the overall political and organisational framework of the party. It describes the army as an instrument of the party and assigns the party responsibility for determining its overall political direction. The document makes a clear distinction between the party’s role in providing political leadership and the army’s role within the organisation’s broader revolutionary programme.",
+      "The Constitution explicitly states that the party exercises full control over the army from the beginning. This control is based on the principle that the party determines the overall political strategy and tactics and, consequently, directs the organisation and functioning of the military structure. The army is therefore not presented as an independent institution with authority separate from the party. Rather, it is placed under the political leadership of the party and is expected to function in accordance with its policies and decisions."
+    ]
+  },
+  {
+    "title": "The Central Military Commission",
+    "group": "Military Organisation and Political Control",
+    "paragraphs": [
+      "The Central Military Commission is established by the Central Committee to oversee military affairs within the party’s organisational framework. The Constitution assigns it responsibility for conducting military affairs in accordance with the party’s military line and the policies, directives and decisions of the Central Committee.",
+      "The establishment of the Central Military Commission places military leadership within the central organisational structure of the party. Its authority derives from the Central Committee, which determines the broader political direction governing the military organisation. The Constitution also provides for military commissions and commands at different levels, thereby extending the system of military administration within the party’s broader hierarchy."
+    ]
+  },
+  {
+    "title": "Political Committees and Authority within the People’s Army",
+    "group": "Military Organisation and Political Control",
+    "paragraphs": [
+      "The Constitution provides for party committees and party branches within the military organisation. It states that military formations are to function under the leadership of their respective party committees and that the decisions of these committees are to be implemented by the corresponding formations. Party committees are therefore assigned a formal role in maintaining political authority within the military structure.",
+      "The document also provides for party branches and cells within different levels of the military organisation. Party members serving in military formations are expected to provide political leadership within their respective organisational settings. The Constitution thus establishes an arrangement in which the party’s political authority is extended into the military organisation through committees and party units rather than being confined to the civilian organisational structure."
+    ]
+  },
+  {
+    "title": "The Relationship Between Military Leadership and Central Party Authority",
+    "group": "Military Organisation and Political Control",
+    "paragraphs": [
+      "The Constitution makes the relationship between political leadership and military authority explicit. The Central Committee establishes the Central Military Commission, while the latter conducts military affairs in accordance with the party’s political and organisational direction. Military commissions and commands at different levels operate within this framework, and military formations remain under the leadership of their respective party committees.",
+      "This arrangement places the military organisation within the party’s overall chain of authority. The party retains responsibility for determining the broader political line, while the military structure is expected to function within the framework established by the relevant party bodies. The Constitution therefore treats political control over the military as a central organisational principle."
+    ]
+  },
+  {
+    "title": "Party Fractions in Mass Organisations",
+    "group": "Control over Mass Organisations and the Wider Organisational Framework",
+    "paragraphs": [
+      "The Constitution also provides for the formation of party fractions within the executive committees of mass organisations. These fractions are intended to guide the functioning of the respective organisations in accordance with the party’s political direction. The document states that the views of the party committee or member responsible for guiding a fraction are to be treated as its final position. Differences within a fraction are to be communicated in writing to the relevant party committee or higher body.",
+      "This provision indicates that the party’s organisational influence is not confined to its formal committee structure. The Constitution envisages a relationship in which party fractions provide political guidance within mass organisations, while remaining accountable to the relevant party committees. It thereby extends the system of party supervision into organisations operating beyond the party’s direct membership structure."
+    ]
+  },
+  {
+    "title": "An Integrated System of Political and Military Control",
+    "group": "Control over Mass Organisations and the Wider Organisational Framework",
+    "paragraphs": [
+      "Taken together, the provisions of the Constitution establish an integrated system in which political authority is concentrated within the party’s central leadership and extended through its subordinate committees, organisational units and military structures. The Party Congress provides the highest formal authority, while the Central Committee directs the organisation between successive Congresses. The Politburo performs important political, organisational and military functions between Central Committee meetings, and subordinate committees exercise authority within their respective areas under the direction of higher bodies.",
+      "The military organisation is placed directly within this framework. The Central Committee establishes the Central Military Commission, which conducts military affairs in accordance with the party’s political line and decisions. At lower levels, party committees and branches provide the organisational link between the party and military formations. Similarly, party fractions are intended to guide the executive committees of mass organisations.",
+      "The Constitution therefore presents the CPI (Maoist) as an organisation in which political, organisational and military authority are interconnected and subject to the party’s central leadership. Its model of control rests on hierarchical authority, democratic centralism, collective leadership, internal discipline and the subordination of military structures to political direction."
+    ]
+  }
+];
+// HISTORY_MUSEUM_V1
+---
+<section class="po-museum" id="political-organisation" aria-labelledby="po-title">
+  <header class="po-museum-head">
+    <h2 id="po-title">Political Organisation &amp; Leadership</h2>
+  </header>
+  <details class="po-diagram-expand">
+    <summary>View organisational hierarchy diagram</summary>
+    <figure class="po-diagram">
+      <img src={`${BASE}/images/history/cpi-maoist-hierarchy.png`} alt="Editor-provided diagram illustrating the organisational hierarchy of CPI (Maoist)" loading="lazy" decoding="async" />
+      <figcaption>Illustrative diagram provided by the site editor. Verify each organisational relationship against the cited constitutional source.</figcaption>
+    </figure>
+  </details>
+  <nav class="po-topic-nav" aria-label="Organisation topics">
+    {sections.map((section,i)=><a href={`#po-topic-${i+1}`} data-po-link={i+1} title={section.title}><span>{String(i+1).padStart(2,'0')}</span>{section.title}</a>)}
+  </nav>
+  <div class="po-reading">
+    {sections.map((section,i)=>(
+      <article class="po-article" id={`po-topic-${i+1}`} data-po-topic={i+1}>
+        <div class="po-meta">ORGANISATION &amp; LEADERSHIP <span>SECTION {String(i+1).padStart(2,'0')}</span></div>
+        <h3>{section.title}</h3>
+        <div class="po-body">{section.paragraphs.map(p=><p>{p}</p>)}</div>
+      </article>
+    ))}
+    <nav class="po-pager" aria-label="Move between organisation sections">
+      <button type="button" data-po-prev>← Previous</button>
+      <span data-po-counter aria-live="polite">Section 1 of {sections.length}</span>
+      <button type="button" data-po-next>Next →</button>
+    </nav>
+  </div>
+</section>
+<style>
+  .po-museum{--po-ink:#192d25;--po-rust:#9e4e32;--po-border:#d8cec0;color:var(--po-ink);font-family:Georgia,serif;scroll-margin-top:35px}
+  .po-museum *{box-sizing:border-box}.po-museum-head{margin:20px 0 24px}.po-museum-head h2{font:700 clamp(34px,4vw,44px)/1.12 Georgia,serif;letter-spacing:-.03em;margin:0}
+  .po-diagram-expand{margin:12px 0 24px}.po-diagram-expand summary{display:inline-block;cursor:pointer;color:#9e4e32;border-bottom:1px solid #a75a37;padding-bottom:5px;font:750 12px/1.5 system-ui,sans-serif}.po-diagram{margin:18px auto 28px;max-width:980px}.po-diagram img{display:block;width:100%;height:auto;max-height:530px;object-fit:contain;background:#fff;border:1px solid #d5cabc}.po-diagram figcaption{font:12px/1.5 system-ui,sans-serif;color:#71685c;margin-top:7px}
+  .po-topic-nav{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding:0 0 13px;margin-bottom:27px;border-bottom:1px solid var(--po-border)}.po-topic-nav a{flex:0 0 170px;min-height:72px;display:flex;flex-direction:column;gap:6px;padding:10px 12px;text-decoration:none;color:var(--po-ink);border:1px solid #d9cec1;font:650 12px/1.3 Georgia,serif;background:#fffcf7}.po-topic-nav a span{font:800 10px/1.2 system-ui,sans-serif;color:var(--po-rust)}.po-topic-nav a:hover,.po-topic-nav a[aria-current="step"]{background:#eadfd0;border-color:var(--po-rust)}
+  .po-reading{max-width:780px;margin:0 auto}.po-article{scroll-margin-top:35px}.po-meta{font:800 10px/1.5 system-ui,sans-serif;letter-spacing:.08em;color:var(--po-rust)}.po-meta span{margin-left:14px;color:#81786c}.po-article h3{font:700 clamp(30px,3.6vw,42px)/1.16 Georgia,serif;letter-spacing:-.035em;margin:16px 0 24px}.po-body p{font:400 18px/1.82 Georgia,serif;margin:0 0 23px;color:#343b34}
+  .po-pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:36px;padding-top:23px;border-top:1px solid var(--po-border)}.po-pager button{border:1px solid #baaa9a;background:transparent;padding:12px 15px;color:var(--po-ink);font:700 12px system-ui,sans-serif;cursor:pointer}.po-pager button:hover:not(:disabled){background:#eadfd0;border-color:var(--po-rust)}.po-pager button:disabled{opacity:.35;cursor:default}.po-pager span{font:700 12px system-ui,sans-serif;color:#666058}
+  .po-museum a:focus-visible,.po-museum button:focus-visible{outline:3px solid var(--po-rust);outline-offset:3px}
+  @media(max-width:650px){.po-museum-head h2{font-size:35px}.po-topic-nav a{flex-basis:145px}.po-article h3{font-size:32px}.po-body p{font-size:17px;line-height:1.78}.po-pager button{padding:10px}}
+</style>
+<script>
+  const root = document.querySelector<HTMLElement>('.po-museum');
+  if (root) {
+    const sections=[...root.querySelectorAll<HTMLElement>('[data-po-topic]')];
+    const links=[...root.querySelectorAll<HTMLAnchorElement>('[data-po-link]')];
+    const prev=root.querySelector<HTMLButtonElement>('[data-po-prev]');
+    const next=root.querySelector<HTMLButtonElement>('[data-po-next]');
+    const counter=root.querySelector<HTMLElement>('[data-po-counter]');
+    const refresh=()=>{
+      const hash=decodeURIComponent(window.location.hash.slice(1));
+      const match=/^po-topic-(\d+)$/.exec(hash);
+      const idx=match? Math.max(0,Math.min(sections.length-1,Number(match[1])-1)):0;
+      sections.forEach((s,i)=>s.hidden=i!==idx);
+      links.forEach((link,i)=>{if(i===idx)link.setAttribute('aria-current','step');else link.removeAttribute('aria-current')});
+      if(prev) prev.disabled=idx===0;
+      if(next) next.disabled=idx===sections.length-1;
+      if(counter)counter.textContent=`Section ${idx+1} of ${sections.length}`;
+    };
+    refresh();
+    window.addEventListener('hashchange',refresh);
+    prev?.addEventListener('click',()=>{const idx=sections.findIndex(s=>!s.hidden);if(idx>0)window.location.hash=`po-topic-${idx}`;});
+    next?.addEventListener('click',()=>{const idx=sections.findIndex(s=>!s.hidden);if(idx>=0&&idx<sections.length-1)window.location.hash=`po-topic-${idx+2}`;});
+  }
+</script>
