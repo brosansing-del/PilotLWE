@@ -13,7 +13,7 @@ She isn’t there. Perhaps she is living with grandparents. Perhaps she is at a 
 
 For a child growing up in a Maoist family, this can become normal life. Underground warfare demands secrecy, mobility and complete commitment from its cadres. When cadres become parents, their families must adapt to those demands. Former cadres have described children being left with grandparents or relatives and, in some cases, being sent to residential schools while their parents remained underground. For an adult who joins an insurgency, separation from family may be understood as a political sacrifice. A child has no such choice. The child simply grows up within the consequences of that decision.
 
-> “I was 12 when I heard my ma was killed in an encounter. I never saw her. And I never understood why she left.” — Badru, as quoted in the supplied article
+> “I was 12 when I heard my ma was killed in an encounter. I never saw her. And I never understood why she left.” — Badru
 
 The problem can begin even before birth. Accounts from surrendered cadres, documented by the Indian government and reported by the press, describe male cadres being subjected to vasectomy and women facing pressure to terminate pregnancies. Some former cadres later underwent sterilization-reversal procedures after leaving the movement because they wanted children.
 
@@ -25,7 +25,7 @@ The irony is striking. Maoism presents itself as a struggle to create a better f
 
 None of this requires idealising conventional families. Families can themselves reproduce patriarchy, violence and inequality. Nor should every allegation made by former cadres be accepted without considering its evidentiary basis. But those qualifications do not erase the central issue.
 
-> “My dad died trying to save his commander. I had already lost my mom and grew up an orphan. Now those cadres have surrendered. What did the revolution ever gave me? All it did was take away everything I had.” — Raghu from Bastar, as quoted in the supplied article
+> “My dad died trying to save his commander. I had already lost my mom and grew up an orphan. Now those cadres have surrendered. What did the revolution ever gave me? All it did was take away everything I had.” — Raghu from Bastar
 
 The children did not choose the underground.
 
