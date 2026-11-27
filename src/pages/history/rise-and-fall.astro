@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import RiseFallCollage from '../../components/RiseFallCollage.astro';
+
+const BASE = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const url = (path = '') => `${BASE}/${path.replace(/^\/+/, '')}`;
+
+---
+
+<BaseLayout
+  title="Rise and Fall of CPI (Maoist) | The Naxal Archive"
+  description="A visual chronology of the Maoist movement in India, from the 1967 Naxalbari uprising to developments reported in March 2026."
+>
+  <Header />
+  <main class="rf-page" id="top">
+    <div class="rf-container">
+      <nav class="rf-breadcrumb" aria-label="Breadcrumb">
+        <a href={url()}>Home</a><span aria-hidden="true">/</span>
+        <a href={url('history/')}>History</a><span aria-hidden="true">/</span>
+        <span aria-current="page">Rise and Fall</span>
+      </nav>
+
+      <header class="rf-hero">
+        <span class="rf-eyebrow">HISTORY <span aria-hidden="true">/</span> AT A GLANCE</span>
+        <h1>Rise and Fall <em>of CPI (Maoist)</em></h1>
+        <p>A visual record of the movement’s origins, consolidation, expansion and decline.</p>
+      </header>
+
+      <RiseFallCollage />
+
+      <nav class="rf-more" aria-label="Explore more history">
+        <a href={url('history/#naxalbari')}>
+          <span>CONTINUE READING</span>
+          <strong>Historical Evolution</strong>
+          <small>Explore the six phases of the Naxalite movement ↗</small>
+        </a>
+        <a href={url('history/#political-organisation')}>
+          <span>EXPLORE STRUCTURE</span>
+          <strong>Political Organisation</strong>
+          <small>Structure, leadership and internal functioning ↗</small>
+        </a>
+      </nav>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+.rf-page{background:#f3efe6;color:#183129;min-height:100vh;padding-bottom:68px;}
+.rf-container{width:min(1200px,calc(100% - 44px));margin:0 auto;}
+.rf-breadcrumb{display:flex;align-items:center;gap:12px;padding:28px 0 40px;font:600 12px/1.4 system-ui,sans-serif;color:#80766c;}
+.rf-breadcrumb a{color:inherit;text-decoration:none;}.rf-breadcrumb a:hover{color:#a64f32;}
+.rf-hero{padding:0 0 38px;border-bottom:1px solid #d7ccbe;}
+.rf-eyebrow{font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.15em;color:#a64f32;}
+.rf-eyebrow span{padding:0 8px;color:#b5a89a;}
+.rf-hero h1{font:700 clamp(39px,5.7vw,72px)/1.05 Georgia,serif;letter-spacing:-.045em;margin:14px 0 18px;max-width:1040px;}
+.rf-hero h1 em{color:#ad5939;font-weight:400;}
+.rf-hero p{font:17px/1.6 Georgia,serif;color:#58645e;max-width:740px;margin:0;}
+
+.rf-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:26px;}
+.rf-more a{display:flex;flex-direction:column;gap:8px;padding:26px;border:1px solid #d8ccbc;background:#fffaf2;color:#1b362d;text-decoration:none;border-radius:7px;transition:transform .2s ease,box-shadow .2s ease;}
+.rf-more a:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(35,37,29,.08);}
+.rf-more a span{font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.12em;color:#a64f32;}
+.rf-more a strong{font:700 25px/1.2 Georgia,serif;}
+.rf-more a small{font:600 12px/1.5 system-ui,sans-serif;color:#58645e;}
+@media(max-width:600px){.rf-container{width:calc(100% - 26px);}.rf-breadcrumb{padding:20px 0 30px;}.rf-hero{padding-bottom:28px;}.rf-hero h1{font-size:clamp(35px,9vw,48px);}.rf-hero p{font-size:15px;}.rf-more{grid-template-columns:1fr;}.rf-more a{padding:20px;}}
+@media(prefers-reduced-motion:reduce){.rf-more a{transition:none;}}
+</style>

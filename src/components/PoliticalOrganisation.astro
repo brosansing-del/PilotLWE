@@ -170,3 +170,81 @@ const sections = [
   @media(max-width:650px){.po-reading{max-width:100%}.po-body p{font-size:17px;text-align:left}}
 </style>
 
+<!-- PILOTLWE_ORGANISATION_HEADING_IMAGE_V3: Scoped visual fix. No historical text is changed. -->
+<style is:global>
+/* Expand the diagram naturally to the full inside width of its border. */
+#political-organisation figure.po-figure,
+#political-organisation .po-figure {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  overflow: hidden !important;
+}
+#political-organisation .po-figure > a,
+#political-organisation .po-figure > picture,
+#political-organisation .po-figure a:has(> img),
+#political-organisation .po-figure picture {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+#political-organisation figure.po-figure img,
+#political-organisation .po-figure img,
+#political-organisation img[src*="cpi-maoist-hierarchy"] {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  object-fit: fill !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+/* The general title remains visible for the other History chapters. */
+html.po-organisation-view .po-general-history-heading {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+</style>
+<script is:inline>
+// PILOTLWE_ORGANISATION_HEADING_IMAGE_V3: hide the exact redundant heading only for organisation hashes.
+(() => {
+  function init() {
+    const section = document.getElementById('political-organisation');
+    if (!section) return;
+    const generalHeading = Array.from(document.querySelectorAll('h1, h2'))
+      .find(el => {
+        if (section.contains(el)) return false;
+        const title = (el.textContent || '').replace(/\s+/g, ' ').trim().replace(/[.]+$/, '').toLowerCase();
+        return title === 'history of the naxalite movement';
+      });
+    if (generalHeading) generalHeading.classList.add('po-general-history-heading');
+
+    function sync() {
+      const hash = decodeURIComponent(location.hash.slice(1));
+      const isOrganisation = hash === 'political-organisation' || /^po-topic-\d+$/.test(hash);
+      document.documentElement.classList.toggle('po-organisation-view', isOrganisation);
+    }
+    sync();
+    window.addEventListener('hashchange', sync);
+    window.addEventListener('popstate', sync);
+    window.addEventListener('history-part-change', sync);
+    // Some History navigation uses pushState without a hashchange event.
+    document.addEventListener('click', e => {
+      const link = e.target.closest('a[href*="#"]');
+      if (link) requestAnimationFrame(sync);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
+})();
+</script>
+
