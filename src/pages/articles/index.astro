@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ArchiveVideoCollection from '../../components/ArchiveVideoCollection.astro';
 import { getCollection } from 'astro:content';
 
 // Every article appears once in the same compact grid, including featured stories.
@@ -90,9 +91,11 @@ const quoteFor = (item: Article) => {
         <p>Analysis, opinions and interviews exploring the history, ideas and human experiences behind Left-Wing Extremism.</p>
       </header>
 
-      <section class="na-library-collection" aria-label="Browse opinions and editorial articles">
+      <ArchiveVideoCollection mode="interviews" />
+
+      <section id="articles" class="na-library-collection" aria-label="Browse opinions and editorial articles">
         <div class="na-library-toolbar">
-          <span class="na-toolbar-label">EXPLORE THE COLLECTION</span>
+          <h2 class="na-articles-heading">Articles &amp; Analysis</h2>
           <div class="na-library-filter" data-na-article-filters aria-label="Filter articles by category">
             <button type="button" data-na-category="all" class="is-selected" aria-pressed="true">All</button>
             {categories.map(category => (
@@ -213,4 +216,14 @@ const quoteFor = (item: Article) => {
   @media(max-width:960px){.na-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.na-library-intro{padding-top:38px;}}
   @media(max-width:640px){.na-library{padding:16px 0 48px;}.na-library-shell{width:calc(100% - 32px);}.na-library-intro{padding:29px 0 25px;}.na-library-intro h1{font-size:clamp(39px,9vw,52px);}.na-library-intro p{font-size:16px;}.na-library-toolbar{align-items:flex-start;flex-direction:column;gap:12px;}.na-library-grid{grid-template-columns:1fr;gap:16px;}.na-tile-text{padding:20px;}.na-tile-text h2{font-size:25px;}}
   @media(prefers-reduced-motion:reduce){.na-article-tile,.na-tile-image img,.na-library-filter button{transition:none;}}
+
+  /* OPINIONS INTERVIEWS FIRST: LOCAL LAYOUT */
+  .na-articles-heading{margin:0;color:#1c3028;font:500 clamp(27px,2.7vw,36px)/1.15 Georgia,serif;letter-spacing:-.035em;}
+  .na-library-collection{scroll-margin-top:24px;}
+  :global(.na-library .na-library-shell .av-interviews){background:transparent;border-top:0;padding:0 0 38px;scroll-margin-top:24px;}
+  :global(.na-library .na-library-shell .av-interviews .av-shell){width:100%;max-width:none;margin:0;}
+  :global(.na-library .na-library-shell .av-interviews .av-grid){grid-template-columns:repeat(3,minmax(0,1fr));}
+  :global(.na-library .na-library-shell .av-interviews .av-section-head){margin-bottom:22px;}
+  @media(max-width:960px){:global(.na-library .na-library-shell .av-interviews .av-grid){grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media(max-width:700px){:global(.na-library .na-library-shell .av-interviews .av-grid){grid-template-columns:1fr;}:global(.na-library .na-library-shell .av-interviews){padding-bottom:26px;}}
 </style>
